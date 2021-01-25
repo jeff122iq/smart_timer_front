@@ -29,13 +29,11 @@ export default makeStyles((theme: Theme) =>
     },
     buttonLogin: {
       backgroundColor: "#f9c229",
-      margin: "10px 10px 0 0",
-      "& :hover": {
-        backgroundColor: "#f9c229",
-      },
+      margin: "40px 60px 0 0",
+      padding: "8px 20px"
     },
     buttonSignin: {
-      margin: "10px 10px 0 0",
+      margin: "40px 10px 0 0",
       color: "#2336ff",
     },
     buttonForgot: {
@@ -45,36 +43,39 @@ export default makeStyles((theme: Theme) =>
     },
     quickTitle: {
       color: "#a1a1a1",
+      maxWidth: "300px",
+    },
+    buttonSocial: {
+      maxWidth: "260px",
+      color: "white",
+      borderRadius: "2px",
+      textTransform: "none",
+      margin: "5px 0",
+      [theme.breakpoints.up("sm")]: {
+        width: "100%",
+      },
+      "& > span": {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-start"
+      }
     },
     buttonFb: {
-      display: "flex",
-      width: "200px",
       backgroundColor: "#3c66c5",
-      color: "white",
-      borderRadius: "2px",
-      textTransform: "none",
     },
     buttonGp: {
-      display: "flex",
-      width: "200px",
       backgroundColor: "#cf4332",
-      color: "white",
-      borderRadius: "2px",
-      textTransform: "none",
-      margin: "10px 0",
     },
     buttonTw: {
-      display: "flex",
-      width: "200px",
       backgroundColor: "#55acee",
-      color: "white",
-      borderRadius: "2px",
-      textTransform: "none",
     },
     icon: {
-      fontSize: "20px",
       margin: "0 15px 0 0",
-      width: "30px",
+      width: '40px !important',
+      height: '32px !important'
+    },
+    iconShift: {
+      marginLeft: '5px'
     },
     formHelperText: {
       display: "flex",

@@ -30,7 +30,7 @@ export default function Create() {
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center" padding="10px 0">
             <InsertDriveFileOutlinedIcon className={classes.icon} />
-            <Typography variant="body1">Your library</Typography>
+            <Typography variant="subtitle2">Your library</Typography>
           </Box>
           <Box display="flex" flexWrap="wrap" justifyContent="space-between">
             {documents.map((data, idx) => (

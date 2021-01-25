@@ -24,7 +24,7 @@ export default makeStyles((theme: Theme) =>
     },
     list: { width: 250 },
     fullList: { width: "auto" },
-    title: { color: "black" },
+    title: { color: "black", fontFamily: "'Imbue', serif", letterSpacing: 1.5 },
     linkBox: {
       display: "none",
       ["@media (min-width: 670px)"]: {

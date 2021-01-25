@@ -8,7 +8,7 @@ export default makeStyles((theme: Theme) =>
       alignItems: "center",
       justifyContent: "space-between",
       width: "33%",
-      padding: "15px",
+      padding: "10px 15px",
       backgroundColor: "#2b62ff",
       borderRadius: "3px",
       userSelect: "none",
@@ -23,12 +23,13 @@ export default makeStyles((theme: Theme) =>
     documentName: {
       color: "white",
       fontSize: "20px",
-      maxWidth: "260px",
+      maxWidth: "85%",
       //two row text overflow ellipsis
       display: "-webkit-box",
       "-webkit-line-clamp": 2,
       "-webkit-box-orient": "vertical",
       overflow: "hidden",
+      lineHeight: '22px'
     },
     actionsBurger: {
       position: "relative",
