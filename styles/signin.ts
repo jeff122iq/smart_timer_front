@@ -37,8 +37,10 @@ export default makeStyles((theme: Theme) =>
     buttonSignin: {
       margin: "40px 10px 0 0",
       color: "#2336ff",
+      backgroundColor: "transparent",
     },
     buttonForgot: {
+      backgroundColor: "transparent",
       marginTop: "10px",
       color: "red",
       padding: "6px 0",

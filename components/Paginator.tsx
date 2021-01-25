@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) =>
       "& .MuiPaginationItem-icon": {
         display: "none",
         color: "transparent",
-        background: "transparent",
+        background: "transparenret",
       },
       "& .Mui-disabled": {
         opacity: 0,

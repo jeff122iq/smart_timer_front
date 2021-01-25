@@ -17,8 +17,12 @@ export default makeStyles((theme: Theme) =>
       },
     },
     avatar: {
-      width: "30px",
-      height: "30px",
+      width: "20px",
+      height: "20px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "black",
     },
 
     menuButton: {
@@ -55,10 +59,15 @@ export default makeStyles((theme: Theme) =>
     userButton: {
       color: "black",
       padding: "0",
+      display: "flex",
+      backgroundColor: "transparent",
+      justifyContent: "center",
+      alignItems: "center",
     },
     button: {
       textTransform: "none",
       padding: "6px 0",
+      backgroundColor: "transparent",
       minWidth: "55px",
     },
   })

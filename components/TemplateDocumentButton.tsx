@@ -1,5 +1,10 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-import { FormGroup, SvgIcon, Typography } from "@material-ui/core";
+import {
+  FormGroup,
+  SvgIcon,
+  Typography,
+  ClickAwayListener,
+} from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ShareIcon from "@material-ui/icons/Share";
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
@@ -17,8 +22,12 @@ export function TemplateDocumentButton({ data }) {
     setActionsBurger(!actionsBurger);
   };
 
+  const handleClickAway = () => {
+    setActionsBurger(false);
+  };
+
   return (
-    <>
+    <ClickAwayListener onClickAway={handleClickAway}>
       <FormGroup className={classes.documentContainer}>
         <Typography className={classes.documentName}>{data}</Typography>
         <div style={{ position: "relative" }}>
@@ -71,7 +80,7 @@ export function TemplateDocumentButton({ data }) {
           </div>
         </div>
       </FormGroup>
-    </>
+    </ClickAwayListener>
   );
 }
 // ========================== COMPONENT ====================================
