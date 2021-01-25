@@ -9,7 +9,8 @@ export default makeStyles((theme: Theme) =>
     },
     caption: {
       fontWeight: 900,
-      fontSize: 20,
+      fontSize: 25,
+      fontFamily: "Roboto, sans-serif",
       textAlign: "center",
       letterSpacing: 1.5,
       maxWidth: "340px",
@@ -17,6 +18,7 @@ export default makeStyles((theme: Theme) =>
     },
     credsContainer: {
       flexDirection: "column",
+      marginTop: "70px",
       [theme.breakpoints.up("sm")]: {
         flexDirection: "row",
       },
@@ -30,7 +32,7 @@ export default makeStyles((theme: Theme) =>
     buttonLogin: {
       backgroundColor: "#f9c229",
       margin: "40px 60px 0 0",
-      padding: "8px 20px"
+      padding: "8px 20px",
     },
     buttonSignin: {
       margin: "40px 10px 0 0",
@@ -57,8 +59,8 @@ export default makeStyles((theme: Theme) =>
       "& > span": {
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start"
-      }
+        justifyContent: "flex-start",
+      },
     },
     buttonFb: {
       backgroundColor: "#3c66c5",
@@ -71,11 +73,11 @@ export default makeStyles((theme: Theme) =>
     },
     icon: {
       margin: "0 15px 0 0",
-      width: '40px !important',
-      height: '32px !important'
+      width: "40px !important",
+      height: "32px !important",
     },
     iconShift: {
-      marginLeft: '5px'
+      marginLeft: "5px",
     },
     formHelperText: {
       display: "flex",

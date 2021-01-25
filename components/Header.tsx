@@ -108,7 +108,7 @@ export function Header() {
                 className={classes.userButton}
                 aria-label="menu"
               >
-                <Avatar alt={""} src={""} />
+                <Avatar alt={""} src={""} className={classes.avatar} />
               </IconButton>
               <Button className={classes.button}>
                 <Link href="/signin">

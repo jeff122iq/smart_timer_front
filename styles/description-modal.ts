@@ -24,7 +24,6 @@ export default makeStyles((theme: Theme) =>
       boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
       display: "flex",
       justifyContent: "flex-start",
-      margin: "30px 0",
       width: "100%",
     },
     briefTemplateTags: {
