@@ -1,6 +1,7 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 import { Box, Button, Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
+import clsx from 'clsx';
 import useStyles from "../styles/footer";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
@@ -13,7 +14,7 @@ export function Footer() {
       <Container maxWidth="lg">
         <Box display="flex" className={classes.footerContainer}>
           <Box display="flex" className={classes.footerLinksContainer}>
-            <Typography variant="h6" className={classes.footerLink}>
+            <Typography variant="h6" className={clsx(classes.footerLink, classes.logo)}>
               BRIEFFER
             </Typography>
             <Button className={classes.footerLink}>Create Brief</Button>

@@ -3,10 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 export default makeStyles((theme: Theme) =>
   createStyles({
     rootFooter: {
-      display: 'flex',
-      // position: "fixed",
-      // bottom: 0,
-      // left: 0,
+      display: "flex",
       backgroundColor: "#252525",
       color: "white",
       marginTop: "auto",
@@ -15,21 +12,22 @@ export default makeStyles((theme: Theme) =>
     footerContainer: {
       flexDirection: "column",
       padding: "15px",
-      width: '100%',
+      width: "100%",
       margin: "0 auto",
-      ["@media (min-width: 620px)"]: {
+      ["@media (min-width: 765px)"]: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
       },
     },
     logo: {
-      paddingBottom: "5px",
+      fontFamily: "'Imbue', serif",
+      letterSpacing: "1.5px !important" ,
     },
     footerLinksContainer: {
       flexDirection: "column",
       alignItems: "flex-start",
-      ["@media (min-width: 620px)"]: {
+      ["@media (min-width: 765px)"]: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -39,14 +37,15 @@ export default makeStyles((theme: Theme) =>
       cursor: "pointer",
       color: "white",
       padding: 0,
+      fontWeight: "inherit",
       minWidth: "inherit",
       letterSpacing: "inherit",
       textTransform: "inherit",
       "& :not(:first-child)": {
         fontSize: "inherit",
       },
-      ["@media (min-width: 620px)"]: {
-        marginRight: "10px",
+      ["@media (min-width: 765px)"]: {
+        margin: "0 15px",
       },
     },
     helpLinksContainer: {
