@@ -16,15 +16,25 @@ export default makeStyles((theme: Theme) =>
         paddingLeft: "18px",
       },
     },
+    avatar: {
+      width: "20px",
+      height: "20px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "black",
+    },
+
     menuButton: {
       color: "black",
       ["@media (min-width: 670px)"]: {
         display: "none",
+        backgroundColor: "transparent",
       },
     },
     list: { width: 250 },
     fullList: { width: "auto" },
-    title: { color: "black" },
+    title: { color: "black", fontFamily: "'Imbue', serif", letterSpacing: 1.5 },
     linkBox: {
       display: "none",
       ["@media (min-width: 670px)"]: {
@@ -37,15 +47,20 @@ export default makeStyles((theme: Theme) =>
     link: {
       textDecoration: "none",
       color: "black",
-      margin: "0 9px",
+      margin: "0 11px",
     },
     userButton: {
       color: "black",
       padding: "0",
+      display: "flex",
+      backgroundColor: "transparent",
+      justifyContent: "center",
+      alignItems: "center",
     },
     button: {
       textTransform: "none",
       padding: "6px 0",
+      backgroundColor: "transparent",
       minWidth: "55px",
     },
   })

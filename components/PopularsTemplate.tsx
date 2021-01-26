@@ -20,7 +20,7 @@ const PopularsTemplate = () => {
           <EmojiObjectsIcon />
         </SvgIcon>
         <Typography className={classes.title} variant="h4">
-          Populars
+          Popular
         </Typography>
       </div>
       <div className={classes.cardsWrapper}>

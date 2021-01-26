@@ -4,22 +4,26 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       boxShadow: "0px 3px 4px 0px rgba(0,0,0,0.2)",
-      width: "100%",
       background: "white",
+    },
+    content: {
+      maxWidth: "700px",
+      margin: "0 auto",
     },
     caption: {
       fontWeight: 900,
-      fontSize: 20,
+      fontSize: 30,
       textAlign: "center",
+      fontFamily: "Roboto, sans-serif",
       letterSpacing: 1.5,
-      maxWidth: "340px",
+      maxWidth: "400px",
       margin: "0 auto",
     },
     inputContainer: {
       padding: "2px 4px",
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "center",
       backgroundColor: "#f9f9f9",
     },
     input: {

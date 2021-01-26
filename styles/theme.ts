@@ -21,6 +21,21 @@ const theme = createMuiTheme({
       root: {
         "&:hover": {
           backgroundColor: "$labelcolor",
+          "@media (hover: none)": {
+            backgroundColor: "$labelcolor",
+          },
+        },
+        "&:active": {
+          backgroundColor: "$labelcolor",
+        },
+      },
+    },
+    MuiButtonBase: {
+      root: {
+        backgroundColor: "$labelcolor",
+        "&:active": {
+          backgroundColor: "$labelcolor",
+          opacity: "1",
         },
       },
     },
