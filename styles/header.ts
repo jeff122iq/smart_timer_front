@@ -27,9 +27,9 @@ export default makeStyles((theme: Theme) =>
 
     menuButton: {
       color: "black",
+      backgroundColor: "transparent",
       ["@media (min-width: 670px)"]: {
         display: "none",
-        backgroundColor: "transparent",
       },
     },
     list: { width: 250 },
