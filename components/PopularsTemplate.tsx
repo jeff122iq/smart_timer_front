@@ -31,7 +31,10 @@ const PopularsTemplate = () => {
           <div className={classes.popularsCardDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             culpa aut debitis ea. Adipisci voluptas rerum tempore eaque
-            excepturi fugit? Lorem ipsum dolor, sit amet consectetur...
+            excepturi fugit? Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Aliquid modi dolorem nihil cumque culpa voluptates eum animi!
+            Natus quos distinctio blanditiis libero quis adipisci? Hic vero sunt
+            quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
           </div>
           <div className={classes.popularsCardFooter}>
             <Button className={classes.popularsActionsAddBtn}>Add</Button>
@@ -44,7 +47,10 @@ const PopularsTemplate = () => {
           <div className={classes.popularsCardDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             culpa aut debitis ea. Adipisci voluptas rerum tempore eaque
-            excepturi fugit? Lorem ipsum dolor, sit amet consectetur...
+            excepturi fugit? Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Aliquid modi dolorem nihil cumque culpa voluptates eum animi!
+            Natus quos distinctio blanditiis libero quis adipisci? Hic vero sunt
+            quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
           </div>
           <div className={classes.popularsCardFooter}>
             <Button className={classes.popularsActionsAddBtn}>Add</Button>
@@ -57,7 +63,10 @@ const PopularsTemplate = () => {
           <div className={classes.popularsCardDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             culpa aut debitis ea. Adipisci voluptas rerum tempore eaque
-            excepturi fugit? Lorem ipsum dolor, sit amet consectetur...
+            excepturi fugit? Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Aliquid modi dolorem nihil cumque culpa voluptates eum animi!
+            Natus quos distinctio blanditiis libero quis adipisci? Hic vero sunt
+            quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
           </div>
           <div className={classes.popularsCardFooter}>
             <Button className={classes.popularsActionsAddBtn}>Add</Button>
@@ -70,7 +79,10 @@ const PopularsTemplate = () => {
           <div className={classes.popularsCardDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             culpa aut debitis ea. Adipisci voluptas rerum tempore eaque
-            excepturi fugit? Lorem ipsum dolor, sit amet consectetur...
+            excepturi fugit? Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Aliquid modi dolorem nihil cumque culpa voluptates eum animi!
+            Natus quos distinctio blanditiis libero quis adipisci? Hic vero sunt
+            quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
           </div>
           <div className={classes.popularsCardFooter}>
             <Button className={classes.popularsActionsAddBtn}>Add</Button>
@@ -83,7 +95,10 @@ const PopularsTemplate = () => {
           <div className={classes.popularsCardDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             culpa aut debitis ea. Adipisci voluptas rerum tempore eaque
-            excepturi fugit? Lorem ipsum dolor, sit amet consectetur...
+            excepturi fugit? Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Aliquid modi dolorem nihil cumque culpa voluptates eum animi!
+            Natus quos distinctio blanditiis libero quis adipisci? Hic vero sunt
+            quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
           </div>
           <div className={classes.popularsCardFooter}>
             <Button className={classes.popularsActionsAddBtn}>Add</Button>
@@ -96,7 +111,10 @@ const PopularsTemplate = () => {
           <div className={classes.popularsCardDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             culpa aut debitis ea. Adipisci voluptas rerum tempore eaque
-            excepturi fugit? Lorem ipsum dolor, sit amet consectetur...
+            excepturi fugit? Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Aliquid modi dolorem nihil cumque culpa voluptates eum animi!
+            Natus quos distinctio blanditiis libero quis adipisci? Hic vero sunt
+            quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
           </div>
           <div className={classes.popularsCardFooter}>
             <Button className={classes.popularsActionsAddBtn}>Add</Button>

@@ -52,12 +52,8 @@ export default makeStyles((theme: Theme) =>
       flexWrap: "wrap",
       background: "#fff",
       width: "45%",
-      overflow: "hidden",
       borderRadius: 4,
       margin: "7px 7px 7px 0",
-      "&:focus": {
-        height: "auto",
-      },
       [theme.breakpoints.down("sm")]: {
         width: "100%",
         margin: "15px 0 0px 0",
@@ -69,12 +65,22 @@ export default makeStyles((theme: Theme) =>
     },
     popularsCardDescription: {
       padding: "30px",
+      overflow: "hidden",
+      height: "130px",
+      transition: "all 1s",
+      cursor: "pointer",
+      "&:hover": {
+        transition: "all 1s",
+        height: "auto",
+        overflow: "auto",
+      },
     },
     popularsCardFooter: {
       display: "flex",
       justifyContent: "flex-end",
       width: "100%",
       boxShadow: "0px -1px 3px 0px rgba(0,0,0,0.2)",
+      margin: "15px 0 0 0",
     },
     popularsActionsAddBtn: {
       color: "#347cff",
