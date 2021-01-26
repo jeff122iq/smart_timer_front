@@ -25,10 +25,15 @@ export default makeStyles((theme: Theme) =>
     },
     iconLamp: {
       color: "#fff",
+      fontSize: "30px",
+      margin: "0 0 5px 0",
     },
     title: {
+      margin: "0 30px",
+      letterSpacing: "0",
       color: "#fff",
-      fontWeight: 600,
+      fontWeight: 400,
+      fontSize: "25px",
     },
     cardsWrapper: {
       display: "flex",
@@ -46,19 +51,24 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap",
       background: "#fff",
-      width: "48%",
+      width: "45%",
+      overflow: "hidden",
       borderRadius: 4,
       margin: "7px 7px 7px 0",
+      "&:focus": {
+        height: "auto",
+      },
       [theme.breakpoints.down("sm")]: {
         width: "100%",
         margin: "15px 0 0px 0",
       },
     },
     cardTitle: {
-      padding: "15px 0 0px 15px",
+      margin: "10px 0 0 0",
+      padding: "0 30px",
     },
     popularsCardDescription: {
-      padding: "15px",
+      padding: "30px",
     },
     popularsCardFooter: {
       display: "flex",
@@ -76,6 +86,7 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       width: "100%",
+      marginBottom: "50px",
       "& > div > nav > ul > li > button": {
         backgroundColor: "transparent",
       },

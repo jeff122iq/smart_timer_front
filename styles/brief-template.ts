@@ -106,6 +106,9 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       backgroundColor: "transparent",
+      "& > div > nav > ul > li > button": {
+        background: "transparent",
+      },
       [theme.breakpoints.down("xs")]: {},
     },
     actions: {

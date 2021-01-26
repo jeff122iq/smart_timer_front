@@ -47,14 +47,6 @@ export default makeStyles((theme: Theme) =>
       textDecoration: "none",
       color: "black",
       margin: "0 11px",
-      transition: "all 100s",
-      "&:hover": {
-        textShadow: "0 0 .9px #333, 0 0 .9px #333, 0 0 .9px #333",
-        transition: "all 0s",
-      },
-      "&:focus": {
-        textShadow: "0 0 .9px #333, 0 0 .9px #333, 0 0 .9px #333",
-      },
     },
     userButton: {
       color: "black",
