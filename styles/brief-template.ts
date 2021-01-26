@@ -2,6 +2,15 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 
 export default makeStyles((theme: Theme) =>
   createStyles({
+    MuiPaginationItem: {
+      height: "26px",
+      margin: "0 1px",
+      padding: "0 4px",
+      minWidth: "26px",
+      borderRadius: "13px",
+      background: "transparent",
+    },
+
     rootBriefTemplate: {
       display: "flex",
       flexWrap: "wrap",
@@ -29,11 +38,13 @@ export default makeStyles((theme: Theme) =>
       // visibility: 'visible',
     },
     descriptionBtn: {
-      padding: "35px 25px",
+      width: "100%",
+      padding: "15px 25px",
       boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
       display: "flex",
       justifyContent: "flex-start",
       fontSize: "30px",
+      fontWeight: 400,
       lineHeight: 1,
       textTransform: "none",
       letterSpacing: "0",
@@ -41,6 +52,7 @@ export default makeStyles((theme: Theme) =>
       marginTop: "30px",
       animation: "3s ease-in 1s infinite reverse both running slidein",
       transition: "3s ease-in-out",
+      backgroundColor: "white",
       // transform: 'translateY(50%)'
       [theme.breakpoints.down("xs")]: {
         width: "100%",
@@ -93,6 +105,10 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       display: "flex",
       justifyContent: "center",
+      backgroundColor: "transparent",
+      "& > div > nav > ul > li > button": {
+        background: "transparent",
+      },
       [theme.breakpoints.down("xs")]: {},
     },
     actions: {

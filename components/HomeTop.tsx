@@ -21,22 +21,23 @@ export function HomeTop() {
         <Typography variant="h6" className={classes.caption}>
           Find or create brief for necissary type of work
         </Typography>
-
-        <Paper component="form" className={classes.inputContainer}>
-          <InputBase
-            className={classes.input}
-            placeholder="Search brief templates"
-            inputProps={{ "aria-label": "search google maps" }}
-          />
-          <IconButton
-            type="submit"
-            className={classes.iconButton}
-            aria-label="search"
-          >
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-        <Button className={classes.button}>Create new</Button>
+        <div className={classes.content}>
+          <Paper component="form" className={classes.inputContainer}>
+            <InputBase
+              className={classes.input}
+              placeholder="Search brief templates"
+              inputProps={{ "aria-label": "search google maps" }}
+            />
+            <IconButton
+              type="submit"
+              className={classes.iconButton}
+              aria-label="search"
+            >
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+          <Button className={classes.button}>Create new</Button>
+        </div>
       </Container>
     </div>
   );

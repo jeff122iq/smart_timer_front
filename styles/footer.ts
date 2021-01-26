@@ -22,7 +22,7 @@ export default makeStyles((theme: Theme) =>
     },
     logo: {
       fontFamily: "'Imbue', serif",
-      letterSpacing: "1.5px !important" ,
+      letterSpacing: "1.5px !important",
     },
     footerLinksContainer: {
       flexDirection: "column",
@@ -36,6 +36,7 @@ export default makeStyles((theme: Theme) =>
     footerLink: {
       cursor: "pointer",
       color: "white",
+      backgroundColor: "transparent",
       padding: 0,
       fontWeight: "inherit",
       minWidth: "inherit",

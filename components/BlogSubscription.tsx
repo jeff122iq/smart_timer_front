@@ -4,7 +4,7 @@ import UseStyles from "../styles/blogSubscription";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-export const BlogSubscription = () => {
+const BlogSubscription = () => {
   const classes = UseStyles();
 
   return (
@@ -33,4 +33,6 @@ export const BlogSubscription = () => {
     </div>
   );
 };
+
+export default BlogSubscription;
 // ========================== COMPONENT ====================================
