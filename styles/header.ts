@@ -29,6 +29,7 @@ export default makeStyles((theme: Theme) =>
       color: "black",
       ["@media (min-width: 670px)"]: {
         display: "none",
+        backgroundColor: "transparent",
       },
     },
     list: { width: 250 },
