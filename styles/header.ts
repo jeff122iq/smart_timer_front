@@ -51,6 +51,10 @@ export default makeStyles((theme: Theme) =>
       "&:focus": {
         fontWeight: "bolder",
       },
+      ["@media screen and (max-width: 320px)"]: {
+        fontSize: "10px",
+        margin: "0 5px",
+      },
     },
     userButton: {
       color: "black",

@@ -94,6 +94,18 @@ const TestLoggeingPage = (props) => {
         className={classes.wrapTopContent}
         style={{ margin: !tagLength ? "auto" : "0" }}
       >
+        {!tagLength ? (
+          <>
+            <h1 style={{ textAlign: "center", fontSize: "35px" }}>
+              Add tag to that relevant to
+              <br />
+              your type of work
+            </h1>
+          </>
+        ) : (
+          ""
+        )}
+
         <div className={classes.briefTemplateTags}>
           <Tags />
         </div>
@@ -114,11 +126,15 @@ const TestLoggeingPage = (props) => {
             ""
           )}
         </div>
-        <InputBase
-          className={classes.briefTemplateHeading}
-          placeholder="Write heading"
-          inputProps={{ "aria-label": "naked" }}
-        />
+        {tagLength ? (
+          <InputBase
+            className={classes.briefTemplateHeading}
+            placeholder="Write heading"
+            inputProps={{ "aria-label": "naked" }}
+          />
+        ) : (
+          ""
+        )}
         <h1>{card.title}</h1>
         <p>{card.text}</p>
         {/* <div className={classes.briefTemplate_card}>
@@ -173,53 +189,59 @@ const TestLoggeingPage = (props) => {
             <ModalIcon />
           </Modal>
         </div>
-        <div className={classes.pagination}>
-          <Paginator pages={3} />
-        </div>
-        <div className={classes.actions}>
-          <Button className={classes.actionsBtnSave} variant="contained">
-            Save
-          </Button>
-          <div style={{ position: "relative" }}>
-            <SvgIcon
-              className={classes.actionsBurger}
-              onClick={handleActionsBurger}
-            >
-              <MoreVertIcon />
-            </SvgIcon>
-            <div
-              className={
-                actionsBurger
-                  ? classes.actionsBurgerModalOpen
-                  : classes.actionsBurgerModal
-              }
-            >
-              <div className={classes.modalBurgerCopytext}>
-                <SvgIcon className={classes.actionsBurgerIcon}>
-                  <FileCopyOutlinedIcon />
-                </SvgIcon>
-                <Typography
-                  className={classes.actionsBurgerText}
-                  variant="body2"
-                >
-                  Copy text
-                </Typography>
-              </div>
-              <div className={classes.modalBurgerCopytext}>
-                <SvgIcon className={classes.actionsBurgerIcon}>
-                  <DeleteIcon />
-                </SvgIcon>
-                <Typography
-                  className={classes.actionsBurgerText}
-                  variant="body2"
-                >
-                  Clear all
-                </Typography>
-              </div>
+        {tagLength ? (
+          <>
+            <div className={classes.pagination}>
+              <Paginator pages={3} />
             </div>
-          </div>
-          <Button className={classes.actionsBtnLink}>Copy Link</Button>
-        </div>
+            <div className={classes.actions}>
+              <Button className={classes.actionsBtnSave} variant="contained">
+                Save
+              </Button>
+              <div style={{ position: "relative" }}>
+                <SvgIcon
+                  className={classes.actionsBurger}
+                  onClick={handleActionsBurger}
+                >
+                  <MoreVertIcon />
+                </SvgIcon>
+                <div
+                  className={
+                    actionsBurger
+                      ? classes.actionsBurgerModalOpen
+                      : classes.actionsBurgerModal
+                  }
+                >
+                  <div className={classes.modalBurgerCopytext}>
+                    <SvgIcon className={classes.actionsBurgerIcon}>
+                      <FileCopyOutlinedIcon />
+                    </SvgIcon>
+                    <Typography
+                      className={classes.actionsBurgerText}
+                      variant="body2"
+                    >
+                      Copy text
+                    </Typography>
+                  </div>
+                  <div className={classes.modalBurgerCopytext}>
+                    <SvgIcon className={classes.actionsBurgerIcon}>
+                      <DeleteIcon />
+                    </SvgIcon>
+                    <Typography
+                      className={classes.actionsBurgerText}
+                      variant="body2"
+                    >
+                      Clear all
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <Button className={classes.actionsBtnLink}>Copy Link</Button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className={classes.populars}>

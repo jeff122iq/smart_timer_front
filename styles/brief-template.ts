@@ -57,7 +57,11 @@ export default makeStyles((theme: Theme) =>
       [theme.breakpoints.down("xs")]: {
         width: "100%",
       },
+      ["@media screen and (max-width: 320px)"]: {
+        fontSize: "20px",
+      },
     },
+
     briefTemplateTags: {
       marginTop: "30px",
       width: "100%",
@@ -110,6 +114,12 @@ export default makeStyles((theme: Theme) =>
         background: "transparent",
       },
       [theme.breakpoints.down("xs")]: {},
+      ["@media screen and (max-width: 320px)"]: {
+        margin: "0 0 30px 0",
+        display: "flex",
+        justifyContent: "center",
+        width: "80%",
+      },
     },
     actions: {
       display: "flex",
