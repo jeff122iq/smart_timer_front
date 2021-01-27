@@ -2,25 +2,20 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
-import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
-import SvgIcon from "@material-ui/core/SvgIcon";
 import Button from "@material-ui/core/Button";
 import Paginator from "./Paginator";
 import useStyles from "../styles/popularsTemplates";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const PopularsTemplate = () => {
+const AdditionalTemplate = () => {
   const classes = useStyles();
   return (
     // <Container maxWidth="sm" disableGutters={true}	 style={{background: '#e3f4'}}>
     <div className={classes.rootPopulars}>
       <div className={classes.popularsTitle}>
-        <SvgIcon className={classes.iconLamp}>
-          <EmojiObjectsIcon />
-        </SvgIcon>
         <Typography className={classes.title} variant="h4">
-          Popular
+          Additional
         </Typography>
       </div>
       <div className={classes.cardsWrapper}>
@@ -147,5 +142,5 @@ const PopularsTemplate = () => {
   );
 };
 
-export default PopularsTemplate;
+export default AdditionalTemplate;
 // ========================== COMPONENT ====================================

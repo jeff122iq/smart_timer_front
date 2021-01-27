@@ -56,6 +56,9 @@ const LimitTags = () => {
     <div className={classes.root}>
       <CustomAutocomplete
         className={classes.autocomplete}
+        classes={{
+          popupIndicator: classes.popupIndicator,
+        }}
         onChange={(event, value: any) => {
           setTags(value);
           console.log(value);

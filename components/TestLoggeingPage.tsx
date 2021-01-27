@@ -1,4 +1,3 @@
-// ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 import React, { useEffect, useState } from "react";
 import "@material/react-text-field/dist/text-field.css";
 import Button from "@material-ui/core/Button";
@@ -20,11 +19,11 @@ import { CardStore } from "../store/cardStore";
 
 import Tags from "./Tags";
 import Paginator from "./Paginator";
-import PopularsTemplate from "./PopularsTemplate";
 import { TagsStore } from "../store/tagsStore";
 // import DescriptionModal from "./DescriptionModal";
 import useStyles from "../styles/brief-template";
 import ModalIcon from "./ModalWindow";
+import AdditionalTemplate from "./AdditionalTemplate";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -45,7 +44,7 @@ function getModalStyle() {
 }
 // ==================MODAL====================
 
-const BriefTemplate = (props) => {
+const TestLoggeingPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
   const { createCard, card } = CardStore;
@@ -84,9 +83,17 @@ const BriefTemplate = (props) => {
     setOpen(false);
   };
   return (
-    <div className={classes.rootBriefTemplate}>
+    <div
+      className={classes.rootBriefTemplate}
+      style={{
+        flexDirection: !tagLength ? "column" : "row",
+      }}
+    >
       <div className={classes.wrapper}></div>
-      <div className={classes.wrapTopContent}>
+      <div
+        className={classes.wrapTopContent}
+        style={{ margin: !tagLength ? "auto" : "0" }}
+      >
         <div className={classes.briefTemplateTags}>
           <Tags />
         </div>
@@ -216,11 +223,11 @@ const BriefTemplate = (props) => {
       </div>
 
       <div className={classes.populars}>
-        <PopularsTemplate />
+        {tagLength ? <AdditionalTemplate /> : ""}
       </div>
     </div>
   );
 };
 
-export default observer(BriefTemplate);
+export default observer(TestLoggeingPage);
 // ========================== COMPONENT ====================================

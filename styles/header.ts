@@ -41,13 +41,16 @@ export default makeStyles((theme: Theme) =>
         display: "block",
       },
       ["@media (min-width: 740px)"]: {
-        marginLeft: "69px",
+        marginLeft: "100px",
       },
     },
     link: {
       textDecoration: "none",
       color: "black",
-      margin: "0 11px",
+      margin: "0 30px",
+      "&:focus": {
+        fontWeight: "bolder",
+      },
     },
     userButton: {
       color: "black",

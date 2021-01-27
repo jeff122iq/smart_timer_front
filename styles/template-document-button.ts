@@ -23,13 +23,13 @@ export default makeStyles((theme: Theme) =>
     documentName: {
       color: "white",
       fontSize: "20px",
-      maxWidth: "85%",
+      maxWidth: "60%",
       //two row text overflow ellipsis
       display: "-webkit-box",
       "-webkit-line-clamp": 2,
       "-webkit-box-orient": "vertical",
       overflow: "hidden",
-      lineHeight: '22px'
+      lineHeight: "22px",
     },
     actionsBurger: {
       position: "relative",

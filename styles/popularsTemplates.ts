@@ -51,7 +51,7 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap",
       background: "#fff",
-      width: "45%",
+      width: "48%",
       borderRadius: 4,
       margin: "7px 7px 7px 0",
       [theme.breakpoints.down("sm")]: {
@@ -62,13 +62,14 @@ export default makeStyles((theme: Theme) =>
     cardTitle: {
       margin: "10px 0 0 0",
       padding: "0 30px",
+      fontSize: "20px",
     },
     popularsCardDescription: {
-      padding: "30px",
-      overflow: "hidden",
-      height: "130px",
+      padding: "10px 30px",
       transition: "all 1s",
       cursor: "pointer",
+      height: "93px",
+      overflow: "hidden",
       "&:hover": {
         transition: "all 1s",
         height: "auto",
@@ -80,13 +81,21 @@ export default makeStyles((theme: Theme) =>
       justifyContent: "flex-end",
       width: "100%",
       boxShadow: "0px -1px 3px 0px rgba(0,0,0,0.2)",
-      margin: "15px 0 0 0",
+      margin: "10px 0 0 0",
+      padding: "20px 0",
+      [theme.breakpoints.down("md")]: {
+        padding: "0",
+      },
     },
     popularsActionsAddBtn: {
       color: "#347cff",
       fontWeight: 700,
       padding: "10px 0",
       backgroundColor: "transparent",
+      display: "none",
+      [theme.breakpoints.down("md")]: {
+        display: "block",
+      },
     },
     pagination: {
       display: "flex",

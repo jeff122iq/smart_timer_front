@@ -12,11 +12,12 @@ export default makeStyles((theme: Theme) =>
     },
     caption: {
       fontWeight: 900,
-      fontSize: 30,
+      fontSize: 35,
+      lineHeight: "1.5",
       textAlign: "center",
       fontFamily: "Roboto, sans-serif",
-      letterSpacing: 1.5,
-      maxWidth: "400px",
+      letterSpacing: 1,
+      maxWidth: "500px",
       margin: "0 auto",
     },
     inputContainer: {
