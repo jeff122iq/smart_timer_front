@@ -11,6 +11,7 @@ import {
   InputBase,
   TextField,
   Typography,
+  ClickAwayListener,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
@@ -69,6 +70,10 @@ const TestLoggeingPage = (props) => {
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
+  };
+
+  const handleClickAway = () => {
+    setActionsBurger(false);
   };
 
   const handleActionsBurger = () => {
@@ -194,50 +199,52 @@ const TestLoggeingPage = (props) => {
             <div className={classes.pagination}>
               <Paginator pages={3} />
             </div>
-            <div className={classes.actions}>
-              <Button className={classes.actionsBtnSave} variant="contained">
-                Save
-              </Button>
-              <div style={{ position: "relative" }}>
-                <SvgIcon
-                  className={classes.actionsBurger}
-                  onClick={handleActionsBurger}
-                >
-                  <MoreVertIcon />
-                </SvgIcon>
-                <div
-                  className={
-                    actionsBurger
-                      ? classes.actionsBurgerModalOpen
-                      : classes.actionsBurgerModal
-                  }
-                >
-                  <div className={classes.modalBurgerCopytext}>
-                    <SvgIcon className={classes.actionsBurgerIcon}>
-                      <FileCopyOutlinedIcon />
-                    </SvgIcon>
-                    <Typography
-                      className={classes.actionsBurgerText}
-                      variant="body2"
-                    >
-                      Copy text
-                    </Typography>
-                  </div>
-                  <div className={classes.modalBurgerCopytext}>
-                    <SvgIcon className={classes.actionsBurgerIcon}>
-                      <DeleteIcon />
-                    </SvgIcon>
-                    <Typography
-                      className={classes.actionsBurgerText}
-                      variant="body2"
-                    >
-                      Clear all
-                    </Typography>
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <div className={classes.actions}>
+                <Button className={classes.actionsBtnSave} variant="contained">
+                  Save
+                </Button>
+                <div style={{ position: "relative" }}>
+                  <SvgIcon
+                    className={classes.actionsBurger}
+                    onClick={handleActionsBurger}
+                  >
+                    <MoreVertIcon />
+                  </SvgIcon>
+                  <div
+                    className={
+                      actionsBurger
+                        ? classes.actionsBurgerModalOpen
+                        : classes.actionsBurgerModal
+                    }
+                  >
+                    <div className={classes.modalBurgerCopytext}>
+                      <SvgIcon className={classes.actionsBurgerIcon}>
+                        <FileCopyOutlinedIcon />
+                      </SvgIcon>
+                      <Typography
+                        className={classes.actionsBurgerText}
+                        variant="body2"
+                      >
+                        Copy text
+                      </Typography>
+                    </div>
+                    <div className={classes.modalBurgerCopytext}>
+                      <SvgIcon className={classes.actionsBurgerIcon}>
+                        <DeleteIcon />
+                      </SvgIcon>
+                      <Typography
+                        className={classes.actionsBurgerText}
+                        variant="body2"
+                      >
+                        Clear all
+                      </Typography>
+                    </div>
                   </div>
                 </div>
+                <Button className={classes.actionsBtnLink}>Copy Link</Button>
               </div>
-              <Button className={classes.actionsBtnLink}>Copy Link</Button>
-            </div>
+            </ClickAwayListener>
           </>
         ) : (
           ""

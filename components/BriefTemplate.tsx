@@ -59,6 +59,9 @@ const BriefTemplate = (props) => {
 
   const [tags, setTags] = useState([]);
   const [actionsBurger, setActionsBurger] = useState(false);
+  const handleActionsBurger = () => {
+    setActionsBurger(!actionsBurger);
+  };
 
   // ================MODAL==================
   const [modalStyle] = useState(getModalStyle);
@@ -72,9 +75,6 @@ const BriefTemplate = (props) => {
     setInputValue(event.target.value);
   };
 
-  const handleActionsBurger = () => {
-    setActionsBurger(!actionsBurger);
-  };
   const handleWriteDescription = () => {
     setWriteDescription(!writeDescription);
     setOpen(true);

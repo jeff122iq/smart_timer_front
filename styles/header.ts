@@ -51,6 +51,11 @@ export default makeStyles((theme: Theme) =>
       "&:focus": {
         fontWeight: "bolder",
       },
+      ["@media screen and (max-width: 420px)"]: {
+        // fontSize: "10px",
+        margin: "0 5px",
+      },
+
       ["@media screen and (max-width: 320px)"]: {
         fontSize: "10px",
         margin: "0 5px",
