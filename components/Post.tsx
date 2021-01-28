@@ -14,7 +14,7 @@ const Post = () => {
           alt=""
         />
       </div>
-      <div className={classes.tetxtBlog}>
+      <div className={classes.texttBlog}>
         <h1 className={classes.cardTitle}>Title</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
