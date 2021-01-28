@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
   Collapse,
+  ClickAwayListener,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
@@ -84,6 +85,10 @@ const BriefTemplate = (props) => {
   const handleWriteDescription = () => {
     setWriteDescription(!writeDescription);
     setOpen(true);
+  };
+
+  const handleClickAway = () => {
+    setActionsBurger(false);
   };
 
   const handleClose = () => {
@@ -171,56 +176,58 @@ const BriefTemplate = (props) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <DescriptionModal />
+            <DescriptionModal open={open} setOpen={setOpen} />
           </Modal>
         </div>
         <div className={classes.pagination}>
           <Paginator pages={3} />
         </div>
-        <div className={classes.actions}>
-          <Button className={classes.actionsBtnSave} variant="contained">
-            Save
-          </Button>
-          <div style={{ position: "relative" }}>
-            <SvgIcon
-              className={classes.actionsBurger}
-              onClick={handleActionsBurger}
-            >
-              <MoreVertIcon />
-            </SvgIcon>
-            <div
-              className={
-                actionsBurger
-                  ? classes.actionsBurgerModalOpen
-                  : classes.actionsBurgerModal
-              }
-            >
-              <div className={classes.modalBurgerCopytext}>
-                <SvgIcon className={classes.actionsBurgerIcon}>
-                  <FileCopyOutlinedIcon />
-                </SvgIcon>
-                <Typography
-                  className={classes.actionsBurgerText}
-                  variant="body2"
-                >
-                  Copy text
-                </Typography>
-              </div>
-              <div className={classes.modalBurgerCopytext}>
-                <SvgIcon className={classes.actionsBurgerIcon}>
-                  <DeleteIcon />
-                </SvgIcon>
-                <Typography
-                  className={classes.actionsBurgerText}
-                  variant="body2"
-                >
-                  Clear all
-                </Typography>
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <div className={classes.actions}>
+            <Button className={classes.actionsBtnSave} variant="contained">
+              Save
+            </Button>
+            <div style={{ position: "relative" }}>
+              <SvgIcon
+                className={classes.actionsBurger}
+                onClick={handleActionsBurger}
+              >
+                <MoreVertIcon />
+              </SvgIcon>
+              <div
+                className={
+                  actionsBurger
+                    ? classes.actionsBurgerModalOpen
+                    : classes.actionsBurgerModal
+                }
+              >
+                <div className={classes.modalBurgerCopytext}>
+                  <SvgIcon className={classes.actionsBurgerIcon}>
+                    <FileCopyOutlinedIcon />
+                  </SvgIcon>
+                  <Typography
+                    className={classes.actionsBurgerText}
+                    variant="body2"
+                  >
+                    Copy text
+                  </Typography>
+                </div>
+                <div className={classes.modalBurgerCopytext}>
+                  <SvgIcon className={classes.actionsBurgerIcon}>
+                    <DeleteIcon />
+                  </SvgIcon>
+                  <Typography
+                    className={classes.actionsBurgerText}
+                    variant="body2"
+                  >
+                    Clear all
+                  </Typography>
+                </div>
               </div>
             </div>
+            <Button className={classes.actionsBtnLink}>Copy Link</Button>
           </div>
-          <Button className={classes.actionsBtnLink}>Copy Link</Button>
-        </div>
+        </ClickAwayListener>
       </div>
 
       <div className={classes.populars}>

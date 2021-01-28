@@ -22,9 +22,8 @@ import { CardStore } from "../store/cardStore";
 import Tags from "./Tags";
 import Paginator from "./Paginator";
 import { TagsStore } from "../store/tagsStore";
-// import DescriptionModal from "./DescriptionModal";
+import DescriptionModal from "./DescriptionModal";
 import useStyles from "../styles/testLoggedInPage";
-import ModalIcon from "./ModalWindow";
 import AdditionalTemplate from "./AdditionalTemplate";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
@@ -195,7 +194,7 @@ const TestLoggeingPage = (props) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <ModalIcon />
+            <DescriptionModal open={open} setOpen={setOpen} />
           </Modal>
         </div>
         {tagLength ? (

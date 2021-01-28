@@ -30,7 +30,7 @@ export default makeStyles((theme: Theme) =>
       margin: "0 0 5px 0",
     },
     title: {
-      margin: "0 30px",
+      margin: "0 15px",
       letterSpacing: "0",
       color: "#fff",
       fontWeight: 400,

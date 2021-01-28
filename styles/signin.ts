@@ -9,11 +9,12 @@ export default makeStyles((theme: Theme) =>
     },
     caption: {
       fontWeight: 900,
-      fontSize: 25,
-      fontFamily: "Roboto, sans-serif",
+      fontSize: 35,
+      lineHeight: "1.1",
       textAlign: "center",
-      letterSpacing: 1.5,
-      maxWidth: "340px",
+      fontFamily: "Roboto, sans-serif",
+      letterSpacing: 1,
+      maxWidth: "500px",
       margin: "0 auto",
     },
     credsContainer: {

@@ -61,6 +61,11 @@ const DescriptionModal = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [localTheme, setLocalTheme] = useState(theme);
 
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const save = (data: any) => {
     const dataValue = JSON.parse(data);
     dataValue.title = inputValue;
@@ -106,10 +111,8 @@ const DescriptionModal = (props) => {
                 name: "close",
                 icon: <div style={{}}>close</div>,
                 type: "callback",
-                onClick: (data: any) => {
-                  const dataValue = JSON.parse(data);
-                  dataValue.title = inputValue;
-                  console.log("DATA", dataValue);
+                onClick: () => {
+                  props.setOpen(false);
                 },
               },
             ]}

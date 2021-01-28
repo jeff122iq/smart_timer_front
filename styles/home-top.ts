@@ -13,7 +13,7 @@ export default makeStyles((theme: Theme) =>
     caption: {
       fontWeight: 900,
       fontSize: 35,
-      lineHeight: "1.5",
+      lineHeight: "1.1",
       textAlign: "center",
       fontFamily: "Roboto, sans-serif",
       letterSpacing: 1,
