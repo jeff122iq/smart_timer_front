@@ -19,7 +19,7 @@ const BlogSubscription = () => {
       </div>
       <div className={classes.subscription}>
         <h1>SIGN UP FOR NEWSLETTER</h1>
-        <input type="text" placeholder="Email:" />
+        <input type="text" placeholder="Email*" />
         <button>SUBSCRIBE</button>
       </div>
       <div className={classes.subscription}>

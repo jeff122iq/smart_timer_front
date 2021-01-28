@@ -41,5 +41,8 @@ export default makeStyles((theme: Theme) =>
     briefTemplateModal: {
       width: "100%",
     },
+    deleteIcon: {
+      color: "red",
+    },
   })
 );

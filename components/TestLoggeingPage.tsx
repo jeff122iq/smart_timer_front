@@ -12,6 +12,7 @@ import {
   TextField,
   Typography,
   ClickAwayListener,
+  Collapse,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
@@ -22,7 +23,7 @@ import Tags from "./Tags";
 import Paginator from "./Paginator";
 import { TagsStore } from "../store/tagsStore";
 // import DescriptionModal from "./DescriptionModal";
-import useStyles from "../styles/brief-template";
+import useStyles from "../styles/testLoggedInPage";
 import ModalIcon from "./ModalWindow";
 import AdditionalTemplate from "./AdditionalTemplate";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
@@ -89,7 +90,7 @@ const TestLoggeingPage = (props) => {
   };
   return (
     <div
-      className={classes.rootBriefTemplate}
+      className={classes.rootCreateTemplate}
       style={{
         flexDirection: !tagLength ? "column" : "row",
       }}
@@ -100,43 +101,46 @@ const TestLoggeingPage = (props) => {
         style={{ margin: !tagLength ? "auto" : "0" }}
       >
         {!tagLength ? (
-          <>
-            <h1 style={{ textAlign: "center", fontSize: "35px" }}>
-              Add tag to that relevant to
-              <br />
-              your type of work
-            </h1>
-          </>
+          <h1 style={{}}>
+            Add tag to that relevant to
+            <br />
+            your type of work
+          </h1>
         ) : (
           ""
         )}
-
-        <div className={classes.briefTemplateTags}>
+        <div className={classes.CreateTemplateTags}>
           <Tags />
         </div>
         {/* <Slide direction="right" style={{ visibility: tagLength ? "visible" : "hidden" }}> */}
         <div
-          className={classes.briefTemplate_description}
+          className={classes.CreateTemplate_description}
           style={{ display: tagLength ? "block" : "none" }}
         >
-          {tagLength ? (
-            <Button
-              className={classes.descriptionBtn}
-              onClick={handleWriteDescription}
-              // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
-            >
-              Write description
-            </Button>
-          ) : (
-            ""
-          )}
+          <Collapse in={tagLength}>
+            {tagLength ? (
+              <Button
+                className={classes.descriptionBtn}
+                onClick={handleWriteDescription}
+                // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
+              >
+                Write description
+              </Button>
+            ) : (
+              ""
+            )}
+          </Collapse>
         </div>
         {tagLength ? (
-          <InputBase
-            className={classes.briefTemplateHeading}
-            placeholder="Write heading"
-            inputProps={{ "aria-label": "naked" }}
-          />
+          <Collapse in={tagLength}>
+            <>
+              <InputBase
+                className={classes.CreateTemplateHeading}
+                placeholder="Write heading"
+                inputProps={{ "aria-label": "naked" }}
+              />
+            </>
+          </Collapse>
         ) : (
           ""
         )}
@@ -182,8 +186,8 @@ const TestLoggeingPage = (props) => {
         <div
           className={
             writeDescription
-              ? classes.briefTemplateModalOpen
-              : classes.briefTemplateModal
+              ? classes.CreateTemplateModalOpen
+              : classes.CreateTemplateModal
           }
         >
           <Modal
@@ -250,9 +254,10 @@ const TestLoggeingPage = (props) => {
           ""
         )}
       </div>
-
       <div className={classes.populars}>
-        {tagLength ? <AdditionalTemplate /> : ""}
+        <Collapse in={tagLength}>
+          {tagLength ? <AdditionalTemplate /> : ""}
+        </Collapse>
       </div>
     </div>
   );

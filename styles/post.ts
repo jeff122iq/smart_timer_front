@@ -5,7 +5,7 @@ export default makeStyles((theme: Theme) =>
     post: {
       width: "100%",
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "column",
       justifyContent: "space-between",
       backgroundColor: "white",
       margin: "20px 0",
@@ -15,7 +15,7 @@ export default makeStyles((theme: Theme) =>
     },
 
     postImage: {
-      width: "calc(100% / 1.5)",
+      width: "100%",
       "& > img": {
         objectFit: "cover",
         width: "100%",
@@ -25,19 +25,27 @@ export default makeStyles((theme: Theme) =>
       },
     },
 
-    tetxtBlog: {
-      width: "100%",
+    texttBlog: {
       margin: "0 20px",
-      "& > h1": {
-        margin: "0",
-        padding: "0",
-      },
-      [theme.breakpoints.down("md")]: {
-        width: "90%",
-      },
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      textAlign: "justify",
       "& > p": {
-        margin: "0",
+        [theme.breakpoints.down("md")]: {
+          width: "90%",
+          maxHeight: "190px",
+          overflow: "hidden",
+          "&:hover": {
+            height: "auto",
+          },
+        },
       },
+    },
+    cardTitle: {
+      display: "flex",
+      justifyContent: "flex-start",
+      width: "100%",
     },
   })
 );

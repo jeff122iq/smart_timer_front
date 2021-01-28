@@ -30,7 +30,7 @@ export default function ModalIcon() {
     <>
       <div className={classes.modalIcon}>
         <input type="text" name="" id="" placeholder="Title" />
-        <textarea name="" id="" placeholder="Text" />
+        <textarea contentEditable name="" id="" placeholder="Text" />
         <div className={classes.navBlock}>
           <ul>
             <li>

@@ -6,14 +6,18 @@ class cardStore {
     makeObservable(this);
   }
 
+  @observable cardsArray: [] = [];
+
   @observable card: cards = {
     title: "",
     text: "",
   };
 
-  @action createCard = (info) => {
-    this.card.title = info.title;
-    this.card.text = info.text;
+  @action createCard = (value) => {
+    this.card.title = value.title;
+    this.card.text = value.text;
+    // this.cardsArray.push();
+    console.log("CARD STORE", this.card);
   };
 }
 

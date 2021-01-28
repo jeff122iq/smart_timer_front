@@ -4,7 +4,9 @@ export default makeStyles((theme: Theme) =>
     blogSubscription: {
       width: "100%",
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "center",
+      alignContent: "baseline",
+      alignItems: "center",
       flexWrap: "wrap",
       [theme.breakpoints.down("md")]: {
         justifyContent: "center",
@@ -20,10 +22,8 @@ export default makeStyles((theme: Theme) =>
       alignItems: "center",
       flexDirection: "column",
       border: "2px solid silver",
-      margin: "150px 0 150px 0",
-      [theme.breakpoints.down("md")]: {
-        margin: "20px 0",
-      },
+      margin: "50px 0",
+      [theme.breakpoints.down("md")]: {},
       "& > h1": {
         fontWeight: "300",
         fontSize: "20px",
@@ -60,11 +60,11 @@ export default makeStyles((theme: Theme) =>
         border: "none",
         borderBottom: "1px solid grey",
         outline: "none",
-        fontSize: "30px",
+        fontSize: "20px",
         transition: "all 0.3s",
 
         "&::placeholder": {
-          fontSize: "30px",
+          fontSize: "20px",
           [theme.breakpoints.down("xs")]: {
             transition: "all 0.3s",
             fontSize: "20px",

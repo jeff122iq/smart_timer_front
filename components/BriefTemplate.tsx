@@ -1,5 +1,5 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import "@material/react-text-field/dist/text-field.css";
 import Button from "@material-ui/core/Button";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -12,6 +12,7 @@ import {
   InputBase,
   TextField,
   Typography,
+  Collapse,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
@@ -25,6 +26,7 @@ import { TagsStore } from "../store/tagsStore";
 // import DescriptionModal from "./DescriptionModal";
 import useStyles from "../styles/brief-template";
 import ModalIcon from "./ModalWindow";
+import DescriptionModal from "./DescriptionModal";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -57,7 +59,11 @@ const BriefTemplate = (props) => {
     });
   }, []);
 
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([card]);
+  console.log("=================");
+  console.log(tags);
+  console.log("=================");
+
   const [actionsBurger, setActionsBurger] = useState(false);
   const handleActionsBurger = () => {
     setActionsBurger(!actionsBurger);
@@ -96,13 +102,15 @@ const BriefTemplate = (props) => {
           style={{ display: tagLength ? "block" : "none" }}
         >
           {tagLength ? (
-            <Button
-              className={classes.descriptionBtn}
-              onClick={handleWriteDescription}
-              // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
-            >
-              Write description
-            </Button>
+            <>
+              <Button
+                className={classes.descriptionBtn}
+                onClick={handleWriteDescription}
+                // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
+              >
+                Write description
+              </Button>
+            </>
           ) : (
             ""
           )}
@@ -163,7 +171,7 @@ const BriefTemplate = (props) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <ModalIcon />
+            <DescriptionModal />
           </Modal>
         </div>
         <div className={classes.pagination}>
@@ -217,6 +225,7 @@ const BriefTemplate = (props) => {
 
       <div className={classes.populars}>
         <PopularsTemplate />
+        {/* </Collapse> */}
       </div>
     </div>
   );

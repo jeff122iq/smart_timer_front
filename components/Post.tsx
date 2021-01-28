@@ -15,7 +15,7 @@ const Post = () => {
         />
       </div>
       <div className={classes.tetxtBlog}>
-        <h1>Title</h1>
+        <h1 className={classes.cardTitle}>Title</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
           pariatur quos distinctio, consectetur laudantium alias ad in quo

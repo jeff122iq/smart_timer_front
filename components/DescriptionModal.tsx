@@ -5,6 +5,7 @@ import InputBase from "@material-ui/core/InputBase";
 import MUIRichTextEditor from "mui-rte";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -22,6 +23,19 @@ const local_theme_overrides = {
         // boxShadow: "0px -1px 3px 0px rgba(0,0,0,0.2)",
         "& > button": {
           color: "#347cff",
+        },
+        "& > button:nth-child(4)": {
+          position: "absolute",
+          // left: 250,
+          // width: "100%",
+          left: "calc(50% - 24px)",
+          bottom: 0,
+          // zIndex: 0,
+        },
+        "& > button:nth-child(5)": {
+          position: "absolute",
+          right: 15,
+          bottom: 0,
         },
       },
       label: {},
@@ -46,16 +60,10 @@ const DescriptionModal = (props) => {
   const theme = useTheme();
   const [inputValue, setInputValue] = useState("");
   const [localTheme, setLocalTheme] = useState(theme);
-  const [bold, setBold] = useState(false);
 
   const save = (data: any) => {
     const dataValue = JSON.parse(data);
     dataValue.title = inputValue;
-
-    console.log(dataValue);
-  };
-  const handldeBold = () => {
-    setBold(!bold);
   };
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -65,7 +73,7 @@ const DescriptionModal = (props) => {
   }, []);
 
   return (
-    <div className={classes.rootModal}>
+    <div className={classes.rootModal} style={{}}>
       <InputBase
         className={classes.input}
         placeholder="Write title"
@@ -74,12 +82,37 @@ const DescriptionModal = (props) => {
         onChange={handleInputValue}
       />
       <ThemeProvider theme={localTheme}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            position: "relative",
+            width: "100%",
+          }}
+        >
           <MUIRichTextEditor
-            controls={["numberList", "link", "bold", "delete"]}
+            controls={["numberList", "link", "bold", "MoreVertIcon", "close"]}
             inlineToolbar={true}
             label="Write description..."
             onSave={save}
+            customControls={[
+              {
+                name: "MoreVertIcon",
+                icon: <MoreVertIcon />,
+                type: "callback",
+                onClick: () => {},
+              },
+              {
+                name: "close",
+                icon: <div style={{}}>close</div>,
+                type: "callback",
+                onClick: (data: any) => {
+                  const dataValue = JSON.parse(data);
+                  dataValue.title = inputValue;
+                  console.log("DATA", dataValue);
+                },
+              },
+            ]}
           ></MUIRichTextEditor>
         </div>
       </ThemeProvider>

@@ -15,5 +15,13 @@ export default makeStyles((theme: Theme) =>
         fontSize: "50px",
       },
     },
+    content: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "row",
+      [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+      },
+    },
   })
 );

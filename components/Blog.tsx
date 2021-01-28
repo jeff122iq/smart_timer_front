@@ -13,10 +13,15 @@ const Blog = () => {
     <div className={classes.root}>
       <Container maxWidth="lg" className={classes.rootBlog}>
         <h1>Blog page</h1>
-        <Post />
-        <Post />
-        <Post />
-        <BlogSubscription />
+        <div className={classes.content}>
+          <div className="posts" style={{ width: "100%", marginRight: "50px" }}>
+            <Post />
+            <Post />
+            <Post />
+          </div>
+
+          <BlogSubscription />
+        </div>
       </Container>
     </div>
   );

@@ -11,6 +11,7 @@ export default makeStyles((theme: Theme) =>
       padding: "0 40px",
       [theme.breakpoints.down("sm")]: {
         marginBottom: "200px",
+        padding: "0 10px",
       },
     },
     popularsTitle: {
@@ -34,6 +35,9 @@ export default makeStyles((theme: Theme) =>
       color: "#fff",
       fontWeight: 400,
       fontSize: "25px",
+      [theme.breakpoints.down("md")]: {
+        margin: 0,
+      },
     },
     cardsWrapper: {
       display: "flex",
@@ -41,22 +45,22 @@ export default makeStyles((theme: Theme) =>
       justifyContent: "space-around",
       width: "100%",
       marginTop: "39px",
-      paddingLeft: "5px",
+      padding: "0 100px",
       [theme.breakpoints.down("sm")]: {
-        marginTop: "0px",
-        paddingLeft: "0px",
+        marginTop: "30px",
+        padding: 0,
       },
     },
     popularsCard: {
       display: "flex",
       flexWrap: "wrap",
       background: "#fff",
-      width: "48%",
+      width: "300px",
+      margin: "10px 0",
       borderRadius: 4,
-      margin: "7px 7px 7px 0",
       [theme.breakpoints.down("sm")]: {
         width: "100%",
-        margin: "15px 0 0px 0",
+        margin: "10px 0",
       },
     },
     cardTitle: {
@@ -68,7 +72,7 @@ export default makeStyles((theme: Theme) =>
       padding: "10px 30px",
       transition: "all 1s",
       cursor: "pointer",
-      height: "93px",
+      height: "105px",
       overflow: "hidden",
       "&:hover": {
         transition: "all 1s",

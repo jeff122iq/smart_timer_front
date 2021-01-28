@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
             alignItems: "center",
             "& > button::after": {
               color: "#347cff",
-              marginRight: "40px",
+              marginRight: "50px",
               content: "'Previous'",
             },
           },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) =>
             alignItems: "center",
             "& > button::before": {
               color: "#347cff",
-              marginLeft: "20px",
+              marginLeft: "50px",
               content: "'Next'",
             },
           },
