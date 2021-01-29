@@ -13,10 +13,16 @@ import {
   Typography,
   ClickAwayListener,
   Collapse,
+  ButtonBase,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  withStyles,
+} from "@material-ui/core/styles";
 import { CardStore } from "../store/cardStore";
 
 import Tags from "./Tags";
@@ -26,6 +32,14 @@ import DescriptionModal from "./DescriptionModal";
 import useStyles from "../styles/testLoggedInPage";
 import AdditionalTemplate from "./AdditionalTemplate";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
+
+const CustomButton = withStyles(() => {
+  createStyles({
+    focusVisible: {
+      display: "none",
+    },
+  });
+})(ButtonBase);
 
 // ========================== COMPONENT ====================================
 // =================MODAL=====================
@@ -118,13 +132,13 @@ const TestLoggeingPage = (props) => {
         >
           <Collapse in={tagLength}>
             {tagLength ? (
-              <Button
+              <CustomButton
                 className={classes.descriptionBtn}
                 onClick={handleWriteDescription}
                 // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
               >
                 Write description
-              </Button>
+              </CustomButton>
             ) : (
               ""
             )}

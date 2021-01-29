@@ -50,9 +50,12 @@ export default makeStyles((theme: Theme) =>
       letterSpacing: "0",
       color: "grey",
       marginTop: "30px",
-      animation: "3s ease-in 1s infinite reverse both running slidein",
+      // animat ion: "3s ease-in 1s infinite reverse both running slidein",
       transition: "3s ease-in-out",
       backgroundColor: "white",
+      "&:focus": {
+        background: "transparent",
+      },
       // transform: 'translateY(50%)'
       [theme.breakpoints.down("xs")]: {
         width: "100%",

@@ -17,12 +17,9 @@ export default makeStyles((theme: Theme) =>
       },
     },
     avatar: {
-      width: "20px",
-      height: "20px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "black",
+      width: "25px",
+      height: "25px",
+      color: "#2e373b",
     },
 
     menuButton: {
@@ -40,6 +37,9 @@ export default makeStyles((theme: Theme) =>
       ["@media (min-width: 670px)"]: {
         display: "block",
       },
+      ["@media screen and (max-width: 1024px)"]: {
+        margin: "0",
+      },
       ["@media (min-width: 740px)"]: {
         marginLeft: "100px",
       },
@@ -48,8 +48,14 @@ export default makeStyles((theme: Theme) =>
       textDecoration: "none",
       color: "black",
       margin: "0 30px",
-      "&:focus": {
+      "&:active": {
         fontWeight: "bolder",
+      },
+      ["@media screen and (max-width: 1055px)"]: {
+        margin: "0 10px",
+      },
+      ["@media screen and (max-width: 768px)"]: {
+        margin: "0 5px",
       },
       ["@media screen and (max-width: 420px)"]: {
         // fontSize: "10px",

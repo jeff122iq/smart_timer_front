@@ -15,7 +15,21 @@ const local_theme_overrides = {
       root: {
         marginTop: 20,
         width: "100%",
+        "& > .Mui-focusVisible": {
+          display: "none",
+          background: "red",
+          "&:focus": {
+            display: "none",
+            background: "red",
+          },
+        },
       },
+
+      focusVisible: {
+        display: "none",
+        background: "red",
+      },
+
       toolbar: {
         display: "flex",
         justifyContent: "flex-start",
@@ -38,6 +52,7 @@ const local_theme_overrides = {
           bottom: 0,
         },
       },
+
       label: {},
       editor: {
         padding: "0 0 0 10px",

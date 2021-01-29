@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) =>
           margin: "0",
           padding: "0",
           width: "25px",
+          "&:hover": {
+            background: "transparent",
+          },
           "&:first-child": {
             display: "flex",
             justifyContent: "flex-start",
@@ -21,6 +24,9 @@ const useStyles = makeStyles((theme) =>
               color: "#347cff",
               marginRight: "50px",
               content: "'Previous'",
+              "&:hover": {
+                background: "transparent",
+              },
             },
           },
           "&:last-child": {

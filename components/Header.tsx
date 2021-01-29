@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Link from "next/link";
 import useStyles from "../styles/header";
 import { useRouter } from "next/router";
@@ -108,7 +108,7 @@ export function Header() {
                 className={classes.userButton}
                 aria-label="menu"
               >
-                <Avatar alt={""} src={""} className={classes.avatar} />
+                <AccountCircleIcon className={classes.avatar} />
               </IconButton>
               <Button className={classes.button}>
                 <Link href="/signin">
