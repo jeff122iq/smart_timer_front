@@ -180,7 +180,7 @@ export function Header() {
                       }
                     })} */}
                     <Link href={`/${link}`}>
-                      <a onClick={() => handleLink(index)}>{name}</a>
+                      {/* <a onClick={() => handleLink(index)}>{name}</a> */}
                     </Link>
                   </ListItem>
                 </Box>
