@@ -1,17 +1,17 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 import React from "react";
 import { Body } from "../components/layouts/Body";
-import TestLoggeingPage from "../components/TestLoggeingPage";
+import TestLoggedInPage from "../components/TestLoggedInPage";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const testLoggeingPage = () => {
+const testLoggedinPage = () => {
   return (
     <Body>
-      <TestLoggeingPage />
+      <TestLoggedInPage />
     </Body>
   );
 };
 
-export default testLoggeingPage;
+export default testLoggedinPage;
 // ========================== COMPONENT ====================================

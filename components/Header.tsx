@@ -17,29 +17,109 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Link from "next/link";
 import useStyles from "../styles/header";
 import { useRouter } from "next/router";
+import { Home } from "./Home";
+import TestLoggedInPage from "./TestLoggedInPage";
+import BriefTemplate from "./BriefTemplate";
+import About from "./About";
+import Blog from "./Blog";
+import { useEffect } from "react";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 export function Header() {
+  // ============================= LINKS ====================================
+  const [navMenu, setNavMenu] = useState([
+    { link: "", name: "Home", active: false },
+    { link: "create", name: "Create brief", active: false },
+    { link: "templates", name: "Brief template", active: false },
+    { link: "about", name: "About", active: false },
+    { link: "blog", name: "Blog", active: false },
+  ]);
+  // const [selectedLink, setSelectedLink] = useState(null);
+  // const [pathSelected, setPathSelected] = useState("");
+  // const [selected, setSelected] = useState(false);
+
+  // useEffect(() => {
+  //   path.map((el, index) => {
+  //     if (index === selectedLink) {
+  //       console.log("map", el, index);
+  //       setPathSelected(el);
+  //     }
+  //   });
+  // }, []);
+
+  const handleLink = (index, event) => {
+    setNavMenu(
+      navMenu.map((elem, i) => {
+        if (index === i) {
+          return { ...elem, active: true };
+        }
+        return { ...elem, active: false };
+      })
+    );
+  };
+
+  console.log(navMenu);
+
+  // useEffect(() => {
+  //   selected
+  //     ? path.map((el, index) => {
+  //         if (index === selectedLink) {
+  //           console.log("map", el, index);
+  //           setPathSelected(el);
+  //           setSelected(false);
+  //           setSelectedLink(index);
+  //         }
+  //       })
+  //     : null;
+  // }, [selectedLink]);
+  // console.log(selected);
+  const switchLink = [
+    <Home />,
+    <TestLoggedInPage />,
+    <BriefTemplate />,
+    <About />,
+    <Blog />,
+  ];
   const router = useRouter();
   const isTemplatesPage = router.pathname === "/templates";
-
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = (open: boolean) => {
     setIsOpen((prev) => !prev);
+  };
+  const getLink = () => {
+    // return path.map((el, index) => {
+    //   // console.log(el);
+    //   if (index === selectedLink) {
+    //     setPathSelected(el);
+    //   }
+    // });
   };
 
   const menu = () => (
     <div className={classes.list} role="presentation">
       <List>
-        <ListItem button>
-          <Link href="/">
-            <a className={classes.link}>Home</a>
-          </Link>
-        </ListItem>
-        <ListItem button>
+        {/* {links.map((index) => {
+          return (
+            <div key={index}>
+              <ListItem>
+                <Link href="/">
+                  <a
+                    className={
+                      index === selectedLink ? classes.activeLink : classes.link
+                    }
+                    onClick={() => handleLink(index)}
+                  >
+                    Home
+                  </a>
+                </Link>
+              </ListItem>
+            </div>
+          );
+        })} */}
+
+        {/* <ListItem button>
           <Link href="/create">
             <a className={classes.link}>Create brief</a>
           </Link>
@@ -58,7 +138,7 @@ export function Header() {
           <Link href="/blog">
             <a className={classes.link}>Blog</a>
           </Link>
-        </ListItem>
+        </ListItem> */}
       </List>
     </div>
   );
@@ -84,7 +164,29 @@ export function Header() {
               <Typography className={classes.title}>BRIEFFER</Typography>
             </Box>
 
-            <Box display="flex" className={classes.linkBox}>
+            {navMenu.map(({ name, link, active }, index) => {
+              return (
+                <Box key={index} display="flex" className={classes.linkBox}>
+                  <ListItem
+                    className={active ? classes.activeLink : classes.link}
+                  >
+                    {/* {path.map((el, index) => {
+                      if (el === selectedLink) {
+                        return (
+                          <div className="" key={index}>
+                            {el}
+                          </div>
+                        );
+                      }
+                    })} */}
+                    <Link href={`/${link}`}>
+                      <a onClick={() => handleLink(index)}>{name}</a>
+                    </Link>
+                  </ListItem>
+                </Box>
+              );
+            })}
+            {/* <Box display="flex" className={classes.linkBox}>
               <Link href="/">
                 <a className={classes.link}>Home</a>
               </Link>
@@ -100,7 +202,7 @@ export function Header() {
               <Link href="/blog">
                 <a className={classes.link}>Blog</a>
               </Link>
-            </Box>
+            </Box> */}
 
             <Box display="flex">
               <IconButton
@@ -127,4 +229,5 @@ export function Header() {
     </div>
   );
 }
+// ============================= LINKS ====================================
 // ========================== COMPONENT ====================================

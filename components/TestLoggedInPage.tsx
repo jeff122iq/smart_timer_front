@@ -59,7 +59,7 @@ function getModalStyle() {
 }
 // ==================MODAL====================
 
-const TestLoggeingPage = (props) => {
+const TestLoggeInPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
   const { createCard, card } = CardStore;
@@ -276,5 +276,5 @@ const TestLoggeingPage = (props) => {
   );
 };
 
-export default observer(TestLoggeingPage);
+export default observer(TestLoggeInPage);
 // ========================== COMPONENT ====================================

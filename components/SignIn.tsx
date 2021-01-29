@@ -63,7 +63,7 @@ export function SignIn() {
               </FormHelperText>
             </FormControl>
             <Box display="flex">
-              <Link href="/testLoggedInPage">
+              <Link href="/testLoggedinPage">
                 <Button className={classes.buttonLogin}>
                   <a>Log in</a>
                 </Button>

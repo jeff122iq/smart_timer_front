@@ -16,15 +16,43 @@ const useStyles = makeStyles((theme) =>
           "&:hover": {
             background: "transparent",
           },
+          "&:active": {
+            background: "transparent",
+          },
+          "& > button": {
+            "& > .MuiTouchRipple-root": {
+              zIndex: -1,
+            },
+          },
+          "& > .MuiPaginationItem-page": {
+            background: "transparent",
+
+            "& > .Mui-selected": {
+              background: "transparent",
+              "&:hover": {
+                background: "transparent",
+              },
+              "&:active": {
+                background: "transparent",
+              },
+            },
+          },
           "&:first-child": {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
+            "&:hover": {
+              background: "transparent",
+            },
             "& > button::after": {
               color: "#347cff",
               marginRight: "50px",
               content: "'Previous'",
+
               "&:hover": {
+                background: "transparent",
+              },
+              "&:active": {
                 background: "transparent",
               },
             },

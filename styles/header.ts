@@ -11,7 +11,7 @@ export default makeStyles((theme: Theme) =>
     },
     toolbar: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       ["@media (min-width: 620px)"]: {
         paddingLeft: "18px",
       },
@@ -33,7 +33,7 @@ export default makeStyles((theme: Theme) =>
     fullList: { width: "auto" },
     title: { color: "black", fontFamily: "'Imbue', serif", letterSpacing: 1.5 },
     linkBox: {
-      display: "none",
+      // display: "none",
       ["@media (min-width: 670px)"]: {
         display: "block",
       },
@@ -41,16 +41,27 @@ export default makeStyles((theme: Theme) =>
         margin: "0",
       },
       ["@media (min-width: 740px)"]: {
-        marginLeft: "100px",
+        // marginLeft: "100px",
       },
-    },
-    link: {
-      textDecoration: "none",
-      color: "black",
-      margin: "0 30px",
-      "&:active": {
-        fontWeight: "bolder",
+      "& > li": {
+        "& > a": {
+          textDecoration: "none",
+          color: "black",
+          // margin: "0 30px",
+          // "&:active": {
+          //   fontWeight: "bolder",
+          //   textDecoration: "none",
+          //   color: "black",
+          // },
+          // "& > a": {
+          //   textDecoration: "none",
+          //   margin: "0",
+          //   padding: "0",
+          //   color: "black",
+          // },
+        },
       },
+
       ["@media screen and (max-width: 1055px)"]: {
         margin: "0 10px",
       },
@@ -66,6 +77,12 @@ export default makeStyles((theme: Theme) =>
         fontSize: "10px",
         margin: "0 5px",
       },
+    },
+    link: {
+      fontWeight: 300,
+    },
+    activeLink: {
+      fontWeight: "bold",
     },
     userButton: {
       color: "black",
