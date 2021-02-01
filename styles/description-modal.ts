@@ -8,8 +8,8 @@ export default makeStyles((theme: Theme) =>
       maxWidth: "800px",
       background: "#fff",
       margin: "100px auto",
-      // ["@media screen and (max-width: 768px)"]: {
-      [theme.breakpoints.down("md")]: {
+      ["@media screen and (max-width: 810px)"]: {
+      // [theme.breakpoints.down("md")]: {
         margin: "180px 10px",
       },
     },
