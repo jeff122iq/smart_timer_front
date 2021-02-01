@@ -34,7 +34,7 @@ export default makeStyles((theme: Theme) =>
       "& > p": {
         [theme.breakpoints.down("md")]: {
           width: "90%",
-          maxHeight: "190px",
+          height: "180px",
           overflow: "hidden",
           "&:hover": {
             height: "auto",
