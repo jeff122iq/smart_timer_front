@@ -5,6 +5,7 @@ export default makeStyles((theme: Theme) =>
     root: {
       width: "100%",
       background: "none",
+      marginTop: "105px",
     },
 
     rootBlog: {

@@ -21,7 +21,6 @@ export default makeStyles((theme: Theme) =>
 
     descriptionBtn: {
       padding: "35px 25px",
-      boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
       display: "flex",
       justifyContent: "flex-start",
       width: "100%",

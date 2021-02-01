@@ -3,8 +3,8 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      boxShadow: "0px 3px 4px 0px rgba(0,0,0,0.2)",
       background: "white",
+      marginTop: "68px",
     },
     content: {
       maxWidth: "700px",
@@ -18,7 +18,9 @@ export default makeStyles((theme: Theme) =>
       fontFamily: "Roboto, sans-serif",
       letterSpacing: 1,
       maxWidth: "500px",
-      margin: "0 auto",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "50px"
     },
     inputContainer: {
       padding: "2px 4px",

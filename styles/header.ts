@@ -2,12 +2,20 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 
 export default makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
+    header: {
+      width: "100%",
+      margin: "0 0 20px 0",
+      padding: 0,
+      backgroundColor: "white",
+      position: "fixed",
+      top: "auto",
+      left: "auto",
+      zIndex: 2,
+    },
     appbar: {
       backgroundColor: "white",
       width: "100%",
       margin: "0 auto",
-      boxShadow: "inherit",
     },
     toolbar: {
       display: "flex",

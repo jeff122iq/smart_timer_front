@@ -4,6 +4,7 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: "white",
+      marginTop: "105px",
     },
     rootAbout: {
       "& div:nth-child(3)": {

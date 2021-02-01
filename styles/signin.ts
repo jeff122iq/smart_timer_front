@@ -6,6 +6,7 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       padding: "16px 0",
       background: "white",
+      marginTop: "105px",
     },
     caption: {
       fontWeight: 900,

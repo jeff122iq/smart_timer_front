@@ -8,6 +8,9 @@ export default makeStyles((theme: Theme) =>
       boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
       padding: "10px 0",
       backgroundColor: "white",
+      position: "fixed",
+      top: "56px",
+      zIndex: 2,
       [theme.breakpoints.down("sm")]: {},
     },
     image: {

@@ -24,6 +24,7 @@ import About from "./About";
 import Blog from "./Blog";
 import { CurrentPage } from "../store/currentPage";
 import { observer } from "mobx-react";
+// import Container from "./Container";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -134,33 +135,33 @@ const Header = () => {
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
-        <Container maxWidth={isTemplatesPage ? "xl" : "lg"}>
-          <Toolbar className={classes.toolbar}>
-            <Box display="flex" alignItems="center">
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="menu"
-                onClick={() => toggleMenu(true)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Drawer open={isOpen} onClose={() => toggleMenu(false)}>
-                {menu()}
-              </Drawer>
-              <Typography className={classes.title}>BRIEFFER</Typography>
-            </Box>
+    <div className={classes.header}>
+      {/* <AppBar position="static" className={classes.appbar}> */}
+      <Container>
+        <Toolbar className={classes.toolbar}>
+          <Box display="flex" alignItems="center">
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={() => toggleMenu(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer open={isOpen} onClose={() => toggleMenu(false)}>
+              {menu()}
+            </Drawer>
+            <Typography className={classes.title}>BRIEFFER</Typography>
+          </Box>
 
-            {navMenu.map(({ name, link, active }, index) => {
-              return (
-                <Box key={index} display="flex" className={classes.linkBox}>
-                  <ListItem
-                    className={active ? classes.activeLink : classes.link}
-                  >
-                    {/* {path.map((el, index) => {
+          {navMenu.map(({ name, link, active }, index) => {
+            return (
+              <Box key={index} display="flex" className={classes.linkBox}>
+                <ListItem
+                  className={active ? classes.activeLink : classes.link}
+                >
+                  {/* {path.map((el, index) => {
                       if (el === selectedLink) {
                         return (
                           <div className="" key={index}>
@@ -169,14 +170,14 @@ const Header = () => {
                         );
                       }
                     })} */}
-                    <Link href={`/${link}`} as={`/${link}`}>
-                      <a>{name}</a>
-                    </Link>
-                  </ListItem>
-                </Box>
-              );
-            })}
-            {/* <Box display="flex" className={classes.linkBox}>
+                  <Link href={`/${link}`} as={`/${link}`}>
+                    <a>{name}</a>
+                  </Link>
+                </ListItem>
+              </Box>
+            );
+          })}
+          {/* <Box display="flex" className={classes.linkBox}>
               <Link href="/">
                 <a className={classes.link}>Home</a>
               </Link>
@@ -194,28 +195,28 @@ const Header = () => {
               </Link>
             </Box> */}
 
-            <Box display="flex">
-              <IconButton
-                color="inherit"
-                className={classes.userButton}
-                aria-label="menu"
-              >
-                <AccountCircleIcon className={classes.avatar} />
-              </IconButton>
-              <Button className={classes.button}>
-                <Link href="/signin">
-                  <a className={classes.link}>Log in</a>
-                </Link>
-              </Button>
-              <Button className={classes.button}>
-                <Link href="/signin">
-                  <a className={classes.link}>Sign in</a>
-                </Link>
-              </Button>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
+          <Box display="flex">
+            <IconButton
+              color="inherit"
+              className={classes.userButton}
+              aria-label="menu"
+            >
+              <AccountCircleIcon className={classes.avatar} />
+            </IconButton>
+            <Button className={classes.button}>
+              <Link href="/signin">
+                <a className={classes.link}>Log in</a>
+              </Link>
+            </Button>
+            <Button className={classes.button}>
+              <Link href="/signin">
+                <a className={classes.link}>Sign in</a>
+              </Link>
+            </Button>
+          </Box>
+        </Toolbar>
+      </Container>
+      {/* </AppBar> */}
     </div>
   );
 };

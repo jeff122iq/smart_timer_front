@@ -15,6 +15,7 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap",
       background: "white",
+      marginTop: "110px",
       // zIndex: 2
     },
     wrapper: {

@@ -52,12 +52,23 @@ export default makeStyles((theme: Theme) =>
       },
     },
     popularsCard: {
-      display: "flex",
+      // display: "flex",
       flexWrap: "wrap",
       background: "#fff",
       width: "300px",
+      height: "auto",
       margin: "10px 0",
       borderRadius: 4,
+      height: "171px",
+      overflow: "hidden",
+      position: "relative",
+      transition: "all 0.5s",
+      "&:hover": {
+        height: "331px",
+        "& $popularsCardDescription": {
+          lineClamp: 12,
+        },
+      },
       [theme.breakpoints.down("sm")]: {
         width: "100%",
         margin: "10px 0",
@@ -69,16 +80,14 @@ export default makeStyles((theme: Theme) =>
       fontSize: "20px",
     },
     popularsCardDescription: {
-      padding: "10px 30px",
+      display: "-webkit-box",
+      padding: "10px 30px 44px",
       transition: "all 1s",
       cursor: "pointer",
-      height: "105px",
+      // textOverflow: "ellipsis",
+      lineClamp: 4,
+      boxOrient: "vertical",
       overflow: "hidden",
-      "&:hover": {
-        transition: "all 1s",
-        height: "auto",
-        overflow: "auto",
-      },
     },
     popularsCardFooter: {
       display: "flex",
@@ -86,7 +95,10 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       boxShadow: "0px -1px 3px 0px rgba(0,0,0,0.2)",
       margin: "10px 0 0 0",
-      padding: "20px 0",
+      zIndex: 1,
+      position: "absolute",
+      bottom: 0,
+      backgroundColor: "white",
       [theme.breakpoints.down("md")]: {
         padding: "0",
       },
@@ -96,10 +108,6 @@ export default makeStyles((theme: Theme) =>
       fontWeight: 700,
       padding: "10px 0",
       backgroundColor: "transparent",
-      display: "none",
-      [theme.breakpoints.down("md")]: {
-        display: "block",
-      },
     },
     pagination: {
       display: "flex",
