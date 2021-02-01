@@ -5,7 +5,7 @@ import InputBase from "@material-ui/core/InputBase";
 import MUIRichTextEditor from "mui-rte";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import ModalBurgerMenu from "./ModalBurgerMenu";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -67,6 +67,14 @@ const local_theme_overrides = {
         flexDirection: "column-reverse",
       },
     },
+    MuiIconButton: {
+      root: {
+        backgroundColor: "transparent !important",
+        "& :hover": {
+          backgroundColor: "$labelcolor",
+        },
+      },
+    },
   },
 };
 
@@ -118,7 +126,7 @@ const DescriptionModal = (props) => {
             customControls={[
               {
                 name: "MoreVertIcon",
-                icon: <MoreVertIcon />,
+                icon: <ModalBurgerMenu />,
                 type: "callback",
                 onClick: () => {},
               },
