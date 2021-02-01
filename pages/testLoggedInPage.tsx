@@ -5,7 +5,7 @@ import TestLoggedInPage from "../components/TestLoggedInPage";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const testLoggedinPage = () => {
+const testLoggedInPage = () => {
   return (
     <Body>
       <TestLoggedInPage />
@@ -13,5 +13,5 @@ const testLoggedinPage = () => {
   );
 };
 
-export default testLoggedinPage;
+export default testLoggedInPage;
 // ========================== COMPONENT ====================================

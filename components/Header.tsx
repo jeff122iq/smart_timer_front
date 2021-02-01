@@ -12,7 +12,7 @@ import {
   Container,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Link from "next/link";
 import useStyles from "../styles/header";
@@ -22,11 +22,12 @@ import TestLoggedInPage from "./TestLoggedInPage";
 import BriefTemplate from "./BriefTemplate";
 import About from "./About";
 import Blog from "./Blog";
-import { useEffect } from "react";
+import { CurrentPage } from "../store/currentPage";
+import { observer } from "mobx-react";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-export function Header() {
+const Header = () => {
   // ============================= LINKS ====================================
   const [navMenu, setNavMenu] = useState([
     { link: "", name: "Home", active: false },
@@ -35,6 +36,9 @@ export function Header() {
     { link: "about", name: "About", active: false },
     { link: "blog", name: "Blog", active: false },
   ]);
+
+  const { currentPage } = CurrentPage;
+  console.log(currentPage);
   // const [selectedLink, setSelectedLink] = useState(null);
   // const [pathSelected, setPathSelected] = useState("");
   // const [selected, setSelected] = useState(false);
@@ -48,16 +52,16 @@ export function Header() {
   //   });
   // }, []);
 
-  const handleLink = (index, event) => {
+  useEffect(() => {
     setNavMenu(
-      navMenu.map((elem, i) => {
-        if (index === i) {
+      navMenu.map((elem) => {
+        if (elem.name === currentPage) {
           return { ...elem, active: true };
         }
         return { ...elem, active: false };
       })
     );
-  };
+  }, [currentPage]);
 
   console.log(navMenu);
 
@@ -88,57 +92,43 @@ export function Header() {
   const toggleMenu = (open: boolean) => {
     setIsOpen((prev) => !prev);
   };
-  const getLink = () => {
-    // return path.map((el, index) => {
-    //   // console.log(el);
-    //   if (index === selectedLink) {
-    //     setPathSelected(el);
-    //   }
-    // });
-  };
 
   const menu = () => (
     <div className={classes.list} role="presentation">
       <List>
-        {/* {links.map((index) => {
-          return (
-            <div key={index}>
-              <ListItem>
-                <Link href="/">
-                  <a
-                    className={
-                      index === selectedLink ? classes.activeLink : classes.link
-                    }
-                    onClick={() => handleLink(index)}
-                  >
-                    Home
-                  </a>
-                </Link>
-              </ListItem>
-            </div>
-          );
-        })} */}
-
-        {/* <ListItem button>
+        <ListItem button>
+          <Link href={"/"}>
+            <a className={classes.link}>Home</a>
+          </Link>
+        </ListItem>
+        <ListItem button>
           <Link href="/create">
-            <a className={classes.link}>Create brief</a>
+            <a className={classes.link} href="/create">
+              Create brief
+            </a>
           </Link>
         </ListItem>
         <ListItem button>
           <Link href="/templates">
-            <a className={classes.link}>Brief templates</a>
+            <a className={classes.link} href="/templates">
+              Brief templates
+            </a>
           </Link>
         </ListItem>
         <ListItem button>
           <Link href="/about">
-            <a className={classes.link}>About</a>
+            <a className={classes.link} href="/about">
+              About
+            </a>
           </Link>
         </ListItem>
         <ListItem button>
           <Link href="/blog">
-            <a className={classes.link}>Blog</a>
+            <a className={classes.link} href="/blog">
+              Blog
+            </a>
           </Link>
-        </ListItem> */}
+        </ListItem>
       </List>
     </div>
   );
@@ -179,8 +169,8 @@ export function Header() {
                         );
                       }
                     })} */}
-                    <Link href={`/${link}`}>
-                      {/* <a onClick={() => handleLink(index)}>{name}</a> */}
+                    <Link href={`/${link}`} as={`/${link}`}>
+                      <a>{name}</a>
                     </Link>
                   </ListItem>
                 </Box>
@@ -228,6 +218,8 @@ export function Header() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default observer(Header);
 // ============================= LINKS ====================================
 // ========================== COMPONENT ====================================

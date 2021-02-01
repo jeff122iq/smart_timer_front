@@ -1,5 +1,5 @@
 import { Footer } from "../Footer";
-import { Header } from "../Header";
+import Header from "../Header";
 import { BodyContent } from "./BodyContent";
 import useStyles from "../../styles/body";
 import { useState } from "react";
