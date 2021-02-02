@@ -10,18 +10,14 @@ import useStyles from "../styles/popularsTemplates";
 import { CardStore } from "../store/cardStore";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
+import DescriptionModal from "./DescriptionModal";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const PopularsTemplate = () => {
+const PopularsTemplate = ({ handleOpenModal }) => {
   const { card, createCard, switchCard } = CardStore;
   const [cards, setCard] = useState();
-
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleSwitchCard = () => {
     switchCard();
@@ -39,7 +35,7 @@ const PopularsTemplate = () => {
         </Typography>
       </div>
       <div className={classes.cardsWrapper}>
-        <div className={classes.popularsCard}>
+        <div className={classes.popularsCard} onClick={handleOpenModal}>
           <Typography className={classes.cardTitle} variant="h4">
             Title
           </Typography>

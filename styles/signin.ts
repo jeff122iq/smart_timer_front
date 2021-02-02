@@ -7,26 +7,31 @@ export default makeStyles((theme: Theme) =>
       padding: "16px 0",
       background: "white",
       marginTop: "105px",
+      marginBottom: "40px",
     },
     caption: {
       fontWeight: 900,
-      fontSize: 35,
-      lineHeight: "1.1",
+      fontSize: 30,
+      lineHeight: "1.19",
       textAlign: "center",
       fontFamily: "Roboto, sans-serif",
-      letterSpacing: 1,
-      maxWidth: "500px",
-      margin: "0 auto",
+      letterSpacing: "normal",
+      maxWidth: "400px",
+      margin: "40px auto 0 auto",
     },
     credsContainer: {
       flexDirection: "column",
-      marginTop: "70px",
+      marginTop: "65px",
+      marginBottom: "185px",
       [theme.breakpoints.up("sm")]: {
         flexDirection: "row",
       },
     },
     inputPannel: {
       marginRight: "10px",
+      "& .MuiInput-underline.Mui-error:after": {
+        borderBottomColor: "#f34235",
+      },
     },
     loginButtonPannel: {
       marginLeft: "10px",
@@ -44,11 +49,11 @@ export default makeStyles((theme: Theme) =>
     buttonForgot: {
       backgroundColor: "transparent",
       marginTop: "10px",
-      color: "red",
+      color: "#f34235",
       padding: "6px 0",
     },
     quickTitle: {
-      color: "#a1a1a1",
+      color: "#959595",
       maxWidth: "300px",
     },
     buttonSocial: {
@@ -56,7 +61,7 @@ export default makeStyles((theme: Theme) =>
       color: "white",
       borderRadius: "2px",
       textTransform: "none",
-      margin: "5px 0",
+      margin: "8px 0",
       [theme.breakpoints.up("sm")]: {
         width: "100%",
       },

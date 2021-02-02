@@ -102,6 +102,17 @@ export default makeStyles((theme: Theme) =>
         padding: "0",
       },
     },
+    briefTemplateModal: {
+      display: "none",
+    },
+    briefTemplateModalOpen: {
+      display: "block",
+      background: "rgba(0,0,0,0.5)",
+      width: "100%",
+      marginTop: "30px",
+      borderRadius: 4,
+      boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
+    },
     popularsActionsAddBtn: {
       color: "#347cff",
       fontWeight: 700,

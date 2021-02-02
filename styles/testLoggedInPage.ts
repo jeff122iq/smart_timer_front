@@ -27,8 +27,13 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       "& > h1": {
+        marginTop: "30px",
         textAlign: "center",
-        fontSize: "35px",
+        fontSize: "30px",
+        lineHaight: "normal",
+        fontWeight: "bold",
+        letterSpacing: "normal",
+        fontStratch: "normal",
       },
       [theme.breakpoints.down("sm")]: {
         width: "100%",

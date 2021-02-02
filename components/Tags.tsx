@@ -75,6 +75,10 @@ const LimitTags = () => {
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
         <CustomAutocomplete
+          classes={{
+            autocomplete: classes.autocomplete,
+            popupIndicator: classes.popupIndicator,
+          }}
           className={classes.autocomplete}
           onChange={(event, value: any) => {
             setTags(value);

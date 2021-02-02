@@ -12,7 +12,7 @@ export default makeStyles((theme: Theme) =>
       top: "59px",
       zIndex: 2,
       [theme.breakpoints.up("sm")]: {
-        top: "66px",
+        top: "64px",
       },
     },
     image: {

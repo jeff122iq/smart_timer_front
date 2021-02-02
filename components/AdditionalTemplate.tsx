@@ -12,7 +12,7 @@ import { observer } from "mobx-react";
 
 // ========================== COMPONENT ===================================
 
-const AdditionalTemplate = () => {
+const AdditionalTemplate = ({ handleOpenModal }) => {
   const { card, createCard, switchCard } = CardStore;
   const [cards, setCard] = useState();
 
@@ -29,7 +29,7 @@ const AdditionalTemplate = () => {
         </Typography>
       </div>
       <div className={classes.cardsWrapper}>
-        <div className={classes.popularsCard}>
+        <div className={classes.popularsCard} onClick={handleOpenModal}>
           <Typography className={classes.cardTitle} variant="h4">
             Title
           </Typography>

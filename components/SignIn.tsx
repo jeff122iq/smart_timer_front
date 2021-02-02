@@ -38,17 +38,22 @@ export function SignIn() {
         >
           <div className={classes.inputPannel}>
             <FormControl error fullWidth>
-              <InputLabel htmlFor="email-field">Company email</InputLabel>
+              <InputLabel htmlFor="email-field" style={{ color: "#f34235" }}>
+                Company email
+              </InputLabel>
               <Input
                 id="email-field"
                 aria-describedby="component-error-email"
+                style={{ borderColor: "#f34235" }}
               />
               <FormHelperText
                 id="component-error-email"
                 className={classes.formHelperText}
               >
-                <Typography variant="caption">Email already taken</Typography>
-                <WarningIcon />
+                <Typography variant="caption" style={{ color: "#f34235" }}>
+                  Email already taken
+                </Typography>
+                <WarningIcon style={{ color: "#f34235" }} />
               </FormHelperText>
             </FormControl>
             <FormControl fullWidth>

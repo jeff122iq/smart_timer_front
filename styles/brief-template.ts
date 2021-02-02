@@ -121,7 +121,6 @@ export default makeStyles((theme: Theme) =>
     briefTemplateModalOpen: {
       display: "block",
       background: "rgba(0,0,0,0.5)",
-      // position:
       width: "100%",
       marginTop: "30px",
       borderRadius: 4,

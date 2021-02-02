@@ -28,11 +28,16 @@ export default function Create() {
       {!isLogedIn && <SignIn />}
       <div>
         <Container maxWidth="lg">
-          <Box display="flex" alignItems="center" padding="10px 0">
+          <Box
+            display="flex"
+            alignItems="center"
+            padding="10px 0"
+            style={{ marginBottom: "36px" }}
+          >
             <InsertDriveFileOutlinedIcon className={classes.icon} />
             <Typography variant="subtitle2">Your library</Typography>
           </Box>
-          <Box display="flex" flexWrap="wrap"> 
+          <Box display="flex" flexWrap="wrap" style={{ marginBottom: "147px" }}>
             {documents.map((data, idx) => (
               <TemplateDocumentButton data={data} key={idx} />
             ))}

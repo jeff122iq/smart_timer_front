@@ -99,6 +99,10 @@ const TestLoggeInPage = (props) => {
     setInputValue(event.target.value);
   };
 
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
   const handleClickAway = () => {
     setActionsBurger(false);
   };
@@ -127,7 +131,7 @@ const TestLoggeInPage = (props) => {
         style={{ margin: !tagLength ? "auto" : "0" }}
       >
         {!tagLength ? (
-          <h1 style={{}}>
+          <h1>
             Add tag to that relevant to
             <br />
             your type of work
@@ -261,7 +265,11 @@ const TestLoggeInPage = (props) => {
       </div>
       <div className={classes.populars}>
         <Collapse in={tagLength}>
-          {tagLength ? <AdditionalTemplate /> : ""}
+          {tagLength ? (
+            <AdditionalTemplate handleOpenModal={handleOpenModal} />
+          ) : (
+            ""
+          )}
         </Collapse>
       </div>
     </div>

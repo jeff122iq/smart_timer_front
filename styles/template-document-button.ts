@@ -16,12 +16,12 @@ export default makeStyles((theme: Theme) =>
       [theme.breakpoints.up("sm")]: {
         minWidth: "100px",
         maxWidth: "260px",
-        width: 'fit-content',
+        width: "fit-content",
       },
     },
     documentName: {
       color: "white",
-      fontSize: "20px",
+      fontSize: "22px",
       maxWidth: "89%",
       //two row text overflow ellipsis
       display: "-webkit-box",

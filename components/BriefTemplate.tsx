@@ -97,15 +97,13 @@ const BriefTemplate = (props) => {
   ) => {
     setPage(value);
   };
-  const [writeDescription, setWriteDescription] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  const handleWriteDescription = () => {
-    setWriteDescription(!writeDescription);
+  const handleOpenModal = () => {
     setOpen(true);
   };
 
@@ -132,8 +130,7 @@ const BriefTemplate = (props) => {
             <>
               <CustomButton
                 className={classes.descriptionBtn}
-                onClick={handleWriteDescription}
-                // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
+                onClick={handleOpenModal}
               >
                 Write description
               </CustomButton>
@@ -159,9 +156,7 @@ const BriefTemplate = (props) => {
           })}
         <div
           className={
-            writeDescription
-              ? classes.briefTemplateModalOpen
-              : classes.briefTemplateModal
+            open ? classes.briefTemplateModalOpen : classes.briefTemplateModal
           }
         >
           <Modal
@@ -237,7 +232,7 @@ const BriefTemplate = (props) => {
         )}
       </div>
       <div className={classes.populars}>
-        <PopularsTemplate />
+        <PopularsTemplate handleOpenModal={handleOpenModal} />
         {/* </Collapse> */}
       </div>
     </div>
