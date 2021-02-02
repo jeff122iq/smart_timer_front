@@ -12,7 +12,7 @@ export default function Create() {
   const isLogedIn = false; // get from cookie
 
   const documents = [
-    "Name of document",
+    "Name",
     "Name of document",
     "Type of document with long long long long long long name",
     "Type of document with long long long long long long name",
@@ -32,7 +32,7 @@ export default function Create() {
             <InsertDriveFileOutlinedIcon className={classes.icon} />
             <Typography variant="subtitle2">Your library</Typography>
           </Box>
-          <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+          <Box display="flex" flexWrap="wrap"> 
             {documents.map((data, idx) => (
               <TemplateDocumentButton data={data} key={idx} />
             ))}

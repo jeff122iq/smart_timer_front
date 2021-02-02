@@ -9,9 +9,11 @@ export default makeStyles((theme: Theme) =>
       padding: "10px 0",
       backgroundColor: "white",
       position: "fixed",
-      top: "64px",
+      top: "59px",
       zIndex: 2,
-      [theme.breakpoints.down("sm")]: {},
+      [theme.breakpoints.up("sm")]: {
+        top: "66px",
+      },
     },
     image: {
       cursor: "pointer",

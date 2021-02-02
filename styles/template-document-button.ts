@@ -7,23 +7,22 @@ export default makeStyles((theme: Theme) =>
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      width: "33%",
+      width: "100%",
       padding: "10px 15px",
       backgroundColor: "#2b62ff",
       borderRadius: "3px",
       userSelect: "none",
-      margin: "5px 0",
-      "@media (max-width: 1100px)": {
-        width: "49.5%",
-      },
-      "@media (max-width: 750px)": {
-        width: "100%",
+      margin: "0 5px 5px 0",
+      [theme.breakpoints.up("sm")]: {
+        minWidth: "100px",
+        maxWidth: "260px",
+        width: 'fit-content',
       },
     },
     documentName: {
       color: "white",
       fontSize: "20px",
-      maxWidth: "90%",
+      maxWidth: "89%",
       //two row text overflow ellipsis
       display: "-webkit-box",
       "-webkit-line-clamp": 2,
@@ -35,6 +34,7 @@ export default makeStyles((theme: Theme) =>
       position: "relative",
       color: "white",
       cursor: "pointer",
+      marginTop: "5px",
     },
     actionsBurgerModal: {
       display: "none",
