@@ -29,11 +29,14 @@ const AdditionalTemplate = ({ handleOpenModal }) => {
         </Typography>
       </div>
       <div className={classes.cardsWrapper}>
-        <div className={classes.popularsCard} onClick={handleOpenModal}>
+        <div className={classes.popularsCard}>
           <Typography className={classes.cardTitle} variant="h4">
             Title
           </Typography>
-          <div className={classes.popularsCardDescription}>
+          <div
+            className={classes.popularsCardDescription}
+            onClick={handleOpenModal}
+          >
             Simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industry's standard dummy text ever since the
             1500s, when an... unknown printer took a galley of type and
