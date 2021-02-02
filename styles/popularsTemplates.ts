@@ -112,7 +112,7 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       width: "100%",
-      marginBottom: "50px",
+      marginBottom: "100px",
       "& > div > nav > ul > li > button": {
         backgroundColor: "transparent",
       },

@@ -1,14 +1,24 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-import React from "react";
+import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paginator from "./Paginator";
 import useStyles from "../styles/popularsTemplates";
+import { CardStore } from "../store/cardStore";
+import { observer } from "mobx-react";
+
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
-// ========================== COMPONENT ====================================
+// ========================== COMPONENT ===================================
+
 const AdditionalTemplate = () => {
+  const { card, createCard, switchCard } = CardStore;
+  const [cards, setCard] = useState();
+
+  const handleSwitchCard = () => {
+    switchCard();
+  };
   const classes = useStyles();
   return (
     // <Container maxWidth="sm" disableGutters={true}	 style={{background: '#e3f4'}}>
@@ -35,7 +45,12 @@ const AdditionalTemplate = () => {
             PageMaker including versions of Lorem Ipsum....
           </div>
           <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
+            <Button
+              className={classes.popularsActionsAddBtn}
+              onClick={handleSwitchCard}
+            >
+              Add
+            </Button>
           </div>
         </div>
         <div className={classes.popularsCard}>
@@ -136,11 +151,11 @@ const AdditionalTemplate = () => {
       </div>
 
       <div className={classes.pagination}>
-        <Paginator pages={10} />
+        <Paginator count={10} />
       </div>
     </div>
   );
 };
 
-export default AdditionalTemplate;
+export default observer(AdditionalTemplate);
 // ========================== COMPONENT ====================================

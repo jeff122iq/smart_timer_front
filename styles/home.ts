@@ -21,9 +21,10 @@ export default makeStyles((theme: Theme) =>
       },
     },
     more: {
-      margin: "10px 0",
+      margin: "30px 0",
       color: "#1853f4",
       letterSpacing: "1px",
+      padding: "0",
     },
   })
 );

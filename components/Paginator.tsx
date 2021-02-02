@@ -89,12 +89,11 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export default function Paginator(props) {
+export default function Paginator({ ...props }) {
   const classes = useStyles();
-  const pages = props.pages;
   return (
     <div className={classes.root}>
-      <Pagination count={pages} size="small" />
+      <Pagination size="small" {...props} />
     </div>
   );
 }

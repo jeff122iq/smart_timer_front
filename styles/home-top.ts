@@ -8,7 +8,7 @@ export default makeStyles((theme: Theme) =>
     },
     content: {
       maxWidth: "700px",
-      margin: "0 auto",
+      margin: "15px auto 0 auto",
     },
     caption: {
       fontWeight: 900,
@@ -35,6 +35,10 @@ export default makeStyles((theme: Theme) =>
     },
     iconButton: {
       padding: 10,
+      backgroundColor: "transparent",
+      "&:hover": {
+        backgroundColor: "transparent",
+      },
     },
     button: {
       backgroundColor: "#f9c229",

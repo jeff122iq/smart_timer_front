@@ -161,7 +161,7 @@ const PopularsTemplate = () => {
       </div>
 
       <div className={classes.pagination}>
-        <Paginator pages={10} />
+        <Paginator count={10} />
       </div>
     </div>
   );

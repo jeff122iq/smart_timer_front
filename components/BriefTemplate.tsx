@@ -89,6 +89,14 @@ const BriefTemplate = (props) => {
   const [open, setOpen] = useState(false);
   // ================MODAL==================
 
+  const [page, setPage] = useState(1);
+  const totalPages = Math.ceil(cardsArray.length / 2);
+  const handlePagination = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
   const [writeDescription, setWriteDescription] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -139,52 +147,16 @@ const BriefTemplate = (props) => {
           placeholder="Write heading"
           inputProps={{ "aria-label": "naked" }}
         />
-        {cardsArray.map((card: any, index: number) => {
-          return (
-            <div key={index}>
-              <h1>{card.title}</h1>
-              <p>{card.text}</p>
-            </div>
-          );
-        })}
-
-        {/* <div className={classes.briefTemplate_card}>
-          <Typography className={classes.briefTemplate_card__title} variant="h4">
-            Title
-          </Typography>
-          <Typography className={classes.briefTemplate_card__description} variant="body2">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid modi dolorem nihil
-            cumque culpa voluptates eum animi! Laudantium ipsa illo ex laboriosam nostrum quisquam
-            repudiandae odio ratione! Ex laboriosam autem magnam ipsa. Natus quos distinctio
-            blanditiis libero quis adipisci? Hic vero sunt quisquam, voluptate ipsa natus sequi
-            corrupti ipsam eum!
-          </Typography>
-        </div>
-        <div className={classes.briefTemplate_card}>
-          <Typography className={classes.briefTemplate_card__title} variant="h4">
-            Title
-          </Typography>
-          <Typography className={classes.briefTemplate_card__description} variant="body2">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid modi dolorem nihil
-            cumque culpa voluptates eum animi! Laudantium ipsa illo ex laboriosam nostrum quisquam
-            repudiandae odio ratione! Ex laboriosam autem magnam ipsa. Natus quos distinctio
-            blanditiis libero quis adipisci? Hic vero sunt quisquam, voluptate ipsa natus sequi
-            corrupti ipsam eum!
-          </Typography>
-        </div>
-        <div className={classes.briefTemplate_card}>
-          <Typography className={classes.briefTemplate_card__title} variant="h4">
-            Title
-          </Typography>
-          <Typography className={classes.briefTemplate_card__description} variant="body2">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid modi dolorem nihil
-            cumque culpa voluptates eum animi! Natus quos distinctio blanditiis libero quis
-            adipisci? Hic vero sunt quisquam, voluptate ipsa natus sequi corrupti ipsam eum!
-            Laudantium ipsa illo ex laboriosam nostrum quisquam repudiandae odio ratione! Ex
-            laboriosam autem magnam ipsa.
-          </Typography>
-        </div> */}
-        {/* <DescriptionModal /> */}
+        {cardsArray
+          .slice((page - 1) * 2, page * 2)
+          .map((card: any, index: number) => {
+            return (
+              <div key={index}>
+                <h1>{card.title}</h1>
+                <p>{card.text}</p>
+              </div>
+            );
+          })}
         <div
           className={
             writeDescription
@@ -200,57 +172,70 @@ const BriefTemplate = (props) => {
             <DescriptionModal open={open} setOpen={setOpen} />
           </Modal>
         </div>
-        <div className={classes.pagination}>
-          <Paginator pages={3} />
-        </div>
-        <ClickAwayListener onClickAway={handleClickAway}>
-          <div className={classes.actions}>
-            <Button className={classes.actionsBtnSave} variant="contained">
-              Save
-            </Button>
-            <div style={{ position: "relative" }}>
-              <SvgIcon
-                className={classes.actionsBurger}
-                onClick={handleActionsBurger}
-              >
-                <MoreVertIcon />
-              </SvgIcon>
-              <div
-                className={
-                  actionsBurger
-                    ? classes.actionsBurgerModalOpen
-                    : classes.actionsBurgerModal
-                }
-              >
-                <div className={classes.modalBurgerCopytext}>
-                  <SvgIcon className={classes.actionsBurgerIcon}>
-                    <FileCopyOutlinedIcon />
-                  </SvgIcon>
-                  <Typography
-                    className={classes.actionsBurgerText}
-                    variant="body2"
-                  >
-                    Copy text
-                  </Typography>
-                </div>
-                <div className={classes.modalBurgerCopytext}>
-                  <SvgIcon className={classes.actionsBurgerIcon}>
-                    <DeleteIcon />
-                  </SvgIcon>
-                  <Typography
-                    className={classes.actionsBurgerText}
-                    variant="body2"
-                  >
-                    Clear all
-                  </Typography>
-                </div>
+        {cardsArray.length > 0 ? (
+          <div>
+            {cardsArray.length > 2 ? (
+              <div className={classes.pagination}>
+                <Paginator
+                  count={totalPages}
+                  page={page}
+                  onChange={handlePagination}
+                />
               </div>
-            </div>
-            <Button className={classes.actionsBtnLink}>Copy Link</Button>
+            ) : (
+              ""
+            )}
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <div className={classes.actions}>
+                <Button className={classes.actionsBtnSave} variant="contained">
+                  Save
+                </Button>
+                <div style={{ position: "relative" }}>
+                  <SvgIcon
+                    className={classes.actionsBurger}
+                    onClick={handleActionsBurger}
+                  >
+                    <MoreVertIcon />
+                  </SvgIcon>
+                  <div
+                    className={
+                      actionsBurger
+                        ? classes.actionsBurgerModalOpen
+                        : classes.actionsBurgerModal
+                    }
+                  >
+                    <div className={classes.modalBurgerCopytext}>
+                      <SvgIcon className={classes.actionsBurgerIcon}>
+                        <FileCopyOutlinedIcon />
+                      </SvgIcon>
+                      <Typography
+                        className={classes.actionsBurgerText}
+                        variant="body2"
+                      >
+                        Copy text
+                      </Typography>
+                    </div>
+                    <div className={classes.modalBurgerCopytext}>
+                      <SvgIcon className={classes.actionsBurgerIcon}>
+                        <DeleteIcon />
+                      </SvgIcon>
+                      <Typography
+                        className={classes.actionsBurgerText}
+                        variant="body2"
+                      >
+                        Clear all
+                      </Typography>
+                    </div>
+                  </div>
+                </div>
+                <Button className={classes.actionsBtnLink}>Copy Link</Button>
+              </div>
+            </ClickAwayListener>
           </div>
-        </ClickAwayListener>
+        ) : (
+          ""
+        )}
       </div>
-
       <div className={classes.populars}>
         <PopularsTemplate />
         {/* </Collapse> */}
