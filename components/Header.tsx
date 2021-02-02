@@ -154,29 +154,19 @@ const Header = () => {
             </Drawer>
             <Typography className={classes.title}>BRIEFFER</Typography>
           </Box>
-
-          {navMenu.map(({ name, link, active }, index) => {
-            return (
-              <Box key={index} display="flex" className={classes.linkBox}>
-                <ListItem
-                  className={active ? classes.activeLink : classes.link}
-                >
-                  {/* {path.map((el, index) => {
-                      if (el === selectedLink) {
-                        return (
-                          <div className="" key={index}>
-                            {el}
-                          </div>
-                        );
-                      }
-                    })} */}
+          <div className={classes.navLink}>
+            {navMenu.map(({ name, link, active }, index) => {
+              return (
+                <div key={index}>
                   <Link href={`/${link}`} as={`/${link}`}>
-                    <a>{name}</a>
+                    <a className={active ? classes.activeLink : classes.link}>
+                      {name}
+                    </a>
                   </Link>
-                </ListItem>
-              </Box>
-            );
-          })}
+                </div>
+              );
+            })}
+          </div>
           {/* <Box display="flex" className={classes.linkBox}>
               <Link href="/">
                 <a className={classes.link}>Home</a>

@@ -9,7 +9,7 @@ export default makeStyles((theme: Theme) =>
       padding: "10px 0",
       backgroundColor: "white",
       position: "fixed",
-      top: "56px",
+      top: "64px",
       zIndex: 2,
       [theme.breakpoints.down("sm")]: {},
     },

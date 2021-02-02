@@ -65,7 +65,7 @@ function getModalStyle() {
 const BriefTemplate = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
-  const { createCard, card } = CardStore;
+  const { createCard, card, cardsArray } = CardStore;
 
   useEffect(() => {
     createCard({
@@ -74,9 +74,9 @@ const BriefTemplate = (props) => {
     });
   }, []);
 
-  const [tags, setTags] = useState([card]);
+  const [tags, setTags] = useState(cardsArray);
   console.log("=================");
-  console.log(tags);
+  console.log("::::::::::::", tags);
   console.log("=================");
 
   const [actionsBurger, setActionsBurger] = useState(false);
@@ -139,8 +139,15 @@ const BriefTemplate = (props) => {
           placeholder="Write heading"
           inputProps={{ "aria-label": "naked" }}
         />
-        <h1>{card.title}</h1>
-        <p>{card.text}</p>
+        {cardsArray.map((card: any, index: number) => {
+          return (
+            <div key={index}>
+              <h1>{card.title}</h1>
+              <p>{card.text}</p>
+            </div>
+          );
+        })}
+
         {/* <div className={classes.briefTemplate_card}>
           <Typography className={classes.briefTemplate_card__title} variant="h4">
             Title

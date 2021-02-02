@@ -5,6 +5,7 @@ import {
   makeStyles,
   withStyles,
   createStyles,
+  ThemeProvider,
   Theme,
 } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -13,33 +14,51 @@ import { observer } from "mobx-react";
 import { TagsStore } from "../store/tagsStore";
 import { tags } from "../interface/tags";
 import useStyles from "../styles/tags";
+import { createMuiTheme } from "@material-ui/core/styles";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const CustomAutocomplete = withStyles({
-  // inputFocused: {
-  //   '&:focus': {
-  //     border: '1px solid red'
-  //   }
-  // },
-  // input: {
-  //   '&:hover': {
-  //     borderBottom: '5px solid red'
-  //   }
-  // },
-  tag: {
-    background: "#347cff",
-    color: "#fff",
-    borderRadius: "4px",
-    position: "relative",
-    zIndex: 0,
-    "& .MuiChip-label": {
-      color: "#fff",
+// const local_theme_overrides = {
+
+// }
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiChip: {
+      root: {
+        backgroundColor: "#347cff",
+        color: "#fff",
+        borderRadius: "4px",
+        position: "relative",
+        zIndex: 0,
+      },
+      label: {
+        color: "#fff",
+      },
+      deleteIcon: {
+        color: "#fff",
+      },
     },
-    "& .MuiChip-deleteIcon": {
-      color: "#fff",
+    MuiInput: {
+      underline: {
+        "&::before": {
+          borderBottom: "none",
+        },
+        "&::after": {
+          borderBottom: "none",
+        },
+        "&:hover:not(.Mui-disabled):before": {
+          borderBottom: "none",
+        },
+      },
     },
   },
+});
+
+const CustomAutocomplete = withStyles(() => {
+  createStyles({
+    overrides: {},
+  });
 })(Autocomplete);
 
 const LimitTags = () => {
@@ -54,20 +73,22 @@ const LimitTags = () => {
 
   return (
     <div className={classes.root}>
-      <CustomAutocomplete
-        className={classes.autocomplete}
-        onChange={(event, value: any) => {
-          setTags(value);
-          console.log(value);
-        }}
-        multiple
-        // classes={classes}
-        // limitTags={2}
-        options={top100Films}
-        getOptionLabel={(option: any) => option.title}
-        defaultValue={[]}
-        renderInput={(params: any) => <TextField {...params} />}
-      />
+      <ThemeProvider theme={theme}>
+        <CustomAutocomplete
+          className={classes.autocomplete}
+          onChange={(event, value: any) => {
+            setTags(value);
+            console.log(value);
+          }}
+          multiple
+          // classes={classes}
+          // limitTags={2}
+          options={top100Films}
+          getOptionLabel={(option: any) => option.title}
+          defaultValue={[]}
+          renderInput={(params: any) => <TextField {...params} />}
+        />
+      </ThemeProvider>
     </div>
   );
 };

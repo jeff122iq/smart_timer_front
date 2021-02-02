@@ -4,7 +4,7 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       background: "white",
-      marginTop: "68px",
+      marginTop: "64px",
     },
     content: {
       maxWidth: "700px",
@@ -12,7 +12,7 @@ export default makeStyles((theme: Theme) =>
     },
     caption: {
       fontWeight: 900,
-      fontSize: 35,
+      fontSize: 32,
       lineHeight: "1.1",
       textAlign: "center",
       fontFamily: "Roboto, sans-serif",
@@ -20,7 +20,7 @@ export default makeStyles((theme: Theme) =>
       maxWidth: "500px",
       marginLeft: "auto",
       marginRight: "auto",
-      marginTop: "50px"
+      marginTop: "50px",
     },
     inputContainer: {
       padding: "2px 4px",

@@ -74,13 +74,31 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       fontSize: "24px",
       margin: "10px 0",
+      "& $underline::after": {
+        border: "none",
+        outline: "none",
+        background: "transparent",
+        underline: "none",
+        borederBottom: "none",
+      },
     },
+
     heading: {
       margin: "20px 0",
       fontWeight: 700,
       width: "100%",
-      "& ::before": { border: "none" },
-      "& ::after": { border: "none" },
+      "& ::before": {
+        border: "none",
+        outline: "none",
+        background: "transparent",
+      },
+      "& ::after": {
+        border: "none",
+        outline: "none",
+        background: "transparent",
+        underline: "none",
+        borederBottom: "none",
+      },
     },
     briefTemplate_card: {
       margin: "10px 0 40px 0",

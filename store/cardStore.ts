@@ -1,23 +1,50 @@
 import { cards } from "../interface/cards";
 import { observable, makeObservable, action } from "mobx";
-
+const cardsArr = [
+  {
+    title: "Title",
+    text:
+      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an... unknown printer took a galley of type and  scrambled it to make a type specimen book. It has survived not onlyfive centuries, but also the leap into electronic typesetting...essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like... Aldus PageMaker including versions of Lorem Ipsum....",
+  },
+  // {
+  //   title: "Title 2",
+  //   text:
+  //     "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an... unknown printer took a galley of type and  scrambled it to make a type specimen book. It has survived not onlyfive centuries, but also the leap into electronic typesetting...essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like... Aldus PageMaker including versions of Lorem Ipsum....",
+  // },
+  // {
+  //   title: "Title 3",
+  //   text:
+  //     "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an... unknown printer took a galley of type and  scrambled it to make a type specimen book. It has survived not onlyfive centuries, but also the leap into electronic typesetting...essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like... Aldus PageMaker including versions of Lorem Ipsum....",
+  // },
+];
 class cardStore {
   constructor() {
     makeObservable(this);
   }
 
-  @observable cardsArray: [] = [];
+  @observable cardsArray: cards[] = [];
 
   @observable card: cards = {
-    title: "",
-    text: "",
+    title: "Title",
+    text: `Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an... unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
+    five centuries, but also the leap into electronic
+    typesetting...essentially unchanged. It was popularised in the 1960s
+    with the release of Letraset sheets containing Lorem Ipsum passages,
+    and more recently with desktop publishing software like... Aldus
+    PageMaker including versions of Lorem Ipsum....`,
   };
-
   @action createCard = (value) => {
     this.card.title = value.title;
     this.card.text = value.text;
     // this.cardsArray.push();
     console.log("CARD STORE", this.card);
+  };
+
+  @action switchCard = () => {
+    cardsArr.forEach((el: cards) => {
+      this.cardsArray.push(el);
+      console.log("CARD ==>>", el);
+    });
   };
 }
 

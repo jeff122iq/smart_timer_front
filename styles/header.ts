@@ -19,17 +19,32 @@ export default makeStyles((theme: Theme) =>
     },
     toolbar: {
       display: "flex",
-      justifyContent: "space-around",
-      ["@media (max-width: 620px)"]: {
-        paddingLeft: "18px",
-      },
+      justifyContent: "space-between",
+      padding: 0,
     },
     avatar: {
       width: "25px",
       height: "25px",
       color: "#2e373b",
     },
-
+    navLink: {
+      display: "flex",
+      "& > div > a": {
+        margin: "0 28px",
+        color: "black",
+        textDecoration: "none",
+      },
+      ["@media screen and (max-width: 768px)"]: {
+        fontSize: "10px",
+      },
+      ["@media screen and (max-width: 720px)"]: {
+        fontSize: "10px",
+        margin: "0 5px",
+      },
+      ["@media (max-width: 620px)"]: {
+        display: "none",
+      },
+    },
     menuButton: {
       color: "black",
       backgroundColor: "transparent",

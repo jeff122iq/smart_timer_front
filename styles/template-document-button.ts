@@ -23,7 +23,7 @@ export default makeStyles((theme: Theme) =>
     documentName: {
       color: "white",
       fontSize: "20px",
-      maxWidth: "60%",
+      maxWidth: "90%",
       //two row text overflow ellipsis
       display: "-webkit-box",
       "-webkit-line-clamp": 2,

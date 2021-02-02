@@ -62,7 +62,7 @@ function getModalStyle() {
 const TestLoggeInPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
-  const { createCard, card } = CardStore;
+  const { createCard, card, cardsArray } = CardStore;
 
   useEffect(() => {
     createCard({
@@ -71,7 +71,11 @@ const TestLoggeInPage = (props) => {
     });
   }, []);
 
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(cardsArray);
+  console.log("=================");
+  console.log("::::::::::::", tags);
+  console.log("=================");
+
   const [actionsBurger, setActionsBurger] = useState(false);
 
   // ================MODAL==================
@@ -157,8 +161,14 @@ const TestLoggeInPage = (props) => {
         ) : (
           ""
         )}
-        <h1>{card.title}</h1>
-        <p>{card.text}</p>
+        {cardsArray.map((card: any, index: number) => {
+          return (
+            <div key={index}>
+              <h1>{card.title}</h1>
+              <p>{card.text}</p>
+            </div>
+          );
+        })}
         {/* <div className={classes.briefTemplate_card}>
           <Typography className={classes.briefTemplate_card__title} variant="h4">
             Title

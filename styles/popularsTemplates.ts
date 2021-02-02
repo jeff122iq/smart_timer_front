@@ -56,7 +56,6 @@ export default makeStyles((theme: Theme) =>
       flexWrap: "wrap",
       background: "#fff",
       width: "300px",
-      height: "auto",
       margin: "10px 0",
       borderRadius: 4,
       height: "171px",
@@ -65,6 +64,7 @@ export default makeStyles((theme: Theme) =>
       transition: "all 0.5s",
       "&:hover": {
         height: "331px",
+        transition: "all 0.5s",
         "& $popularsCardDescription": {
           lineClamp: 12,
         },
@@ -82,9 +82,8 @@ export default makeStyles((theme: Theme) =>
     popularsCardDescription: {
       display: "-webkit-box",
       padding: "10px 30px 44px",
-      transition: "all 1s",
+      transition: "all 0.5s",
       cursor: "pointer",
-      // textOverflow: "ellipsis",
       lineClamp: 4,
       boxOrient: "vertical",
       overflow: "hidden",

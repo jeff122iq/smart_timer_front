@@ -1,5 +1,5 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
@@ -7,10 +7,25 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import Button from "@material-ui/core/Button";
 import Paginator from "./Paginator";
 import useStyles from "../styles/popularsTemplates";
+import { CardStore } from "../store/cardStore";
+import { observer } from "mobx-react";
+import Modal from "@material-ui/core/Modal";
+
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 const PopularsTemplate = () => {
+  const { card, createCard, switchCard } = CardStore;
+  const [cards, setCard] = useState();
+
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSwitchCard = () => {
+    switchCard();
+  };
   const classes = useStyles();
   return (
     // <Container maxWidth="sm" disableGutters={true}	 style={{background: '#e3f4'}}>
@@ -40,7 +55,12 @@ const PopularsTemplate = () => {
             PageMaker including versions of Lorem Ipsum....
           </div>
           <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
+            <Button
+              className={classes.popularsActionsAddBtn}
+              onClick={handleSwitchCard}
+            >
+              Add
+            </Button>
           </div>
         </div>
         <div className={classes.popularsCard}>
@@ -147,5 +167,5 @@ const PopularsTemplate = () => {
   );
 };
 
-export default PopularsTemplate;
+export default observer(PopularsTemplate);
 // ========================== COMPONENT ====================================
