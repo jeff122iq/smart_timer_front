@@ -36,7 +36,7 @@ export function HomeTop() {
               <SearchIcon />
             </IconButton>
           </Paper>
-          <Button className={classes.button}>Create new breaf</Button>
+          <Button className={classes.button}>Create new brief</Button>
         </div>
       </Container>
     </div>

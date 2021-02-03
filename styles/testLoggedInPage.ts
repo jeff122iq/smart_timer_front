@@ -14,6 +14,7 @@ export default makeStyles((theme: Theme) =>
     rootCreateTemplate: {
       display: "flex",
       flexWrap: "wrap",
+        justifyContent: "center",
       background: "white",
       marginTop: "105px",
       // zIndex: 2
@@ -22,8 +23,8 @@ export default makeStyles((theme: Theme) =>
       background: "rgba(0, 0, 0, 0.5)",
     },
     wrapTopContent: {
-      width: "50%",
-      padding: "0 40px 40px 40px",
+        width: "35%",
+        padding: "0 50px 40px 53px",
       display: "flex",
       flexDirection: "column",
       "& > h1": {
@@ -184,6 +185,16 @@ export default makeStyles((theme: Theme) =>
         background: "#eaefff",
       },
     },
+      cardsHeading: {
+          "& > h1": {
+              fontWeight: 400,
+          },
+          "& > p": {
+              marginBottom: "30px"
+          },
+          borderBottom: "2px solid rgba(0, 0, 0, 0.12)",
+          marginBottom: "60px",
+      },
     actionsBtnLink: {
       background: "transparent",
       color: "#347cff",
@@ -192,7 +203,7 @@ export default makeStyles((theme: Theme) =>
     populars: {
       display: "flex",
       flexWrap: "wrap",
-      width: "50%",
+      width: "38%",
       [theme.breakpoints.down("sm")]: {
         width: "100%",
       },

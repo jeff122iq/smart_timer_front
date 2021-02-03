@@ -1,27 +1,34 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 import React, { useState } from "react";
-import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paginator from "./Paginator";
 import useStyles from "../styles/popularsTemplates";
 import { CardStore } from "../store/cardStore";
 import { observer } from "mobx-react";
+import PopupPopularTemplate from "./PopupPopularTemplate";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ===================================
 
-const AdditionalTemplate = ({ handleOpenModal }) => {
+const AdditionalTemplate = () => {
   const { card, createCard, switchCard } = CardStore;
   const [cards, setCard] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleSwitchCard = () => {
-    switchCard();
+  // const handleSwitchCard = () => {
+  //   switchCard();
+  // };
+  const handleOpenModal = () => {
+    setModalOpen(true);
   };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   const classes = useStyles();
   return (
-    // <Container maxWidth="sm" disableGutters={true}	 style={{background: '#e3f4'}}>
     <div className={classes.rootPopulars}>
       <div className={classes.popularsTitle}>
         <Typography className={classes.title} variant="h4">
@@ -30,12 +37,12 @@ const AdditionalTemplate = ({ handleOpenModal }) => {
       </div>
       <div className={classes.cardsWrapper}>
         <div className={classes.popularsCard}>
+          <PopupPopularTemplate  handleCloseModal={handleCloseModal} modalOpen={modalOpen}/>
           <Typography className={classes.cardTitle} variant="h4">
             Title
           </Typography>
           <div
             className={classes.popularsCardDescription}
-            onClick={handleOpenModal}
           >
             Simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industry's standard dummy text ever since the
@@ -50,7 +57,7 @@ const AdditionalTemplate = ({ handleOpenModal }) => {
           <div className={classes.popularsCardFooter}>
             <Button
               className={classes.popularsActionsAddBtn}
-              onClick={handleSwitchCard}
+              onClick={handleOpenModal}
             >
               Add
             </Button>

@@ -11,25 +11,30 @@ import { CardStore } from "../store/cardStore";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
 import DescriptionModal from "./DescriptionModal";
+import PopupPopularTemplate from "./PopupPopularTemplate";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const PopularsTemplate = ({ handleOpenModal }) => {
+const PopularsTemplate = (  ) => {
   const { card, createCard, switchCard } = CardStore;
   const [cards, setCard] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleSwitchCard = () => {
-    switchCard();
+  const handleOpenModal = () => {
+    setModalOpen(true);
   };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+
   const classes = useStyles();
   return (
-    // <Container maxWidth="sm" disableGutters={true}	 style={{background: '#e3f4'}}>
     <div className={classes.rootPopulars}>
+      <PopupPopularTemplate handleCloseModal={handleCloseModal} modalOpen={modalOpen}/>
       <div className={classes.popularsTitle}>
-        <SvgIcon className={classes.iconLamp}>
-          <EmojiObjectsIcon />
-        </SvgIcon>
+        <i className="fas fa-lightbulb"/>
         <Typography className={classes.title} variant="h4">
           Popular
         </Typography>
@@ -41,7 +46,6 @@ const PopularsTemplate = ({ handleOpenModal }) => {
           </Typography>
           <div
             className={classes.popularsCardDescription}
-            onClick={handleOpenModal}
           >
             Simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industry's standard dummy text ever since the
@@ -56,7 +60,7 @@ const PopularsTemplate = ({ handleOpenModal }) => {
           <div className={classes.popularsCardFooter}>
             <Button
               className={classes.popularsActionsAddBtn}
-              onClick={handleSwitchCard}
+              onClick={handleOpenModal}
             >
               Add
             </Button>

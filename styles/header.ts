@@ -126,6 +126,8 @@ export default makeStyles((theme: Theme) =>
       padding: "6px 0",
       backgroundColor: "transparent",
       minWidth: "55px",
+      display: "flex",
+      justifyContent: "flex-end"
     },
   })
 );

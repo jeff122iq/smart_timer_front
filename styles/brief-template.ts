@@ -3,27 +3,28 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 export default makeStyles((theme: Theme) =>
   createStyles({
     MuiPaginationItem: {
-      height: "26px",
-      margin: "0 1px",
-      padding: "0 4px",
-      minWidth: "26px",
-      borderRadius: "13px",
-      background: "transparent",
+        height: "26px",
+        margin: "0 1px",
+        padding: "0 4px",
+        minWidth: "26px",
+        borderRadius: "13px",
+        background: "transparent",
     },
 
     rootBriefTemplate: {
-      display: "flex",
-      flexWrap: "wrap",
-      background: "white",
-      marginTop: "110px",
-      // zIndex: 2
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        background: "white",
+        marginTop: "110px",
+        // zIndex: 2
     },
     wrapper: {
       background: "rgba(0, 0, 0, 0.5)",
     },
     wrapTopContent: {
-      width: "50%",
-      padding: "0 40px 40px 40px",
+      width: "35%",
+      padding: "0 50px 40px 53px",
       display: "flex",
       flexDirection: "column",
       [theme.breakpoints.down("sm")]: {
@@ -97,9 +98,21 @@ export default makeStyles((theme: Theme) =>
         outline: "none",
         background: "transparent",
         underline: "none",
-        borederBottom: "none",
+        borderBottom: "none",
       },
     },
+
+    cardsHeading: {
+        "& > h1": {
+            fontWeight: 400,
+        },
+        "& > p": {
+            marginBottom: "30px"
+        },
+        borderBottom: "2px solid rgba(0, 0, 0, 0.12)",
+        marginBottom: "60px",
+    },
+
     briefTemplate_card: {
       margin: "10px 0 40px 0",
       borderBottom: "1px solid lightgrey",
@@ -200,7 +213,7 @@ export default makeStyles((theme: Theme) =>
     populars: {
       display: "flex",
       flexWrap: "wrap",
-      width: "50%",
+      width: "38%",
       [theme.breakpoints.down("sm")]: {
         width: "100%",
       },

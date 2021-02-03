@@ -63,8 +63,6 @@ export function SignIn() {
                 aria-describedby="component-error-password"
               />
               <FormHelperText id="component-error-email">
-                {/* <Typography variant="caption">Email already taken</Typography>
-                <WarningIcon /> */}
               </FormHelperText>
             </FormControl>
             <Box display="flex">
@@ -77,7 +75,7 @@ export function SignIn() {
             </Box>
             <Button className={classes.buttonForgot}>Forgot password?</Button>
           </div>
-          <div className={classes.loginButtonPannel}>
+          <div>
             <Typography variant="h5" className={classes.quickTitle}>
               Quick register with your social media
             </Typography>

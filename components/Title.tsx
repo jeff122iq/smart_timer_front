@@ -13,13 +13,7 @@ export function Title() {
     <Box className={classes.rootTitle}>
       <Container maxWidth="lg">
         <div className={classes.titleWrap}>
-          <Image
-            className={classes.image}
-            src="/arrow_back-24px.svg"
-            alt="arrow0back"
-            width="50"
-            height="20"
-          />
+            <i className="fas fa-arrow-left"/>
           <Typography>Template name</Typography>
         </div>
       </Container>

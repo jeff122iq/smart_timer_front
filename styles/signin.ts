@@ -33,9 +33,9 @@ export default makeStyles((theme: Theme) =>
         borderBottomColor: "#f34235",
       },
     },
-    loginButtonPannel: {
-      marginLeft: "10px",
-    },
+    // loginButtonPannel: {
+    //   marginLeft: "10px",
+    // },
     buttonLogin: {
       backgroundColor: "#f9c229",
       margin: "40px 60px 0 0",
@@ -54,7 +54,7 @@ export default makeStyles((theme: Theme) =>
     },
     quickTitle: {
       color: "#959595",
-      maxWidth: "300px",
+      maxWidth: "260px",
     },
     buttonSocial: {
       maxWidth: "260px",

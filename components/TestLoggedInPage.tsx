@@ -175,15 +175,15 @@ const TestLoggeInPage = (props) => {
           ""
         )}
         {cardsArray
-          .slice((page - 1) * 2, page * 2)
-          .map((card: any, index: number) => {
-            return (
-              <div key={index}>
-                <h1>{card.title}</h1>
-                <p>{card.text}</p>
-              </div>
-            );
-          })}
+            .slice((page - 1) * 2, page * 2)
+            .map((card: any, index: number) => {
+              return (
+                  <div className={classes.cardsHeading} key={index}>
+                    <h1>{card.title}</h1>
+                    <p>{card.text}</p>
+                  </div>
+              );
+            })}
         <div
           className={
             writeDescription
@@ -266,7 +266,7 @@ const TestLoggeInPage = (props) => {
       <div className={classes.populars}>
         <Collapse in={tagLength}>
           {tagLength ? (
-            <AdditionalTemplate handleOpenModal={handleOpenModal} />
+            <AdditionalTemplate/>
           ) : (
             ""
           )}
