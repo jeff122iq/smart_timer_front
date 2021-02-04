@@ -57,7 +57,8 @@ const theme = createMuiTheme({
 
 const CustomAutocomplete = withStyles(() => {
   createStyles({
-    overrides: {},
+    overrides: {
+    },
   });
 })(Autocomplete);
 
@@ -78,6 +79,7 @@ const LimitTags = () => {
           classes={{
             autocomplete: classes.autocomplete,
             popupIndicator: classes.popupIndicator,
+            clearIndicatorDirty: classes.clearIndicatorDirty
           }}
           className={classes.autocomplete}
           onChange={(event, value: any) => {
@@ -85,8 +87,6 @@ const LimitTags = () => {
             console.log(value);
           }}
           multiple
-          // classes={classes}
-          // limitTags={2}
           options={top100Films}
           getOptionLabel={(option: any) => option.title}
           defaultValue={[]}

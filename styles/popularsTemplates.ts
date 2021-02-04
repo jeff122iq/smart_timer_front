@@ -10,7 +10,7 @@ export default makeStyles((theme: Theme) =>
       background: "#f2bc1c",
       padding: "0 53px 0 33px",
         ["@media screen and (max-width: 1280px)"]: {
-            padding: "0 15px",
+            padding: "0 10px",
         },
       [theme.breakpoints.down("sm")]: {
         marginBottom: "200px",
@@ -28,8 +28,8 @@ export default makeStyles((theme: Theme) =>
       },
         "& > i": {
                 color: "#fff",
-                fontSize: "20px",
-                margin: "0 0 5px 0",
+                fontSize: "19px",
+                margin: "0 13px 5px 0",
         }
     },
     title: {
@@ -67,7 +67,7 @@ export default makeStyles((theme: Theme) =>
       transition: "all 0.5s",
       "&:hover": {
         transition: "all 0.5s",
-          boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.6)",
+          boxShadow: "0px 3px 14px 0px rgba(0,0,0,0.6)",
       //   "& $popularsCardDescription": {
       //     lineClamp: 12,
       //   },

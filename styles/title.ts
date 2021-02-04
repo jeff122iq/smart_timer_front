@@ -5,8 +5,8 @@ export default makeStyles((theme: Theme) =>
     rootTitle: {
         display: "flex",
         width: "100%",
-        boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
-        padding: "10px 0",
+        boxShadow: "-1px 1px 6px 0px rgba(0,0,0,0.6)",
+        padding: "15px 0",
         backgroundColor: "white",
         position: "fixed",
         top: "59px",

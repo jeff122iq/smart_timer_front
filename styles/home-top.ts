@@ -5,6 +5,8 @@ export default makeStyles((theme: Theme) =>
     root: {
       background: "white",
       marginTop: "64px",
+        boxShadow: "0px -5px 5px -5px rgba(34, 60, 80, 0.6) inset",
+
     },
     content: {
       maxWidth: "700px",

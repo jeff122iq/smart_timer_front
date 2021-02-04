@@ -152,7 +152,9 @@ const Header = () => {
             <Drawer open={isOpen} onClose={() => toggleMenu(false)}>
               {menu()}
             </Drawer>
+            <Link href={"/"}>
             <Typography className={classes.title}>BRIEFFER</Typography>
+            </Link>
           </Box>
           <div className={classes.navLink}>
             {navMenu.map(({ name, link, active }, index) => {

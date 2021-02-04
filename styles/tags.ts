@@ -14,6 +14,9 @@ export default makeStyles((theme: Theme) =>
     input: {
       border: "none",
     },
+      clearIndicatorDirty:{
+        display:'none'
+      },
     popupIndicator: {
       transform: "none",
     },
