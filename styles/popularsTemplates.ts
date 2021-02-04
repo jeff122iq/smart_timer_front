@@ -33,7 +33,7 @@ export default makeStyles((theme: Theme) =>
         }
     },
     title: {
-      margin: "0 15px",
+      // margin: "0 15px",
       letterSpacing: "0",
       color: "#fff",
       fontWeight: 400,
