@@ -27,6 +27,10 @@ export default makeStyles((theme: Theme) =>
       padding: "0 50px 40px 53px",
       display: "flex",
       flexDirection: "column",
+        ["@media screen and (max-width: 1280px)"]: {
+            width: "50%",
+            padding: "0 30px 40px 20px",
+        },
       [theme.breakpoints.down("sm")]: {
         width: "100%",
       },
@@ -214,6 +218,9 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap",
       width: "38%",
+        ["@media screen and (max-width: 1280px)"]: {
+            width: "50%",
+        },
       [theme.breakpoints.down("sm")]: {
         width: "100%",
       },

@@ -9,6 +9,9 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       background: "#f2bc1c",
       padding: "0 53px 0 33px",
+        ["@media screen and (max-width: 1280px)"]: {
+            padding: "0 15px",
+        },
       [theme.breakpoints.down("sm")]: {
         marginBottom: "200px",
         padding: "0 10px",

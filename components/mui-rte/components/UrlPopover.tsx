@@ -7,8 +7,6 @@ import { createStyles, withStyles, WithStyles, Theme } from '@material-ui/core/s
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto'
 import MovieIcon from '@material-ui/icons/Movie'
-import CheckIcon from '@material-ui/icons/Check'
-import DeleteIcon from '@material-ui/icons/DeleteOutline'
 import FormatAlignCenter from '@material-ui/icons/FormatAlignCenter'
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft'
 import FormatAlignRight from '@material-ui/icons/FormatAlignRight'
@@ -34,12 +32,44 @@ interface IUrlPopoverStateProps extends WithStyles<typeof styles> {
 
 const styles = ({ spacing }: Theme) => createStyles({
     linkPopover: {
-        padding: spacing(2, 2, 2, 2),
+        padding: spacing("10px", "10px", "4px", "10px"),
         maxWidth: 250,
+        borderRadius: 0,
+        "& > h3": {
+            margin: 0,
+            marginBottom: 20,
+            fontWeight: 400,
+        }
     },
+
+    fieldContainer: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        "& > i": {
+            fontSize: "10px",
+        }
+    },
+
     linkTextField: {
         width: "100%",
-    }
+        fontSize: "5px",
+        '& input::placeholder': {
+            fontSize: "10px",
+        },
+    },
+
+    buttons: {
+        "& > button > span > p": {
+            margin: 0,
+            fontSize: 10,
+            background: "transparent",
+            "&:hover": {
+                color: "#4573f9",
+                background: "transparent"
+            },
+        },
+    },
 })
 
 const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
@@ -79,30 +109,36 @@ const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
             }}
         >
             <div className={classes.linkPopover}>
-                <Grid container spacing={1}>
+                <h3>Edit link</h3>
+                <Grid container spacing={1} style={{display: "flex", flexDirection: "column"}}>
                     <Grid container item xs spacing={1}>
                         <Grid item xs={12}>
+                            <div className={classes.fieldContainer}>
+                                <i style={{marginRight: "10px"}} className="fas fa-align-left"/>
+                                <TextField
+                                    placeholder="Link name"
+                                    className={classes.linkTextField}
+                                    onChange={(event) => setData({...data, url: event.target.value})}
+                                    defaultValue={props.data && props.data.url}
+                                    autoFocus={true}
+                                    InputLabelProps={{
+                                        shrink: true
+                                    }}
+                                />
+                            </div>
+                            <div className={classes.fieldContainer}>
+                            <i style={{marginRight: "10px"}} className="fas fa-globe"/>
                             <TextField
                                 className={classes.linkTextField}
                                 onChange={(event) => setData({...data, url: event.target.value})}
-                                label="Edit link"
+                                placeholder="Web adress"
                                 defaultValue={props.data && props.data.url}
                                 autoFocus={true}
                                 InputLabelProps={{
                                     shrink: true
                                 }}
                             />
-                            <br/>
-                            <TextField
-                                className={classes.linkTextField}
-                                onChange={(event) => setData({...data, url: event.target.value})}
-                                label="Web adress"
-                                defaultValue={props.data && props.data.url}
-                                autoFocus={true}
-                                InputLabelProps={{
-                                    shrink: true
-                                }}
-                            />
+                            </div>
                         </Grid>
                         {props.isMedia ?
                             <>
@@ -171,24 +207,19 @@ const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
                             </>
                             : null}
                     </Grid>
+                    <footer style={{borderTop: "2px solid #ebebeb", marginTop: "20px"}}>
                     <Grid container item xs={12} direction="row" justify="flex-end">
-                        {props.data && props.data.url ?
-                        <Button
-                            onClick={() => props.onConfirm(props.isMedia, "")}
-                        >
-                            <DeleteIcon />
-                        </Button>
-                        : null }
-                        <Button
-                            onClick={() => props.onConfirm(props.isMedia, data.url, data.width, data.height, data.alignment, data.type)}
-                        >
-                            {/*<CheckIcon />*/}
+                        <div className={classes.buttons}>
+                            <Button style={{background: "transparent",}} onClick={() => props.onConfirm(props.isMedia, data.url, data.width, data.height, data.alignment, data.type)}>
+                                <p>save</p>
+                            </Button>
+                        <Button style={{background: "transparent",}}
+                            onClick={() => props.onConfirm(props.isMedia, "")}>
                             <p>close</p>
                         </Button>
-                        <Button>
-                            <p>save</p>
-                        </Button>
+                        </div>
                     </Grid>
+                    </footer>
                 </Grid>
             </div>
         </Popover>
