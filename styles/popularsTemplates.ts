@@ -64,7 +64,7 @@ export default makeStyles((theme: Theme) =>
       transition: "all 0.5s",
       "&:hover": {
         transition: "all 0.5s",
-          boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
+          boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.6)",
       //   "& $popularsCardDescription": {
       //     lineClamp: 12,
       //   },

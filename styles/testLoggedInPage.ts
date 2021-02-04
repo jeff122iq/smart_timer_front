@@ -84,7 +84,7 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       fontSize: "24px",
       margin: "10px 0",
-      textDecoration: "underline",
+        borderBottom: "2px solid #a1a1a1",
     },
     heading: {
       margin: "20px 0",

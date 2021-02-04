@@ -75,13 +75,12 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       fontSize: "24px",
       margin: "10px 0",
-      textDecoration: "underline",
+        borderBottom: "2px solid #a1a1a1",
       "& $underline::after": {
         border: "none",
         outline: "none",
         background: "transparent",
         underline: "none",
-        borederBottom: "none",
       },
     },
 

@@ -2,51 +2,51 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
-import MUIRichTextEditor from "mui-rte";
+import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
 import ModalBurgerMenu from "./ModalBurgerMenu";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const local_theme_overrides = {
+const local_theme_overrides =  {
   overrides: {
+    linkPopover: {
+
+    },
     MUIRichTextEditor: {
       root: {
         marginTop: 20,
         width: "100%",
         "& > .Mui-focusVisible": {
           display: "none",
-          background: "red",
           "&:focus": {
             display: "none",
-            background: "red",
           },
         },
         UrlPopover: {
-          background: 'red'
-        }
+        },
+        '& >.UrlPopover-linkPopover': {
+
+        },
       },
       '& > .MuiPopover-paper': {
         '.UrlPopover-linkPopover-1471': {
-          background: 'red'
-
+          zIndex: 500,
         },
 
       },
-      MuiPaper: {
+      MuiPopover: {
         root: {
-          LinkPopover: {
-            background: 'red'
-          },
           UrlPopover: {
-            background: 'red'
-          }
+            zIndex: 500,
+          },
+          linkPopover: {
+          },
         },
       },
       focusVisible: {
         display: "none",
-        background: "red",
       },
 
       toolbar: {
@@ -150,13 +150,25 @@ const DescriptionModal = (props) => {
               },
               {
                 name: "close",
-                icon: <div style={{}}>close</div>,
+                icon: <div style={{
+                  textTransform: "uppercase",
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  fontFamily: "Roboto, san-serif"
+                }}>close</div>,
                 type: "callback",
                 onClick: () => {
                   props.setOpen(false);
                 },
               },
+              {
+                name: 'link',
+                icon: <ModalBurgerMenu />,
+                type: "callback",
+                onClick: () => console.log('test'),
+              },
             ]}
+
           ></MUIRichTextEditor>
         </div>
       </ThemeProvider>
