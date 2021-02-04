@@ -23,8 +23,27 @@ const local_theme_overrides = {
             background: "red",
           },
         },
+        UrlPopover: {
+          background: 'red'
+        }
       },
+      '& > .MuiPopover-paper': {
+        '.UrlPopover-linkPopover-1471': {
+          background: 'red'
 
+        },
+
+      },
+      MuiPaper: {
+        root: {
+          LinkPopover: {
+            background: 'red'
+          },
+          UrlPopover: {
+            background: 'red'
+          }
+        },
+      },
       focusVisible: {
         display: "none",
         background: "red",

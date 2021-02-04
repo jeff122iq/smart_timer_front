@@ -75,6 +75,7 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       fontSize: "24px",
       margin: "10px 0",
+      textDecoration: "underline",
       "& $underline::after": {
         border: "none",
         outline: "none",
