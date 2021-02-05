@@ -18,7 +18,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import useStyles from "../styles/signin";
-import Axios from "axios"
+import Axios from "axios";
 import React, {useState} from "react";
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
 
