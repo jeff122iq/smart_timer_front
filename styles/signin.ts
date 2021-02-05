@@ -30,7 +30,8 @@ export default makeStyles((theme: Theme) =>
     inputPannel: {
       marginRight: "10px",
       "& .MuiInput-underline.Mui-error:after": {
-        borderBottomColor: "#f34235",
+        borderBottomColor: "gray",
+        borderBottom: "1px solid"
       },
     },
     // loginButtonPannel: {
