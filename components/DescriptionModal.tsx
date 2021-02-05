@@ -110,6 +110,8 @@ const DescriptionModal = (props) => {
   const save = (data: any) => {
     const dataValue = JSON.parse(data);
     dataValue.title = inputValue;
+    console.log(dataValue)
+    props.setOpen(false);
   };
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -137,7 +139,7 @@ const DescriptionModal = (props) => {
           }}
         >
           <MUIRichTextEditor
-            controls={["numberList", "link", "bold", "MoreVertIcon", "close"]}
+            controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
             inlineToolbar={true}
             label="Write description..."
             onSave={save}
@@ -149,7 +151,7 @@ const DescriptionModal = (props) => {
                 onClick: () => {},
               },
               {
-                name: "close",
+                name: "save",
                 icon: <div style={{
                   textTransform: "uppercase",
                   fontSize: "15px",
@@ -157,9 +159,6 @@ const DescriptionModal = (props) => {
                   fontFamily: "Roboto, san-serif"
                 }}>close</div>,
                 type: "callback",
-                onClick: () => {
-                  props.setOpen(false);
-                },
               },
               {
                 name: 'link',

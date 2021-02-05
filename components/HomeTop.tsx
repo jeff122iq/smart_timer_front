@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "../styles/home-top";
+import Link from "next/link";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -36,7 +37,9 @@ export function HomeTop() {
               <SearchIcon />
             </IconButton>
           </Paper>
+          <Link href={'/create'}>
           <Button className={classes.button}>Create new brief</Button>
+          </Link>
         </div>
       </Container>
     </div>

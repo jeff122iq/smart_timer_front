@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { createStyles, withStyles, WithStyles, Theme } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import {
+    ContentState,
     Editor, EditorState, convertFromRaw, RichUtils, AtomicBlockUtils,
     CompositeDecorator, convertToRaw, DefaultDraftBlockRenderMap, DraftEditorCommand,
     DraftHandleValue, DraftStyleMap, ContentBlock, DraftDecorator, 
@@ -261,6 +262,8 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         end: 0
     })
 
+    console.log(editorState)
+
     /**
      * Exposed methods
      */
@@ -336,7 +339,6 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
                     })
                 return
             }
-
             selectionRef.current = {
                 start: selection.getStartOffset(),
                 end: selection.getEndOffset()
@@ -522,7 +524,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         if (!state.anchorUrlPopover) {
             setState({
                 ...state,
-                toolbarPosition: undefined
+                toolbarPosition: undefined,
             })
         }
     }
@@ -669,6 +671,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
             const linkInstance = contentState.getEntity(linkKey)
             data = linkInstance.getData()
         }
+
         setState({
             urlData: data,
             urlKey: linkKey,
@@ -680,11 +683,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
     }
 
     const handlePromptForLink = (inlineMode?: boolean) => {
-        const selection = editorState.getSelection()
-
-        if (!selection.isCollapsed()) {
-            handlePrompt(editorState, "link", inlineMode)
-        }
+        handlePrompt(editorState, "link", inlineMode)
     }
 
     const handlePromptForMedia = (inlineMode?: boolean, newState?: EditorState) => {
@@ -698,6 +697,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
             return
         }
         confirmLink(...args)
+        console.log(...args)
     }
 
     const handleToolbarClick = (style: string, type: string, id: string, inlineMode?: boolean) => {
@@ -760,7 +760,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         setEditorState(RichUtils.toggleLink(editorState, selection, null))
     }
 
-    const confirmLink = (url?: string) => {
+    const confirmLink = (url?: string, name?: string,) => {
         const { urlKey } = state
         if (!url) {
             if (urlKey) {
@@ -774,6 +774,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         let replaceEditorState = editorState
         const data = {
             url: url,
+            name: name,
             className: classes.anchorLink
         }
 
@@ -802,7 +803,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         setEditorState(newEditorState)
     }
 
-    const confirmMedia = (url?: string, width?: number, height?: number, alignment?: TAlignment, type?: TMediaType) => {
+    const confirmMedia = (url?: string, name?: string, width?: number, height?: number, alignment?: TAlignment, type?: TMediaType) => {
         const { urlKey } = state
         if (!url) {
             if (urlKey) {
@@ -815,6 +816,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         const contentState = editorState.getCurrentContent()
         const data = {
             url: url,
+            name: name,
             width: width,
             height: height,
             alignment: alignment,
@@ -997,12 +999,11 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
 
     const updateSearchTermForKeyBinding = (keyBinding: DraftEditorCommand | null) => {
         const text = editorStateRef.current!.getCurrentContent().getLastBlock().getText()
-
         if (keyBinding === "backspace"
             && autocompleteRef.current 
             && text.substr(text.length - 1) === autocompleteRef.current.triggerChar) {
             clearSearch()
-        } else if (autocompletePositionRef.current 
+        } else if (autocompletePositionRef.current
             && keyBinding === "backspace"
             && searchTerm.length) {
             setSearchTerm(searchTerm.substr(0, searchTerm.length - 1))
@@ -1014,6 +1015,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
     }
 
     const keyBindingFn = (e: React.KeyboardEvent<{}>): string | null => {
+
         if (hasCommandModifier(e) && props.keyCommands) {
             const comm = props.keyCommands.find(comm => comm.key === e.keyCode)
             if (comm) {
@@ -1022,12 +1024,14 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         }
         if (searchTerm) {
             const autocompleteEvent = getAutocompleteKeyEvent(e)
+
             if (autocompleteEvent) {
                 return autocompleteEvent
             }
         }
         const keyBinding = getDefaultKeyBinding(e)
         updateSearchTermForKeyBinding(keyBinding)
+        console.log(e)
 
         return keyBinding
     }

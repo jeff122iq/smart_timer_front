@@ -17,6 +17,7 @@ export type TMediaType = "image" | "video"
 
 export type TUrlData = {
     url?: string
+    name?: string
     width?: number
     height?: number
     alignment?: TAlignment
@@ -74,6 +75,7 @@ const styles = ({ spacing }: Theme) => createStyles({
 
 const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
     const [data, setData] = useState<TUrlData>(props.data || {
+        name: undefined,
         url: undefined,
         width: undefined,
         height: undefined,
@@ -118,8 +120,8 @@ const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
                                 <TextField
                                     placeholder="Link name"
                                     className={classes.linkTextField}
-                                    onChange={(event) => setData({...data, url: event.target.value})}
-                                    defaultValue={props.data && props.data.url}
+                                    onChange={(event) => setData({...data, name: event.target.value})}
+                                    defaultValue={props.data && props.data.name}
                                     autoFocus={true}
                                     InputLabelProps={{
                                         shrink: true
@@ -210,9 +212,10 @@ const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
                     <footer style={{borderTop: "2px solid #ebebeb", marginTop: "20px"}}>
                     <Grid container item xs={12} direction="row" justify="flex-end">
                         <div className={classes.buttons}>
-                            <Button style={{background: "transparent",}} onClick={() => props.onConfirm(props.isMedia, data.url, data.width, data.height, data.alignment, data.type)}>
+                            <Button style={{background: "transparent",}} onClick={() => props.onConfirm(props.isMedia, data.url, data.name, data.width, data.height, data.alignment, data.type)}>
                                 <p>save</p>
                             </Button>
+                            {console.log(data.name, data.url)}
                         <Button style={{background: "transparent",}}
                             onClick={() => props.onConfirm(props.isMedia, "")}>
                             <p>close</p>

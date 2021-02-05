@@ -184,7 +184,12 @@ const STYLE_TYPES: TStyleType[] = [
         label: 'Save',
         name: "save",
         style: 'save',
-        icon: <SaveIcon />,
+        icon: <div style={{
+            textTransform: "uppercase",
+            fontSize: "15px",
+            fontWeight: 600,
+            fontFamily: "Roboto, san-serif"
+        }}>close</div>,
         type: "callback"
     }
 ]
