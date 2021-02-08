@@ -11,8 +11,9 @@ import {
   Drawer,
   Container,
 } from "@material-ui/core";
+import Avatar from '@material-ui/core/Avatar';
 import MenuIcon from "@material-ui/icons/Menu";
-import { useState, useEffect } from "react";
+import React, {useState} from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Link from "next/link";
 import useStyles from "../styles/header";
@@ -24,13 +25,16 @@ import About from "./About";
 import Blog from "./Blog";
 import { CurrentPage } from "../store/currentPage";
 import { observer } from "mobx-react";
+import Create from "./Create";
+import jwt_decode from "jwt-decode";
+import {emit} from "cluster";
 // import Container from "./Container";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 const Header = () => {
   // ============================= LINKS ====================================
-  const [navMenu, setNavMenu] = useState([
+  const [navMenu, setNavMenu] = React.useState([
     { link: "", name: "Home", active: false },
     { link: "create", name: "Create brief", active: false },
     { link: "templates", name: "Brief template", active: false },
@@ -38,22 +42,15 @@ const Header = () => {
     { link: "blog", name: "Blog", active: false },
   ]);
 
+  const router = useRouter();
+
+  const [decode, setDecode] = useState("");
+  const [isToken, setIsToken] = React.useState('')
+
   const { currentPage } = CurrentPage;
   console.log(currentPage);
-  // const [selectedLink, setSelectedLink] = useState(null);
-  // const [pathSelected, setPathSelected] = useState("");
-  // const [selected, setSelected] = useState(false);
 
-  // useEffect(() => {
-  //   path.map((el, index) => {
-  //     if (index === selectedLink) {
-  //       console.log("map", el, index);
-  //       setPathSelected(el);
-  //     }
-  //   });
-  // }, []);
-
-  useEffect(() => {
+  React.useEffect(() => {
     setNavMenu(
       navMenu.map((elem) => {
         if (elem.name === currentPage) {
@@ -62,34 +59,34 @@ const Header = () => {
         return { ...elem, active: false };
       })
     );
+    setIsToken(window.localStorage.getItem('token'))
+    if (isToken) {
+      const decoder: string = jwt_decode(isToken)
+      setDecode((decoder as any).email);
+      router.push("/");
+    }
+    // console.log(isToken);
   }, [currentPage]);
 
-  console.log(navMenu);
 
-  // useEffect(() => {
-  //   selected
-  //     ? path.map((el, index) => {
-  //         if (index === selectedLink) {
-  //           console.log("map", el, index);
-  //           setPathSelected(el);
-  //           setSelected(false);
-  //           setSelectedLink(index);
-  //         }
-  //       })
-  //     : null;
-  // }, [selectedLink]);
-  // console.log(selected);
+  console.log(decode);
+
+  const logout = () => {
+    localStorage.clear();
+    router.push("/create");
+  }
+
   const switchLink = [
     <Home />,
     <TestLoggedInPage />,
+    <Create />,
     <BriefTemplate />,
     <About />,
     <Blog />,
   ];
-  const router = useRouter();
   const isTemplatesPage = router.pathname === "/templates";
   const classes = useStyles();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const toggleMenu = (open: boolean) => {
     setIsOpen((prev) => !prev);
   };
@@ -110,8 +107,8 @@ const Header = () => {
           </Link>
         </ListItem>
         <ListItem button>
-          <Link href="/templates">
-            <a className={classes.link} href="/templates">
+          <Link href={"/templates"}>
+            <a className={classes.link}>
               Brief templates
             </a>
           </Link>
@@ -169,46 +166,37 @@ const Header = () => {
               );
             })}
           </div>
-          {/* <Box display="flex" className={classes.linkBox}>
-              <Link href="/">
-                <a className={classes.link}>Home</a>
-              </Link>
-              <Link href="/create">
-                <a className={classes.link}>Create brief</a>
-              </Link>
-              <Link href="/templates">
-                <a className={classes.link}>Brief template</a>
-              </Link>
-              <Link href="/about">
-                <a className={classes.link}>About</a>
-              </Link>
-              <Link href="/blog">
-                <a className={classes.link}>Blog</a>
-              </Link>
-            </Box> */}
 
-          <Box display="flex">
+          <Box display="flex" alignItems="center">
             <IconButton
               color="inherit"
               className={classes.userButton}
               aria-label="menu"
             >
-              <AccountCircleIcon className={classes.avatar} />
             </IconButton>
-            <Button className={classes.button}>
-              <Link href="/signin">
-                <a className={classes.link}>Log in</a>
-              </Link>
-            </Button>
-            <Button className={classes.button}>
-              <Link href="/signin">
-                <a className={classes.link}>Sign in</a>
-              </Link>
-            </Button>
+              {isToken ? <Avatar alt={decode} src={""} className={classes.avatar}/> : <AccountCircleIcon className={classes.avatar} />}
+            {isToken
+                  ?
+                  <Button onClick={logout} className={classes.button}>
+                    <a className={classes.link}>Log out</a>
+                  </Button>
+                  :
+                  <>
+                    <Button className={classes.button}>
+                      <Link href="/signin">
+                        <a className={classes.link}>Log in</a>
+                      </Link>
+                    </Button>
+                    <Button className={classes.button}>
+                      <Link href="/signin">
+                        <a className={classes.link}>Sign in</a>
+                      </Link>
+                    </Button>
+                  </>
+            }
           </Box>
         </Toolbar>
       </Container>
-      {/* </AppBar> */}
     </div>
   );
 };

@@ -21,22 +21,25 @@ import useStyles from "../styles/signin";
 import Axios from "axios";
 import React, {useState} from "react";
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
-
 export interface State extends SnackbarOrigin {
   open: boolean;
 }
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import {useRouter} from "next/router";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-export function SignIn() {
+export function SignIn(props) {
+  const router = useRouter();
+
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState();
   // const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState<State>({
     open: false,
@@ -49,6 +52,9 @@ export function SignIn() {
     setState({open:true, ...newState});
   };
 
+  let isAuth = Boolean(false);
+  console.log(isAuth);
+
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -58,27 +64,26 @@ export function SignIn() {
   async function handleSubmitRegister(event) {
     event.preventDefault();
     try {
-      await Axios.post("http://localhost:5000/auth/register", {email: email, password: password, role: 2});
+      const response = await Axios.post("http://localhost:5000/auth/register", {email: email, password: password, role: 2});
       console.log("Access register");
-
       handleClick({ vertical: 'top', horizontal: 'center' });
-
+      console.log(response.data);
+      localStorage.setItem("token", response.data.access_token);
+      router.push("/");
     } catch (error) {
       console.log(error)
     }
-    setEmail('')
-    setPassword('')
   }
 
   async function handleSubmitLogin(event) {
     event.preventDefault();
     try {
-      const response = await Axios.post("http://localhost:5000/auth/login", {email: email, password: password, role: 2});
+      const response = await Axios.post("http://localhost:5000/auth/login", {email: email, password: password});
       console.log("Access lof-ini");
       console.log(response.data);
-      setEmail('')
-      setPassword('')
       handleClick({ vertical: 'top', horizontal: 'center' });
+      localStorage.setItem("token", response.data.access_token);
+      router.push("/");
 
     } catch (error) {
       console.log(error)

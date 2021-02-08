@@ -4,13 +4,15 @@ import { Box, Container, Typography } from "@material-ui/core";
 import { SignIn } from "./SignIn";
 import useStyles from "../styles/create";
 import { TemplateDocumentButton } from "./TemplateDocumentButton";
+import TestLoggedInPage from "./TestLoggedInPage";
+import {Body} from "./layouts/Body";
+import React from "react";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 export default function Create() {
   const classes = useStyles();
-  const isLogedIn = false; // get from cookie
-
+  const isToken = window.localStorage.getItem("token");
   const documents = [
     "Name",
     "Name of document",
@@ -25,7 +27,11 @@ export default function Create() {
 
   return (
     <>
-      {!isLogedIn && <SignIn />}
+      {isToken ?
+          <TestLoggedInPage/>
+          :
+          <SignIn />
+      }
       <div>
         <Container maxWidth="lg">
           <Box

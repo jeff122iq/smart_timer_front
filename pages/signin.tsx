@@ -6,9 +6,10 @@ import { SignIn } from "../components/SignIn";
 
 // ========================== COMPONENT ====================================
 export default function SignInPage() {
-  return (
+
+    return (
     <Body>
-      <SignIn />
+        <SignIn></SignIn>
     </Body>
   );
 }
