@@ -12,7 +12,10 @@ import React from "react";
 // ========================== COMPONENT ====================================
 export default function Create() {
   const classes = useStyles();
-  const isToken = window.localStorage.getItem("token");
+  const [isToken, setIsToken] = React.useState("");
+  React.useEffect(() => {
+    setIsToken(window.localStorage.getItem("token"))
+  }, )
   const documents = [
     "Name",
     "Name of document",
