@@ -21,12 +21,36 @@ const PopularsTemplate = (  ) => {
   const [cards, setCard] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+
+
   const handleOpenModal = () => {
     setModalOpen(true);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    fetch("http://localhost:5000/cards")
+        .then(res => res.json())
+        .then(
+            (result) => {
+              setIsLoaded(true);
+              setItems(result);
+              console.log(setItems(result));
+            },
+            // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+            // чтобы не перехватывать исключения из ошибок в самих компонентах.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+              console.log(setError(error));
+            }
+        )
+  }, [])
 
 
   const classes = useStyles();
