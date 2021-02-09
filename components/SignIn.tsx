@@ -26,6 +26,7 @@ export interface State extends SnackbarOrigin {
 }
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import {useRouter} from "next/router";
+import adminPage from "../pages/admin";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -39,8 +40,6 @@ export function SignIn(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState();
-  // const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState<State>({
     open: false,
     vertical: 'top',
@@ -84,6 +83,10 @@ export function SignIn(props) {
       handleClick({ vertical: 'top', horizontal: 'center' });
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
+      if ({email: "admin@admin.com", passaword: "123", role: 1}) {
+        console.log("This is admin!");
+        router.push("/admin");
+      }
 
     } catch (error) {
       console.log(error)
