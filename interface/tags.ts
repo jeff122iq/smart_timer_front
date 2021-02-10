@@ -1,4 +1,4 @@
 export interface tags {
-    title: string;
-    year: number;
+    name: string;
+    id: number;
 }

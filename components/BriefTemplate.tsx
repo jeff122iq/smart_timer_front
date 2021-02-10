@@ -69,14 +69,11 @@ const BriefTemplate = (props) => {
   useEffect(() => {
     createCard({
       title: "",
-      text: "",
+      description: "",
     });
   }, []);
 
-  const [tags, setTags] = useState(cardsArray);
-  console.log("=================");
-  console.log("::::::::::::", tags);
-  console.log("=================");
+  const [tags, setTags] = useState();
 
   const [actionsBurger, setActionsBurger] = useState(false);
   const handleActionsBurger = () => {
@@ -120,16 +117,16 @@ const BriefTemplate = (props) => {
               <Tags />
             </div>
             {/* <Slide direction="right" style={{ visibility: tagLength ? "visible" : "hidden" }}> */}
-            {cardsArray
-                .slice((page - 1) * 2, page * 2)
-                .map((card: any, index: number) => {
-                  return (
-                      <div className={classes.cardsHeading} key={index}>
-                        <h1>{card.title}</h1>
-                        <p>{card.text}</p>
-                      </div>
-                  );
-                })}
+            {/*{cardsArray*/}
+            {/*    .slice((page - 1) * 2, page * 2)*/}
+            {/*    .map((card: any, index: number) => {*/}
+            {/*      return (*/}
+            {/*          <div className={classes.cardsHeading} key={index}>*/}
+            {/*            <h1>{card.title}</h1>*/}
+            {/*            <p>{card.description}</p>*/}
+            {/*          </div>*/}
+            {/*      );*/}
+            {/*    })}*/}
             <div
                 className={classes.briefTemplate_description}
                 style={{ display: tagLength ? "block" : "none" }}

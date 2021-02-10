@@ -77,13 +77,13 @@ export function SignIn(props) {
   async function handleSubmitLogin(event) {
     event.preventDefault();
     try {
-      const response = await Axios.post("http://localhost:5000/auth/login", {email: email, password: password});
+      const response = await Axios.post("http://localhost:5000/auth/login", {email: email, password: password, role: 2});
       console.log("Access lof-ini");
       console.log(response.data);
       handleClick({ vertical: 'top', horizontal: 'center' });
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
-      if ({email: "admin@admin.com", passaword: "123", role: 1}) {
+      if ({role: 1}) {
         console.log("This is admin!");
         router.push("/admin");
       }

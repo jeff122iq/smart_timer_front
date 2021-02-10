@@ -12,19 +12,20 @@ import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
 import DescriptionModal from "./DescriptionModal";
 import PopupPopularTemplate from "./PopupPopularTemplate";
+import Axios from "axios";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const PopularsTemplate = (  ) => {
-  const { card, createCard, switchCard } = CardStore;
+const PopularsTemplate = (props) => {
+  console.log('PROPS', props)
+  // const { card, createCard, switchCard } = CardStore;
   const [cards, setCard] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
-
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -33,24 +34,7 @@ const PopularsTemplate = (  ) => {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    fetch("http://localhost:5000/cards")
-        .then(res => res.json())
-        .then(
-            (result) => {
-              setIsLoaded(true);
-              setItems(result);
-              console.log(setItems(result));
-            },
-            // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-            // чтобы не перехватывать исключения из ошибок в самих компонентах.
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-              console.log(setError(error));
-            }
-        )
-  }, [])
+
 
 
   const classes = useStyles();

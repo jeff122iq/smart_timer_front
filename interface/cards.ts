@@ -1,4 +1,4 @@
 export interface cards {
   title: string;
-  text: string;
+  description: string;
 }
