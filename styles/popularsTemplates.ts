@@ -131,5 +131,6 @@ export default makeStyles((theme: Theme) =>
         backgroundColor: "transparent",
       },
     },
+
   })
 );

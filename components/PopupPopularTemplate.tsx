@@ -5,11 +5,20 @@ import Dialog from '@material-ui/core/Dialog';
 import { CardStore } from "../store/cardStore";
 import { observer } from "mobx-react";
 import useStyles from "../styles/popupPopularTamplate"
+import useStyles1 from "../styles/popularsTemplates";
+import {Typography} from "@material-ui/core";
 
-const PopupPopularTemplate=({handleCloseModal, modalOpen}) => {
+const PopupPopularTemplate=({card}) => {
     const classes = useStyles();
-    const { createCard, card, cardsArray } = CardStore;
-
+    const classes1 = useStyles1();
+    const { createCard, cardsArray } = CardStore;
+    const [modalOpen, setModalOpen] = useState(false);
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    };
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
     useEffect(() => {
         createCard({
             title: "",
@@ -25,39 +34,42 @@ const PopupPopularTemplate=({handleCloseModal, modalOpen}) => {
     };
 
     return (
-        <div className={classes.popup}>
-            <Dialog onClose={handleCloseModal} aria-labelledby="customized-dialog-title" open={modalOpen}>
-                <div className={classes.title}>
-                    {/*{CardStore.cardsArray*/}
-                    {/*    .map((card: any, index: number) => {*/}
-                    {/*        return (*/}
-                                    <h1>Title</h1>
-                        {/*    )*/}
-                        {/*})}*/}
+        <>
+            <div className={classes1.popularsCard}>
+                <Typography className={classes1.cardTitle} variant="h4">
+                    {card.title}
+                </Typography>
+                <div
+                    className={classes1.popularsCardDescription}
+                >
+                    {card.description}
                 </div>
-                <div className={classes.text}>
-                    {/*{CardStore.cardsArray*/}
-                    {/*    .map((card: any, index: number) => {*/}
-                    {/*        return (*/}
-                                <p>Simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the
-                                    1500s, when an... unknown printer took a galley of type and
-                                    scrambled it to make a type specimen book. It has survived not only
-                                    five centuries, but also the leap into electronic
-                                    typesetting...essentially unchanged. It was popularised in the 1960s
-                                    with the release of Letraset sheets containing Lorem Ipsum passages,
-                                    and more recently with desktop publishing software like... Aldus
-                                    PageMaker including versions of Lorem Ipsum....</p>
-                        {/*    )*/}
-                        {/*})}*/}
-                </div>
-                <div className={classes.footer}>
-                    <Button autoFocus onClick={handleSwitchCard} color="primary">
+                <div className={classes1.popularsCardFooter}>
+                    <Button
+                        className={classes1.popularsActionsAddBtn}
+                        onClick={handleOpenModal}
+                    >
                         Add
                     </Button>
                 </div>
-            </Dialog>
-        </div>
+            </div>
+            <div className={classes.popup}>
+                <Dialog onClose={handleCloseModal} aria-labelledby="customized-dialog-title" open={modalOpen}>
+                    <div className={classes.title}>
+                        <h1>{card.title}</h1>
+                    </div>
+                    <div className={classes.text}>
+                        <p>{card.description}</p>
+                    </div>
+                    <div className={classes.footer}>
+                        <Button autoFocus onClick={handleSwitchCard} color="primary">
+                            Add
+                        </Button>
+                    </div>
+                </Dialog>
+            </div>
+        </>
+
     );
 }
 

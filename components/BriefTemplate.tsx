@@ -64,14 +64,14 @@ function getModalStyle() {
 const BriefTemplate = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
-  const { createCard, card, cardsArray } = CardStore;
+  const { createCard, card, whiteCards } = CardStore;
 
   useEffect(() => {
     createCard({
       title: "",
       description: "",
     });
-  }, []);
+    }, []);
 
   const [tags, setTags] = useState();
 
@@ -86,7 +86,7 @@ const BriefTemplate = (props) => {
   // ================MODAL==================
 
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(cardsArray.length / 2);
+  const totalPages = Math.ceil(whiteCards.length / 2);
   const handlePagination = (
       event: React.ChangeEvent<unknown>,
       value: number
@@ -116,17 +116,16 @@ const BriefTemplate = (props) => {
             <div className={classes.briefTemplateTags}>
               <Tags />
             </div>
-            {/* <Slide direction="right" style={{ visibility: tagLength ? "visible" : "hidden" }}> */}
-            {/*{cardsArray*/}
-            {/*    .slice((page - 1) * 2, page * 2)*/}
-            {/*    .map((card: any, index: number) => {*/}
-            {/*      return (*/}
-            {/*          <div className={classes.cardsHeading} key={index}>*/}
-            {/*            <h1>{card.title}</h1>*/}
-            {/*            <p>{card.description}</p>*/}
-            {/*          </div>*/}
-            {/*      );*/}
-            {/*    })}*/}
+            {whiteCards
+                .slice((page - 1) * 2, page * 2)
+                .map((whiteCards: any, index: number) => {
+                  return (
+                      <div className={classes.cardsHeading} key={index}>
+                        <h1>{whiteCards.title}</h1>
+                        <p>{whiteCards.description}</p>
+                      </div>
+                  );
+                })}
             <div
                 className={classes.briefTemplate_description}
                 style={{ display: tagLength ? "block" : "none" }}
@@ -149,7 +148,7 @@ const BriefTemplate = (props) => {
                 placeholder="Write heading"
                 inputProps={{ "aria-label": "naked" }}
             />
-            {cardsArray.length > 2 ? (
+            {whiteCards.length > 2 ? (
                 <div className={classes.pagination}>
                   <Paginator
                       count={totalPages}
@@ -173,7 +172,7 @@ const BriefTemplate = (props) => {
                 <DescriptionModal open={open} setOpen={setOpen} />
               </Modal>
             </div>
-            {cardsArray.length > 0 ? (
+            {whiteCards.length > 0 ? (
                 <div>
                   <ClickAwayListener onClickAway={handleClickAway}>
                     <div className={classes.actions}>

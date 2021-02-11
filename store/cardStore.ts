@@ -1,14 +1,15 @@
 import { cards } from "../interface/cards";
+import { whiteCards } from "../interface/whiteCards";
 import { observable, makeObservable, action } from "mobx";
-import {useEffect} from "react";
 import Axios from "axios";
-const cardsArr = [
+
+ const cardsArr = [
   {
     title: "",
-    description:
-      "",
+    description: ``,
   },
 ];
+
 class cardStore {
   constructor() {
     makeObservable(this);
@@ -16,36 +17,28 @@ class cardStore {
 
   @observable cardsArray: cards[] = [];
 
-  @observable card: cards = {
-    title: "Title",
-    description: `Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an... unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-    five centuries, but also the leap into electronic
-    typesetting...essentially unchanged. It was popularised in the 1960s
-    with the release of Letraset sheets containing Lorem Ipsum passages,
-    and more recently with desktop publishing software like... Aldus
-    PageMaker including versions of Lorem Ipsum....`,
-  };
+  @observable card: cards[] = [];
+
+  @observable whiteCards: whiteCards[] = [];
+
   @action createCard = (value) => {
-    this.card.title = value.title;
-    this.card.description = value.text;
-    // this.cardsArray.push();
+    this.card.push({title:value.title, description: value.description});
   };
 
   @action switchCard = () => {
-    cardsArr.forEach((el: cards) => {
-      this.cardsArray.push(el);
+    cardsArr.forEach((el: whiteCards) => {
+      this.whiteCards.push(el);
     });
   };
 
-  @action cardsData = async () => {
+  @action cardsData = async (tags) => {
     const token = window.localStorage.getItem("token");
-    console.log("THIS IS A TOKEN: ", token);
     try {
-      const response = await Axios.post("http://localhost:5000/cards/get",{tags:[]}, {headers: {
+      const response = await Axios.post("http://localhost:5000/cards/get",{tags:tags.map(tag=>tag.id)}, {headers: {
           Authorization: `Bearer ${token}`
         }});
-      console.log("RESPONSE", response.data);
-      this.cardsArray.push(response.data)
+      this.cardsArray.length = 0;
+      response.data.map(card => this.cardsArray.push(card));
       console.log("STORE", this.cardsArray);
     } catch (error) {
       console.log(error);

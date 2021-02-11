@@ -23,6 +23,9 @@ export default makeStyles((theme: Theme) =>
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: "50px",
+        [theme.breakpoints.down("sm")]: {
+            marginTop: "-8px",
+        }
     },
     inputContainer: {
       padding: "2px 4px",

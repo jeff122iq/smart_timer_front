@@ -206,8 +206,8 @@ export default makeStyles((theme: Theme) =>
       fontWeight: 700,
     },
     populars: {
-      display: "flex",
       flexWrap: "wrap",
+      backgroundColor: "#f2bc1c",
       width: "38%",
         ["@media screen and (max-width: 1280px)"]: {
             width: "50%",

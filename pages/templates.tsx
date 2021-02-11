@@ -10,14 +10,6 @@ import {CardStore} from "../store/cardStore"
 // ========================== COMPONENT ====================================
 const templates = () => {
   const { setCurrentPage } = CurrentPage;
-  const {cardsData, cardsArray} = CardStore;
-  const [card, setCard] = useState([]);
-
-  useEffect(() => {
-    cardsData(cardsArray);
-    console.log("CARDS FROM STORE:")
-  }, [card, setCard]);
-
   setCurrentPage("Brief template");
   return (
     <Body>

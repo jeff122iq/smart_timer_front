@@ -18,13 +18,10 @@ import { TagsStore } from "../store/tagsStore";
 import { tags } from "../interface/tags";
 import useStyles from "../styles/tags";
 import { createMuiTheme } from "@material-ui/core/styles";
-import {log} from "util";
+import {CardStore} from "../store/cardStore";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-// const local_theme_overrides = {
-
-// }
 
 const theme = createMuiTheme({
   overrides: {
@@ -68,7 +65,8 @@ const CustomAutocomplete = withStyles(() => {
 
 const LimitTags = () => {
   const classes = useStyles();
-  const { getTags, tag, tagLength } = TagsStore;
+  const { getTags, tag, tagLength, setSelectedTags} = TagsStore;
+  const { cardsData } = CardStore
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -88,9 +86,12 @@ const LimitTags = () => {
             clearIndicatorDirty: classes.clearIndicatorDirty
           }}
           className={classes.autocomplete}
-          onChange={(event, value: tags[]) => {
-            setTags(() => _.uniqBy(value, (v) => v.id));
-            console.log(tags)
+          onChange={async(event, value: tags[]) => {
+            value = _.uniqBy(value, (v) => v.id);
+            setTags(() => value);
+            await setSelectedTags(value);
+            console.log(value)
+            await cardsData(value)
           }}
           multiple
           options={toJS(tag)}

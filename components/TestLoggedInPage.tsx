@@ -62,7 +62,7 @@ function getModalStyle() {
 const TestLoggeInPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
-  const { createCard, card, cardsArray } = CardStore;
+  const { createCard, whiteCards } = CardStore;
 
   useEffect(() => {
     createCard({
@@ -71,7 +71,7 @@ const TestLoggeInPage = (props) => {
     });
   }, []);
 
-  const [tags, setTags] = useState(cardsArray);
+  const [tags, setTags] = useState(whiteCards);
   console.log("=================");
   console.log("::::::::::::", tags);
   console.log("=================");
@@ -84,7 +84,7 @@ const TestLoggeInPage = (props) => {
   // ================MODAL==================
 
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(cardsArray.length / 2);
+  const totalPages = Math.ceil(whiteCards.length / 2);
   const handlePagination = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -118,6 +118,7 @@ const TestLoggeInPage = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(tagLength)
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -174,13 +175,13 @@ const TestLoggeInPage = (props) => {
         ) : (
           ""
         )}
-        {cardsArray
+        {whiteCards
             .slice((page - 1) * 2, page * 2)
-            .map((card: any, index: number) => {
+            .map((whiteCards: any, index: number) => {
               return (
                   <div className={classes.cardsHeading} key={index}>
-                    <h1>{card.title}</h1>
-                    <p>{card.text}</p>
+                    <h1>{whiteCards.title}</h1>
+                    <p>{whiteCards.description}</p>
                   </div>
               );
             })}
@@ -199,9 +200,9 @@ const TestLoggeInPage = (props) => {
             <DescriptionModal open={open} setOpen={setOpen} />
           </Modal>
         </div>
-        {cardsArray.length > 0 ? (
+        {whiteCards.length > 0 ? (
           <div>
-            {cardsArray.length > 2 ? (
+            {whiteCards.length > 2 ? (
               <div className={classes.pagination}>
                 <Paginator
                   count={totalPages}

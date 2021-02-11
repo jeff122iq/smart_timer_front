@@ -1,5 +1,5 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paginator from "./Paginator";
@@ -10,161 +10,54 @@ import PopupPopularTemplate from "./PopupPopularTemplate";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
-// ========================== COMPONENT ===================================
-
+// ========================== COMPONENT ====================================
 const AdditionalTemplate = () => {
-  const { card, createCard, switchCard } = CardStore;
-  const [cards, setCard] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
+    const { cardsArray, createCard, switchCard, cardsData } = CardStore;
+    const [cards, setCard] = useState();
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+    const [page, setPage] = useState(1);
+    const totalPages = Math.ceil(cardsArray.length / 2);
+    const handlePagination = (
+        event: React.ChangeEvent<unknown>,
+        value: number
+    ) => {
+        setPage(value);
+    };
 
-  // const handleSwitchCard = () => {
-  //   switchCard();
-  // };
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
 
-  const classes = useStyles();
-  return (
-    <div className={classes.rootPopulars}>
-      <div className={classes.popularsTitle}>
-        <Typography className={classes.title} variant="h4">
-          Additional
-        </Typography>
-      </div>
-      <div className={classes.cardsWrapper}>
-        <div className={classes.popularsCard}>
-          <PopupPopularTemplate  handleCloseModal={handleCloseModal} modalOpen={modalOpen}/>
-          <Typography className={classes.cardTitle} variant="h4">
-            Title
-          </Typography>
-          <div
-            className={classes.popularsCardDescription}
-          >
-            Simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an... unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic
-            typesetting...essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like... Aldus
-            PageMaker including versions of Lorem Ipsum....
-          </div>
-          <div className={classes.popularsCardFooter}>
-            <Button
-              className={classes.popularsActionsAddBtn}
-              onClick={handleOpenModal}
-            >
-              Add
-            </Button>
-          </div>
-        </div>
-        <div className={classes.popularsCard}>
-          <Typography className={classes.cardTitle} variant="h4">
-            Title
-          </Typography>
-          <div className={classes.popularsCardDescription}>
-            Simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an... unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic
-            typesetting...essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like... Aldus
-            PageMaker including versions of Lorem Ipsum....
-          </div>
-          <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
-          </div>
-        </div>
-        <div className={classes.popularsCard}>
-          <Typography className={classes.cardTitle} variant="h4">
-            Title
-          </Typography>
-          <div className={classes.popularsCardDescription}>
-            Simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an... unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic
-            typesetting...essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like... Aldus
-            PageMaker including versions of Lorem Ipsum....
-          </div>
-          <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
-          </div>
-        </div>
-        <div className={classes.popularsCard}>
-          <Typography className={classes.cardTitle} variant="h4">
-            Title
-          </Typography>
-          <div className={classes.popularsCardDescription}>
-            Simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an... unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic
-            typesetting...essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like... Aldus
-            PageMaker including versions of Lorem Ipsum....
-          </div>
-          <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
-          </div>
-        </div>
-        <div className={classes.popularsCard}>
-          <Typography className={classes.cardTitle} variant="h4">
-            Title
-          </Typography>
-          <div className={classes.popularsCardDescription}>
-            Simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an... unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic
-            typesetting...essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like... Aldus
-            PageMaker including versions of Lorem Ipsum....
-          </div>
-          <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
-          </div>
-        </div>
-        <div className={classes.popularsCard}>
-          <Typography className={classes.cardTitle} variant="h4">
-            Title
-          </Typography>
-          <div className={classes.popularsCardDescription}>
-            Simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an... unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic
-            typesetting...essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like... Aldus
-            PageMaker including versions of Lorem Ipsum....
-          </div>
-          <div className={classes.popularsCardFooter}>
-            <Button className={classes.popularsActionsAddBtn}>Add</Button>
-          </div>
-        </div>
-      </div>
+    useEffect(() => {
+        async function  getData(){
+            await cardsData();
+        }
+        getData()
+    }, []);
 
-      <div className={classes.pagination}>
-        <Paginator count={10} />
-      </div>
-    </div>
-  );
+    const classes = useStyles();
+    return (
+        <div className={classes.rootPopulars}>
+
+            <div className={classes.popularsTitle}>
+                <i className="fas fa-lightbulb"/>
+                <Typography className={classes.title} variant="h4">
+                    Popular
+                </Typography>
+            </div>
+            <div className={classes.cardsWrapper}>
+                {cardsArray.slice((page - 1) * 2, page * 6).map(({title, description}) => {
+                    return(<PopupPopularTemplate card={{title, description}}/>)
+                })
+                }
+            </div>
+
+            <div className={classes.pagination}>
+                <Paginator     count={totalPages}
+                               page={page}
+                               onChange={handlePagination}/>
+            </div>
+        </div>
+    );
 };
 
 export default observer(AdditionalTemplate);
