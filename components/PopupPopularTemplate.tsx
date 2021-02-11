@@ -11,7 +11,7 @@ import {Typography} from "@material-ui/core";
 const PopupPopularTemplate=({card}) => {
     const classes = useStyles();
     const classes1 = useStyles1();
-    const { createCard, cardsArray } = CardStore;
+    const { createCard, cardsArray,switchCard, addCard } = CardStore;
     const [modalOpen, setModalOpen] = useState(false);
     const handleOpenModal = () => {
         setModalOpen(true);
@@ -27,8 +27,8 @@ const PopupPopularTemplate=({card}) => {
     }, []);
 
     // const [tags, setTags] = useState(cardsArray);
-    const { switchCard } = CardStore;
     const handleSwitchCard = () => {
+        addCard(card)
         switchCard();
         handleCloseModal();
     };

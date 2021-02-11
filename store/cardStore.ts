@@ -31,6 +31,10 @@ class cardStore {
     });
   };
 
+  @action addCard = (card) => {
+    this.whiteCards.push(card)
+  }
+
   @action cardsData = async (tags) => {
     const token = window.localStorage.getItem("token");
     try {
