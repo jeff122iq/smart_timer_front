@@ -7,12 +7,14 @@ import useStyles from "../styles/popularsTemplates";
 import { CardStore } from "../store/cardStore";
 import { observer } from "mobx-react";
 import PopupPopularTemplate from "./PopupPopularTemplate";
+import {TagsStore} from "../store/tagsStore";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 const PopularsTemplate = () => {
   const { cardsArray, createCard, switchCard, cardsData } = CardStore;
+  const {selectedTags} = TagsStore
   const [cards, setCard] = useState();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,7 +31,7 @@ const PopularsTemplate = () => {
 
     useEffect(() => {
         async function  getData(){
-            await cardsData();
+            await cardsData(selectedTags);
         }
         getData()
     }, []);
