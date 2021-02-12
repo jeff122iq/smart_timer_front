@@ -31,6 +31,8 @@ import { TagsStore } from "../store/tagsStore";
 import DescriptionModal from "./DescriptionModal";
 import useStyles from "../styles/testLoggedInPage";
 import AdditionalTemplate from "./AdditionalTemplate";
+import Axios from "axios";
+import {BriefStore} from "../store/briefStore";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -62,14 +64,12 @@ function getModalStyle() {
 const TestLoggeInPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
-  const { createCard, whiteCards } = CardStore;
-
-  useEffect(() => {
-    createCard({
-      title: "",
-      text: "",
-    });
-  }, []);
+  const { whiteCards } = CardStore;
+  const {addBrief} = BriefStore;
+  const [isToken, setIsToken] = React.useState("");
+  React.useEffect(() => {
+    setIsToken(window.localStorage.getItem("token"))
+  }, )
 
   const [tags, setTags] = useState(whiteCards);
   console.log("=================");
@@ -82,6 +82,7 @@ const TestLoggeInPage = (props) => {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   // ================MODAL==================
+
 
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(whiteCards.length / 2);
@@ -98,7 +99,11 @@ const TestLoggeInPage = (props) => {
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
-
+  async function saveBrief() {
+    const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`, {name: inputValue, cards: whiteCards},{headers: {
+        Authorization: `Bearer ${isToken}`}});
+        addBrief(response.data);
+  }
   const handleOpenModal = () => {
     setOpen(true);
   };
@@ -118,7 +123,6 @@ const TestLoggeInPage = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(tagLength)
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -153,7 +157,6 @@ const TestLoggeInPage = (props) => {
               <CustomButton
                 className={classes.descriptionBtn}
                 onClick={handleWriteDescription}
-                // style={{animation: tagLength ? '3s ease-in 1s infinite reverse both running slidein' : '1s ease'}}
               >
                 Write description
               </CustomButton>
@@ -169,6 +172,8 @@ const TestLoggeInPage = (props) => {
                 className={classes.CreateTemplateHeading}
                 placeholder="Write heading"
                 inputProps={{ "aria-label": "naked" }}
+                value={inputValue}
+                onChange={handleInputValue}
               />
             </>
           </Collapse>
@@ -215,7 +220,7 @@ const TestLoggeInPage = (props) => {
             )}
             <ClickAwayListener onClickAway={handleClickAway}>
               <div className={classes.actions}>
-                <Button className={classes.actionsBtnSave} variant="contained">
+                <Button onClick={saveBrief} className={classes.actionsBtnSave} variant="contained">
                   Save
                 </Button>
                 <div style={{ position: "relative" }}>

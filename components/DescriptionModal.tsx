@@ -6,6 +6,7 @@ import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
 import ModalBurgerMenu from "./ModalBurgerMenu";
+import {log} from "util";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -109,10 +110,15 @@ const DescriptionModal = (props) => {
 
   const save = (data: any) => {
     const dataValue = JSON.parse(data);
-    dataValue.title = inputValue;
-    console.log(dataValue)
+    console.log("DATA_VALUE: ", dataValue)
     props.setOpen(false);
+    saveDescription();
   };
+
+  const saveDescription = () => {
+
+  }
+
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
@@ -152,7 +158,7 @@ const DescriptionModal = (props) => {
               },
               {
                 name: "save",
-                icon: <div style={{
+                icon: <div onClick={saveDescription} style={{
                   textTransform: "uppercase",
                   fontSize: "15px",
                   fontWeight: 600,

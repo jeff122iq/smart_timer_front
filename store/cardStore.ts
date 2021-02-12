@@ -25,25 +25,19 @@ class cardStore {
     this.card.push({title:value.title, description: value.description});
   };
 
-  @action switchCard = () => {
-    cardsArr.forEach((el: whiteCards) => {
-      this.whiteCards.push(el);
-    });
-  };
-
   @action addCard = (card) => {
+    this.cardsArray.length = 0;
     this.whiteCards.push(card)
   }
 
   @action cardsData = async (tags) => {
     const token = window.localStorage.getItem("token");
     try {
-      const response = await Axios.post("http://localhost:5000/cards/get",{tags:tags.map(tag=>tag.id)}, {headers: {
+      const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/cards/get`,{tags:tags.map(tag=>tag.id)}, {headers: {
           Authorization: `Bearer ${token}`
         }});
       this.cardsArray.length = 0;
       response.data.map(card => this.cardsArray.push(card));
-      console.log("STORE", this.cardsArray);
     } catch (error) {
       console.log(error);
     }

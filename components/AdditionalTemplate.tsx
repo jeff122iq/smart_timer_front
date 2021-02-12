@@ -4,18 +4,19 @@ import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paginator from "./Paginator";
 import useStyles from "../styles/popularsTemplates";
-import { CardStore } from "../store/cardStore";
-import { observer } from "mobx-react";
 import PopupPopularTemplate from "./PopupPopularTemplate";
 import {TagsStore} from "../store/tagsStore";
+import { CardStore } from "../store/cardStore";
+import { observer } from "mobx-react";
+import {BriefStore} from "../store/briefStore";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 const AdditionalTemplate = () => {
-    const { cardsArray, createCard, switchCard, cardsData } = CardStore;
+    const { cardsArray, createCard, cardsData } = CardStore;
     const [cards, setCard] = useState();
-    const {selectedTags} = TagsStore
+    const {selectedTags} = TagsStore;
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -41,9 +42,8 @@ const AdditionalTemplate = () => {
         <div className={classes.rootPopulars}>
 
             <div className={classes.popularsTitle}>
-                <i className="fas fa-lightbulb"/>
                 <Typography className={classes.title} variant="h4">
-                    Popular
+                    Additional
                 </Typography>
             </div>
             <div className={classes.cardsWrapper}>

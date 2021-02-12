@@ -90,7 +90,6 @@ const LimitTags = () => {
             value = _.uniqBy(value, (v) => v.id);
             setTags(() => value);
             await setSelectedTags(value);
-            console.log(value)
             await cardsData(value)
           }}
           multiple

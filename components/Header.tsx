@@ -48,7 +48,6 @@ const Header = () => {
   const [isToken, setIsToken] = React.useState('')
 
   const { currentPage } = CurrentPage;
-  console.log(currentPage);
 
   React.useEffect(() => {
     setNavMenu(
@@ -67,9 +66,6 @@ const Header = () => {
     }
     // console.log(isToken);
   }, [currentPage]);
-
-
-  console.log(decode);
 
   const logout = () => {
     localStorage.clear();

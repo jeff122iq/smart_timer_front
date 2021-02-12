@@ -13,7 +13,7 @@ import {TagsStore} from "../store/tagsStore";
 
 // ========================== COMPONENT ====================================
 const PopularsTemplate = () => {
-  const { cardsArray, createCard, switchCard, cardsData } = CardStore;
+  const { cardsArray, cardsData } = CardStore;
   const {selectedTags} = TagsStore
   const [cards, setCard] = useState();
   const [error, setError] = useState(null);

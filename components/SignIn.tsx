@@ -26,7 +26,6 @@ export interface State extends SnackbarOrigin {
 }
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import {useRouter} from "next/router";
-import adminPage from "../pages/admin";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -35,9 +34,7 @@ function Alert(props: AlertProps) {
 }
 export function SignIn(props) {
   const router = useRouter();
-
   const classes = useStyles();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [state, setState] = React.useState<State>({
@@ -46,14 +43,9 @@ export function SignIn(props) {
     horizontal: 'center',
   });
   const { vertical, horizontal, open } = state;
-
   const handleClick = (newState: SnackbarOrigin) => {
     setState({open:true, ...newState});
   };
-
-  let isAuth = Boolean(false);
-  console.log(isAuth);
-
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -63,7 +55,7 @@ export function SignIn(props) {
   async function handleSubmitRegister(event) {
     event.preventDefault();
     try {
-      const response = await Axios.post("http://localhost:5000/auth/register", {email: email, password: password, role: 2});
+      const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/auth/register`, {email: email, password: password, role: 2});
       console.log("Access register");
       handleClick({ vertical: 'top', horizontal: 'center' });
       console.log(response.data);
@@ -77,16 +69,12 @@ export function SignIn(props) {
   async function handleSubmitLogin(event) {
     event.preventDefault();
     try {
-      const response = await Axios.post("http://localhost:5000/auth/login", {email: email, password: password, role: 2});
+      const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/auth/login`, {email: email, password: password, role: 2});
       console.log("Access lof-ini");
       console.log(response.data);
       handleClick({ vertical: 'top', horizontal: 'center' });
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
-      if ({role: 1}) {
-        console.log("This is admin!");
-        router.push("/admin");
-      }
 
     } catch (error) {
       console.log(error)

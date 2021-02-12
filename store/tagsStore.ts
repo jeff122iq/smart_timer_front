@@ -22,7 +22,7 @@ class tagsStore {
   @action getTags = async() => {
     const token = window.localStorage.getItem("token");
     try {
-      const response = await Axios.get("http://localhost:5000/tags/", {headers: {
+      const response = await Axios.get(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/tags/`, {headers: {
           Authorization: `Bearer ${token}`
         }
       });

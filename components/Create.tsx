@@ -5,35 +5,41 @@ import { SignIn } from "./SignIn";
 import useStyles from "../styles/create";
 import { TemplateDocumentButton } from "./TemplateDocumentButton";
 import TestLoggedInPage from "./TestLoggedInPage";
-import {Body} from "./layouts/Body";
 import React from "react";
+import {BriefStore} from "../store/briefStore";
+import {log} from "util";
+import {observer} from "mobx-react";
+import {useRouter} from "next/router";
+
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-export default function Create() {
+const Create =() => {
   const classes = useStyles();
   const [isToken, setIsToken] = React.useState("");
+  const {createBrief, getBrief, briefs} = BriefStore;
+  const [brief,setBrief] = React.useState([])
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"))
   }, )
-  const documents = [
-    "Name",
-    "Name of document",
-    "Type of document with long long long long long long name",
-    "Type of document with long long long long long long name",
-    "Type of document with long long long long long long name",
-    "Type of document with long long long long long long name",
-    "Name of document",
-    "Name of document",
-    "Name of document",
-  ];
+  const router = useRouter();
+
+  React.useEffect(()=>{
+    async function getData(){
+      getBrief();
+    }
+    setBrief(createBrief);
+    getData();
+  },[createBrief])
+
+
 
   return (
     <>
       {isToken ?
           <TestLoggedInPage/>
           :
-          <SignIn />
+          <SignIn/>
       }
       <div>
         <Container maxWidth="lg">
@@ -47,8 +53,8 @@ export default function Create() {
             <Typography variant="subtitle2">Your library</Typography>
           </Box>
           <Box display="flex" flexWrap="wrap" style={{ marginBottom: "147px" }}>
-            {documents.map((data, idx) => (
-              <TemplateDocumentButton data={data} key={idx} />
+            {briefs.map(({name, id}) => (
+              <TemplateDocumentButton data={name} key={id} />
             ))}
           </Box>
         </Container>
@@ -56,4 +62,5 @@ export default function Create() {
     </>
   );
 }
+export default observer(Create);
 // ========================== COMPONENT ====================================
