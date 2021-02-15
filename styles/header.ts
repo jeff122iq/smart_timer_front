@@ -54,7 +54,15 @@ export default makeStyles((theme: Theme) =>
     },
     list: { width: 250 },
     fullList: { width: "auto" },
-    title: { color: "black", fontFamily: "'Imbue', serif", letterSpacing: 1.5, cursor: "pointer", marginLeft: 20 },
+    title: {
+        color: "black",
+        fontFamily: "'Imbue', serif",
+        letterSpacing: 1.5,
+        cursor: "pointer",
+        [theme.breakpoints.down("md")]: {
+            marginLeft: 20
+        }
+    },
     linkBox: {
       // display: "none",
       ["@media (max-width: 670px)"]: {
