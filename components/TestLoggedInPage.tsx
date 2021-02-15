@@ -110,6 +110,18 @@ const TestLoggeInPage = (props) => {
     setOpen(true);
   };
 
+  const copyLink = () => {
+    const el = document.createElement('textarea');
+    el.value = `http://localhost:3000/create`;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  }
+
   const handleClickAway = () => {
     setActionsBurger(false);
   };
@@ -270,7 +282,7 @@ const TestLoggeInPage = (props) => {
                     </div>
                   </div>
                 </div>
-                <Button className={classes.actionsBtnLink}>Copy Link</Button>
+                <Button onClick={copyLink} className={classes.actionsBtnLink}>Copy Link</Button>
               </div>
             </ClickAwayListener>
           </div>

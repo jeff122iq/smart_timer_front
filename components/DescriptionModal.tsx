@@ -111,7 +111,7 @@ const DescriptionModal = (props) => {
 
   const save = (data: any) => {
     const dataValue = JSON.parse(data);
-    whiteCards.push(dataValue.blocks);
+    whiteCards.push(dataValue.blocks.text);
     console.log(whiteCards);
     props.setOpen(false);
     saveDescription();

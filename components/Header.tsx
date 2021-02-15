@@ -32,8 +32,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import { observer } from "mobx-react";
 import Create from "./Create";
 import jwt_decode from "jwt-decode";
-import {emit} from "cluster";
-// import Container from "./Container";
+import ReactLetterAvatar from "react"
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -65,8 +64,9 @@ const Header = () => {
     );
     setIsToken(window.localStorage.getItem('token'))
     if (isToken) {
-      const decoder: string = jwt_decode(isToken)
-      setDecode((decoder as any).email);
+      const decoder: any = jwt_decode(isToken);
+      setDecode((decoder).email);
+      console.log(decode)
       router.push("/");
     }
     // console.log(isToken);
@@ -187,7 +187,7 @@ const Header = () => {
               aria-label="menu"
             >
             </IconButton>
-              {isToken ? <Avatar alt={decode} src={""} className={classes.avatar}/> : <AccountCircleIcon className={classes.avatar} />}
+            {isToken ? <Avatar alt={decode} src={""} className={classes.avatar}/> : <AccountCircleIcon className={classes.avatar} />}
             {isToken
                   ?
                   <Button onClick={logout} className={classes.button}>

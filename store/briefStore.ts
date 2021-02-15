@@ -24,7 +24,7 @@ class briefStore {
         // console.log(response.data);
     }
 
-    @action briefLink = async(briefId) => {
+    @action briefLink = (briefId) => {
         const el = document.createElement('textarea');
         el.value = `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs/${briefId}`;
         el.setAttribute('readonly', '');
