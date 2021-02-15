@@ -26,7 +26,7 @@ class cardStore {
   };
 
   @action addCard = (card) => {
-    this.whiteCards.push(card)
+    this.whiteCards.push(card);
   }
 
   @action cardsData = async (tags) => {

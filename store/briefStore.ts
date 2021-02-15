@@ -24,6 +24,18 @@ class briefStore {
         // console.log(response.data);
     }
 
+    @action briefLink = async(briefId) => {
+        const el = document.createElement('textarea');
+        el.value = `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs/${briefId}`;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    }
+
     @action getBrief = async() => {
         const token = window.localStorage.getItem("token");
         const response = await Axios.get(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`, {headers: {Authorization: `Bearer ${token}`}}

@@ -16,6 +16,7 @@ export default makeStyles((theme: Theme) =>
         },
      },
         titleWrap: {
+        cursor: "pointer",
         display: "flex",
             alignItems: "center",
             "& > i": {

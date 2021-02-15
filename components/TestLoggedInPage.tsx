@@ -103,6 +103,8 @@ const TestLoggeInPage = (props) => {
     const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`, {name: inputValue, cards: whiteCards},{headers: {
         Authorization: `Bearer ${isToken}`}});
         addBrief(response.data);
+        clearAll();
+        setInputValue("");
   }
   const handleOpenModal = () => {
     setOpen(true);
@@ -123,6 +125,7 @@ const TestLoggeInPage = (props) => {
   const clearAll = () => {
     whiteCards.length = 0;
     setActionsBurger(false);
+    setInputValue("");
   }
 
   const handleClose = () => {

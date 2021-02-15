@@ -18,7 +18,7 @@ import {BriefStore} from "../store/briefStore";
 export function TemplateDocumentButton({ name, id }) {
   const classes = useStyles();
 
-  const {removeBrief} = BriefStore
+  const {removeBrief, briefLink} = BriefStore
   const [actionsBurger, setActionsBurger] = useState(false);
   const handleActionsBurger = () => {
     setActionsBurger(!actionsBurger);
@@ -52,7 +52,7 @@ export function TemplateDocumentButton({ name, id }) {
               <SvgIcon className={classes.actionsBurgerIcon}>
                 <ShareIcon />
               </SvgIcon>
-              <Typography className={classes.actionsBurgerText} variant="body2">
+              <Typography onClick={()=>briefLink(id)} className={classes.actionsBurgerText} variant="body2">
                 Share link
               </Typography>
             </div>

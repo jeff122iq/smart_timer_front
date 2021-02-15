@@ -6,7 +6,7 @@ import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
 import ModalBurgerMenu from "./ModalBurgerMenu";
-import {log} from "util";
+import {CardStore} from "../store/cardStore";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -102,6 +102,7 @@ const DescriptionModal = (props) => {
   const theme = useTheme();
   const [inputValue, setInputValue] = useState("");
   const [localTheme, setLocalTheme] = useState(theme);
+  const {whiteCards} = CardStore;
 
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -110,7 +111,8 @@ const DescriptionModal = (props) => {
 
   const save = (data: any) => {
     const dataValue = JSON.parse(data);
-    console.log("DATA_VALUE: ", dataValue)
+    whiteCards.push(dataValue.blocks);
+    console.log(whiteCards);
     props.setOpen(false);
     saveDescription();
   };
@@ -158,7 +160,7 @@ const DescriptionModal = (props) => {
               },
               {
                 name: "save",
-                icon: <div onClick={saveDescription} style={{
+                icon: <div onClick={save} style={{
                   textTransform: "uppercase",
                   fontSize: "15px",
                   fontWeight: 600,
@@ -174,7 +176,7 @@ const DescriptionModal = (props) => {
               },
             ]}
 
-          ></MUIRichTextEditor>
+          />
         </div>
       </ThemeProvider>
     </div>
