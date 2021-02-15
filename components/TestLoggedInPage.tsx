@@ -64,7 +64,7 @@ function getModalStyle() {
 const TestLoggeInPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
-  const { whiteCards } = CardStore;
+  const { whiteCards, card } = CardStore;
   const {addBrief} = BriefStore;
   const [isToken, setIsToken] = React.useState("");
   React.useEffect(() => {
@@ -119,6 +119,11 @@ const TestLoggeInPage = (props) => {
     setWriteDescription(!writeDescription);
     setOpen(true);
   };
+
+  const clearAll = () => {
+    whiteCards.length = 0;
+    setActionsBurger(false);
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -255,6 +260,7 @@ const TestLoggeInPage = (props) => {
                       <Typography
                         className={classes.actionsBurgerText}
                         variant="body2"
+                        onClick={clearAll}
                       >
                         Clear all
                       </Typography>

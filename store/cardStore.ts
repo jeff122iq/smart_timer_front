@@ -26,7 +26,6 @@ class cardStore {
   };
 
   @action addCard = (card) => {
-    this.cardsArray.length = 0;
     this.whiteCards.push(card)
   }
 

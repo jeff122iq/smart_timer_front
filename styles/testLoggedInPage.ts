@@ -191,6 +191,7 @@ export default makeStyles((theme: Theme) =>
       },
     },
       cardsHeading: {
+        cursor: "pointer",
           "& > h1": {
               fontWeight: 400,
           },

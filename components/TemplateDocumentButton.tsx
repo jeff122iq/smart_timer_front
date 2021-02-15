@@ -11,12 +11,14 @@ import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutline";
 import { useState } from "react";
 import useStyles from "../styles/template-document-button";
+import {BriefStore} from "../store/briefStore";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-export function TemplateDocumentButton({ data }) {
+export function TemplateDocumentButton({ name, id }) {
   const classes = useStyles();
 
+  const {removeBrief} = BriefStore
   const [actionsBurger, setActionsBurger] = useState(false);
   const handleActionsBurger = () => {
     setActionsBurger(!actionsBurger);
@@ -25,11 +27,10 @@ export function TemplateDocumentButton({ data }) {
   const handleClickAway = () => {
     setActionsBurger(false);
   };
-
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <FormGroup className={classes.documentContainer}>
-        <Typography className={classes.documentName}>{data}</Typography>
+        <Typography className={classes.documentName}>{name}</Typography>
         <div style={{ position: "relative" }}>
           <SvgIcon
             className={classes.actionsBurger}
@@ -73,7 +74,7 @@ export function TemplateDocumentButton({ data }) {
               <SvgIcon className={classes.actionsBurgerIcon}>
                 <DeleteIcon />
               </SvgIcon>
-              <Typography className={classes.actionsBurgerText} variant="body2">
+              <Typography onClick={()=>removeBrief(id)} className={classes.actionsBurgerText} variant="body2">
                 Delete
               </Typography>
             </div>

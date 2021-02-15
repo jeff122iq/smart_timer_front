@@ -7,7 +7,6 @@ import { TemplateDocumentButton } from "./TemplateDocumentButton";
 import TestLoggedInPage from "./TestLoggedInPage";
 import React from "react";
 import {BriefStore} from "../store/briefStore";
-import {log} from "util";
 import {observer} from "mobx-react";
 import {useRouter} from "next/router";
 
@@ -54,7 +53,7 @@ const Create =() => {
           </Box>
           <Box display="flex" flexWrap="wrap" style={{ marginBottom: "147px" }}>
             {briefs.map(({name, id}) => (
-              <TemplateDocumentButton data={name} key={id} />
+              <TemplateDocumentButton name={name} id={id} key={id} />
             ))}
           </Box>
         </Container>

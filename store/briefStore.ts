@@ -17,6 +17,13 @@ class briefStore {
         this.getBrief();
     }
 
+    @action removeBrief = async(briefId) => {
+        const token = window.localStorage.getItem("token");
+        const response = await Axios.delete(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs/?id=${briefId}`, {headers: {Authorization: `Bearer ${token}`}});
+        this.briefs = this.briefs.filter(brief => briefId !== brief.id);
+        // console.log(response.data);
+    }
+
     @action getBrief = async() => {
         const token = window.localStorage.getItem("token");
         const response = await Axios.get(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`, {headers: {Authorization: `Bearer ${token}`}}
