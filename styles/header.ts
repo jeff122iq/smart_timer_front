@@ -54,7 +54,7 @@ export default makeStyles((theme: Theme) =>
     },
     list: { width: 250 },
     fullList: { width: "auto" },
-    title: { color: "black", fontFamily: "'Imbue', serif", letterSpacing: 1.5, cursor: "pointer" },
+    title: { color: "black", fontFamily: "'Imbue', serif", letterSpacing: 1.5, cursor: "pointer", marginLeft: 20 },
     linkBox: {
       // display: "none",
       ["@media (max-width: 670px)"]: {
@@ -109,6 +109,7 @@ export default makeStyles((theme: Theme) =>
       fontWeight: 400,
       textDecoration: "none",
       color: "black",
+        marginLeft: 20,
     },
     activeLink: {
       fontWeight: "bold",
@@ -127,7 +128,7 @@ export default makeStyles((theme: Theme) =>
       backgroundColor: "transparent",
       minWidth: "55px",
       display: "flex",
-      justifyContent: "flex-end"
+      justifyContent: "flex-end",
     },
   })
 );

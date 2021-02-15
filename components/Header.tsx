@@ -15,6 +15,7 @@ import Avatar from '@material-ui/core/Avatar';
 import MenuIcon from "@material-ui/icons/Menu";
 import React, {useState} from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import HomeIcon from '@material-ui/icons/Home';
 import Link from "next/link";
 import useStyles from "../styles/header";
 import { useRouter } from "next/router";
@@ -24,6 +25,10 @@ import BriefTemplate from "./BriefTemplate";
 import About from "./About";
 import Blog from "./Blog";
 import { CurrentPage } from "../store/currentPage";
+import CloseIcon from '@material-ui/icons/Close';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import InfoIcon from '@material-ui/icons/Info';
 import { observer } from "mobx-react";
 import Create from "./Create";
 import jwt_decode from "jwt-decode";
@@ -86,16 +91,25 @@ const Header = () => {
   const toggleMenu = (open: boolean) => {
     setIsOpen((prev) => !prev);
   };
+  const close = () => {
+    setIsOpen(false);
+  }
 
   const menu = () => (
     <div className={classes.list} role="presentation">
       <List>
+        <ListItem>
+          <CloseIcon onClick={close}/>
+        <Typography className={classes.title}>BRIEFFER</Typography>
+        </ListItem>
         <ListItem button>
+          <HomeIcon/>
           <Link href={"/"}>
             <a className={classes.link}>Home</a>
           </Link>
         </ListItem>
         <ListItem button>
+          <NoteAddIcon/>
           <Link href="/create">
             <a className={classes.link} href="/create">
               Create brief
@@ -103,6 +117,7 @@ const Header = () => {
           </Link>
         </ListItem>
         <ListItem button>
+          <NoteAddIcon/>
           <Link href={"/templates"}>
             <a className={classes.link}>
               Brief templates
@@ -110,6 +125,7 @@ const Header = () => {
           </Link>
         </ListItem>
         <ListItem button>
+          <InfoIcon/>
           <Link href="/about">
             <a className={classes.link} href="/about">
               About
@@ -117,6 +133,7 @@ const Header = () => {
           </Link>
         </ListItem>
         <ListItem button>
+          <SpeakerNotesIcon/>
           <Link href="/blog">
             <a className={classes.link} href="/blog">
               Blog

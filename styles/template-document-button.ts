@@ -50,6 +50,9 @@ export default makeStyles((theme: Theme) =>
       top: "-120px",
       transform: "translateX(-38%)",
       boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
+        [theme.breakpoints.down("sm")]: {
+            transform: "translateX(-73%)",
+        }
     },
     actionsBurgerIcon: {
       color: "#2e373b",
