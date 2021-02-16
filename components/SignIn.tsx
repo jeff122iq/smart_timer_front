@@ -26,13 +26,14 @@ export interface State extends SnackbarOrigin {
 }
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import {useRouter} from "next/router";
+import {observer} from "mobx-react";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-export function SignIn(props) {
+export const SignIn = (props) => {
   const router = useRouter();
   const classes = useStyles();
   const [email, setEmail] = useState('');
@@ -58,7 +59,6 @@ export function SignIn(props) {
       const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/auth/register`, {email: email, password: password, role: 2});
       console.log("Access register");
       handleClick({ vertical: 'top', horizontal: 'center' });
-      console.log(response.data);
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
     } catch (error) {
@@ -70,12 +70,9 @@ export function SignIn(props) {
     event.preventDefault();
     try {
       const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/auth/login`, {email: email, password: password, role: 2});
-      console.log("Access lof-ini");
-      console.log(response.data);
       handleClick({ vertical: 'top', horizontal: 'center' });
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
-
     } catch (error) {
       console.log(error)
     }
@@ -103,16 +100,6 @@ export function SignIn(props) {
                 aria-describedby="component-error-email"
                 style={{ borderColor: "#f34235" }}
               />
-              {/*<FormHelperText>*/}
-              {/*  id="component-error-email"*/}
-              {/*  className={classes.formHelperText}*/}
-
-              {/*  <Typography variant="caption" style={{ color: "#f34235" }}>*/}
-              {/*  Email already taken*/}
-              {/*</Typography>*/}
-              {/*<WarningIcon style={{ color: "#f34235" }} />*/}
-
-              {/*</FormHelperText>*/}
             </FormControl>
             <FormControl fullWidth>
               <InputLabel htmlFor="password-field">Password</InputLabel>
@@ -125,11 +112,9 @@ export function SignIn(props) {
               </FormHelperText>
             </FormControl>
             <Box display="flex">
-              {/*<Link href="/testLoggedInPage">*/}
                 <Button className={classes.buttonLogin} onClick={handleSubmitLogin}>
                   <a>Log in</a>
                 </Button>
-              {/*</Link>*/}
               <Button className={classes.buttonSignin} onClick={handleSubmitRegister}>Sign in</Button>
             </Box>
             <Button className={classes.buttonForgot}>Forgot password?</Button>
@@ -175,4 +160,6 @@ export function SignIn(props) {
     </div>
   );
 }
+
+export default observer(SignIn)
 // ========================== COMPONENT ====================================

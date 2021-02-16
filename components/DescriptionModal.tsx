@@ -6,6 +6,7 @@ import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
 import ModalBurgerMenu from "./ModalBurgerMenu";
+import { observer } from "mobx-react";
 import {CardStore} from "../store/cardStore";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
@@ -97,23 +98,20 @@ const local_theme_overrides =  {
   },
 };
 
-const DescriptionModal = (props) => {
+const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(card.title);
   const [localTheme, setLocalTheme] = useState(theme);
   const {whiteCards} = CardStore;
 
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  console.log(card)
 
   const save = (data: any) => {
-    const dataValue = JSON.parse(data);
-    whiteCards.push(dataValue.blocks.text);
+    const newCard = {title: inputValue, description: data}
+    whiteCards.push(newCard);
     console.log(whiteCards);
-    props.setOpen(false);
+    setOpen(false);
     saveDescription();
   };
 
@@ -147,6 +145,7 @@ const DescriptionModal = (props) => {
           }}
         >
           <MUIRichTextEditor
+            defaultValue={JSON.stringify({"blocks":[{"key":"9dnkp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}})}
             controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
             inlineToolbar={true}
             label="Write description..."
@@ -183,5 +182,5 @@ const DescriptionModal = (props) => {
   );
 };
 
-export default DescriptionModal;
+export default observer(DescriptionModal);
 // ========================== COMPONENT ====================================

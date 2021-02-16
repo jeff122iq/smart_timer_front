@@ -12,7 +12,7 @@ class briefStore {
     @observable createBrief: brief[] = [];
 
     @action addBrief = ({id,name}) => {
-        this.createBrief.push({id,name})
+        this.createBrief.push({id,name});
         this.getBriefs();
     }
 
@@ -22,7 +22,7 @@ class briefStore {
             const response = await Axios.delete(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs/?id=${briefId}`, {headers: {Authorization: `Bearer ${token}`}});
             this.briefs = this.briefs.filter(brief => briefId !== brief.id);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -46,16 +46,20 @@ class briefStore {
             this.briefs.length = 0;
             response.data.map(d => this.briefs.push(d));
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
     @action getBrief = async(id) => {
-        if(id){
-            const token = window.localStorage.getItem("token");
-            const response = await Axios.get(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs/${id}`, {headers: {Authorization: `Bearer ${token}`}}
-            );
-            this.currentBrief = response.data;
+        try {
+            if(id){
+                const token = window.localStorage.getItem("token");
+                const response = await Axios.get(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs/${id}`, {headers: {Authorization: `Bearer ${token}`}}
+                );
+                this.currentBrief = response.data;
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 }

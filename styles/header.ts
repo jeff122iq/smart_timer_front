@@ -31,7 +31,6 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       "& > div > a": {
         margin: "0 28px",
-        color: "black",
         textDecoration: "none",
       },
       ["@media screen and (max-width: 768px)"]: {
@@ -116,11 +115,12 @@ export default makeStyles((theme: Theme) =>
     link: {
       fontWeight: 400,
       textDecoration: "none",
-      color: "black",
+      color: "#5f5f5f",
         marginLeft: 20,
     },
     activeLink: {
       fontWeight: "bold",
+        color: "black",
     },
     userButton: {
       color: "black",

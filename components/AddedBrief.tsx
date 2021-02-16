@@ -18,7 +18,7 @@ const AddedBrief = () => {
     }
     return (
         <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
-        <div style={{textAlign: "center", width: "500px", height: "inherit"}}>
+        <div style={{textAlign: "center", width: "500px", height: "inherit", margin: "20px"}}>
             <h1>Brief name: {currentBrief.name}</h1>
             <hr/>
             <div>

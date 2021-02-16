@@ -38,14 +38,23 @@ export default makeStyles((theme: Theme) =>
     //   marginLeft: "10px",
     // },
     buttonLogin: {
-      backgroundColor: "#f9c229",
       margin: "40px 60px 0 0",
       padding: "8px 20px",
+        color: "#2336ff",
+        backgroundColor: "transparent",
+        "&:hover": {
+            backgroundColor: "#f9c229",
+            color: "black",
+        }
     },
     buttonSignin: {
       margin: "40px 10px 0 0",
       color: "#2336ff",
       backgroundColor: "transparent",
+        "&:hover": {
+            backgroundColor: "#f9c229",
+            color: "black",
+        }
     },
     buttonForgot: {
       backgroundColor: "transparent",

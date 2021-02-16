@@ -169,7 +169,7 @@ const BriefTemplate = (props) => {
                   onClose={handleClose}
                   style={{ width: "100%", overflow: "scroll" }}
               >
-                <DescriptionModal open={open} setOpen={setOpen} />
+                <DescriptionModal setOpen={setOpen} />
               </Modal>
             </div>
             {whiteCards.length > 0 ? (

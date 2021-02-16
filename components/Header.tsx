@@ -41,7 +41,7 @@ const Header = () => {
   const [navMenu, setNavMenu] = React.useState([
     { link: "", name: "Home", active: false },
     { link: "create", name: "Create brief", active: false },
-    { link: "templates", name: "AddedBrief template", active: false },
+    { link: "templates", name: "Brief template", active: false },
     { link: "about", name: "About", active: false },
     { link: "blog", name: "Blog", active: false },
   ]);

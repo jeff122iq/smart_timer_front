@@ -33,6 +33,7 @@ import useStyles from "../styles/testLoggedInPage";
 import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
 import {BriefStore} from "../store/briefStore";
+import {log} from "util";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -81,6 +82,7 @@ const TestLoggeInPage = (props) => {
   // ================MODAL==================
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const [openCurrent, setOpenCurrent] = useState(false);
   // ================MODAL==================
 
 
@@ -134,8 +136,8 @@ const TestLoggeInPage = (props) => {
     setOpen(true);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenCurrent = () => {
+    setOpenCurrent(true);
   }
 
   const clearAll = () => {
@@ -147,6 +149,11 @@ const TestLoggeInPage = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleCloseCurrent = () => {
+    setOpenCurrent(()=>false);
+  };
+  // @ts-ignore
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -206,11 +213,18 @@ const TestLoggeInPage = (props) => {
         )}
         {whiteCards
             .slice((page - 1) * 2, page * 2)
-            .map((whiteCards: any, index: number) => {
+            .map((whiteCard: any, index: number) => {
               return (
-                  <div onClick={handleOpen} className={classes.cardsHeading} key={index}>
-                    <h1>{whiteCards.title}</h1>
-                    <p>{whiteCards.description}</p>
+                  <div onClick={handleOpenCurrent} className={classes.cardsHeading} key={index}>
+                    <h1>{whiteCard.title}</h1>
+                    <p>{whiteCard.description}</p>
+                    <Modal
+                        open={openCurrent}
+                        onClose={handleCloseCurrent}
+                        style={{ width: "100%", overflow: "scroll" }}
+                    >
+                      <DescriptionModal card={whiteCard} setOpen={setOpenCurrent} />
+                    </Modal>
                   </div>
               );
             })}
@@ -226,7 +240,7 @@ const TestLoggeInPage = (props) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <DescriptionModal open={open} setOpen={setOpen} />
+            <DescriptionModal setOpen={setOpen} />
           </Modal>
         </div>
         {whiteCards.length > 0 ? (
