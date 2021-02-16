@@ -134,6 +134,10 @@ const TestLoggeInPage = (props) => {
     setOpen(true);
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
   const clearAll = () => {
     whiteCards.length = 0;
     setActionsBurger(false);
@@ -204,7 +208,7 @@ const TestLoggeInPage = (props) => {
             .slice((page - 1) * 2, page * 2)
             .map((whiteCards: any, index: number) => {
               return (
-                  <div className={classes.cardsHeading} key={index}>
+                  <div onClick={handleOpen} className={classes.cardsHeading} key={index}>
                     <h1>{whiteCards.title}</h1>
                     <p>{whiteCards.description}</p>
                   </div>

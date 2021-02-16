@@ -116,16 +116,6 @@ const BriefTemplate = (props) => {
             <div className={classes.briefTemplateTags}>
               <Tags />
             </div>
-            {whiteCards
-                .slice((page - 1) * 2, page * 2)
-                .map((whiteCards: any, index: number) => {
-                  return (
-                      <div className={classes.cardsHeading} key={index}>
-                        <h1>{whiteCards.title}</h1>
-                        <p>{whiteCards.description}</p>
-                      </div>
-                  );
-                })}
             <div
                 className={classes.briefTemplate_description}
                 style={{ display: tagLength ? "block" : "none" }}
@@ -148,6 +138,16 @@ const BriefTemplate = (props) => {
                 placeholder="Write heading"
                 inputProps={{ "aria-label": "naked" }}
             />
+            {whiteCards
+                .slice((page - 1) * 2, page * 2)
+                .map((whiteCards: any, index: number) => {
+                  return (
+                      <div className={classes.cardsHeading} key={index}>
+                        <h1>{whiteCards.title}</h1>
+                        <p>{whiteCards.description}</p>
+                      </div>
+                  );
+                })}
             {whiteCards.length > 2 ? (
                 <div className={classes.pagination}>
                   <Paginator

@@ -14,7 +14,7 @@ const templates = () => {
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"))
   }, )
-  setCurrentPage("Brief template");
+  setCurrentPage("AddedBrief template");
   return (
     <Body>
       {

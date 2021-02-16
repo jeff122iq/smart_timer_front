@@ -4,6 +4,7 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: "#eeeeee",
+        marginTop: "5px",
     },
     icon: {
       color: "#2b62ff",

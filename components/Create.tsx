@@ -16,7 +16,7 @@ import {useRouter} from "next/router";
 const Create =() => {
   const classes = useStyles();
   const [isToken, setIsToken] = React.useState("");
-  const {createBrief, getBrief, briefs} = BriefStore;
+  const {createBrief, getBriefs, briefs} = BriefStore;
   const [brief,setBrief] = React.useState([])
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"))
@@ -25,7 +25,7 @@ const Create =() => {
 
   React.useEffect(()=>{
     async function getData(){
-      getBrief();
+      getBriefs();
     }
     setBrief(createBrief);
     getData();
