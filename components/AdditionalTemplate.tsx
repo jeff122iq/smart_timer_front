@@ -15,11 +15,7 @@ import {BriefStore} from "../store/briefStore";
 // ========================== COMPONENT ====================================
 const AdditionalTemplate = () => {
     const { cardsArray, createCard, cardsData } = CardStore;
-    const [cards, setCard] = useState();
     const {selectedTags} = TagsStore;
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
     const [page, setPage] = useState(1);
     const totalPages = Math.ceil(cardsArray.length / 2);
     const handlePagination = (

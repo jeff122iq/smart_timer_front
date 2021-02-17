@@ -31,8 +31,6 @@ const Create =() => {
     getData();
   },[createBrief])
 
-
-
   return (
     <>
       {isToken ?

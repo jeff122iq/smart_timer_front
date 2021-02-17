@@ -27,7 +27,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiChip: {
       root: {
-        backgroundColor: "#347cff",
+        backgroundColor: "#2b62ff",
         color: "#fff",
         borderRadius: "4px",
         position: "relative",

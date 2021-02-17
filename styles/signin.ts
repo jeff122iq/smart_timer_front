@@ -33,6 +33,10 @@ export default makeStyles((theme: Theme) =>
         borderBottomColor: "gray",
         borderBottom: "1px solid"
       },
+        "& .MuiInput-underline:after": {
+            borderBottomColor: "gray",
+            borderBottom: "1px solid",
+        },
     },
     // loginButtonPannel: {
     //   marginLeft: "10px",
@@ -40,7 +44,7 @@ export default makeStyles((theme: Theme) =>
     buttonLogin: {
       margin: "40px 60px 0 0",
       padding: "8px 20px",
-        color: "#2336ff",
+        color: "#2b62ff",
         backgroundColor: "transparent",
         "&:hover": {
             backgroundColor: "#f9c229",
@@ -49,7 +53,7 @@ export default makeStyles((theme: Theme) =>
     },
     buttonSignin: {
       margin: "40px 10px 0 0",
-      color: "#2336ff",
+      color: "#2b62ff",
       backgroundColor: "transparent",
         "&:hover": {
             backgroundColor: "#f9c229",

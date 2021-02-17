@@ -173,7 +173,7 @@ export default makeStyles((theme: Theme) =>
     },
     actionsBurger: {
       position: "relative",
-      color: "#347cff",
+      color: "#2b62ff",
       cursor: "pointer",
     },
     actionsBurgerModal: {
@@ -211,7 +211,7 @@ export default makeStyles((theme: Theme) =>
     },
     actionsBtnLink: {
       background: "transparent",
-      color: "#347cff",
+      color: "#2b62ff",
       fontWeight: 700,
     },
     populars: {

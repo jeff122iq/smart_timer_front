@@ -99,25 +99,24 @@ const local_theme_overrides =  {
 };
 
 const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
+  console.log('inputValue', card)
+
   const classes = useStyles();
   const theme = useTheme();
   const [inputValue, setInputValue] = useState(card.title);
   const [localTheme, setLocalTheme] = useState(theme);
   const {whiteCards} = CardStore;
 
-  console.log(card)
-
   const save = (data: any) => {
-    const newCard = {title: inputValue, description: data}
+
+    const parseData = JSON.parse(data)
+    console.log('data',parseData)
+    // const newData = JSON.parse(data);
+    const newCard = {title: inputValue, description: parseData.blocks[0].text}
     whiteCards.push(newCard);
     console.log(whiteCards);
     setOpen(false);
-    saveDescription();
   };
-
-  const saveDescription = () => {
-
-  }
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

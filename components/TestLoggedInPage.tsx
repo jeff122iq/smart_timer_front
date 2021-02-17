@@ -18,8 +18,6 @@ import {
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
 import {
-  makeStyles,
-  Theme,
   createStyles,
   withStyles,
 } from "@material-ui/core/styles";
@@ -33,7 +31,6 @@ import useStyles from "../styles/testLoggedInPage";
 import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
 import {BriefStore} from "../store/briefStore";
-import {log} from "util";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -124,6 +121,19 @@ const TestLoggeInPage = (props) => {
     document.body.removeChild(el);
   }
 
+  const copyText = () => {
+    const el = document.createElement('textarea');
+    el.value = inputValue;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    setActionsBurger(false);
+  }
+
   const handleClickAway = () => {
     setActionsBurger(false);
   };
@@ -135,9 +145,13 @@ const TestLoggeInPage = (props) => {
     setWriteDescription(!writeDescription);
     setOpen(true);
   };
-
+  const handleCloseCurrent = () => {
+    setOpenCurrent(!openCurrent);
+    console.log('CLICK CLOSE CURRENt',openCurrent)
+  }
   const handleOpenCurrent = () => {
     setOpenCurrent(true);
+    console.log('CLICK CURRENt', openCurrent)
   }
 
   const clearAll = () => {
@@ -148,12 +162,9 @@ const TestLoggeInPage = (props) => {
 
   const handleClose = () => {
     setOpen(false);
-  };
+    console.log('CLICK ')
 
-  const handleCloseCurrent = () => {
-    setOpenCurrent(()=>false);
   };
-  // @ts-ignore
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -178,7 +189,6 @@ const TestLoggeInPage = (props) => {
         <div className={classes.CreateTemplateTags}>
           <Tags />
         </div>
-        {/* <Slide direction="right" style={{ visibility: tagLength ? "visible" : "hidden" }}> */}
         <div
           className={classes.CreateTemplate_description}
           style={{ display: tagLength ? "block" : "none" }}
@@ -221,7 +231,7 @@ const TestLoggeInPage = (props) => {
                     <Modal
                         open={openCurrent}
                         onClose={handleCloseCurrent}
-                        style={{ width: "100%", overflow: "scroll" }}
+                        style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
                     >
                       <DescriptionModal card={whiteCard} setOpen={setOpenCurrent} />
                     </Modal>
@@ -282,6 +292,7 @@ const TestLoggeInPage = (props) => {
                       <Typography
                         className={classes.actionsBurgerText}
                         variant="body2"
+                        onClick={copyText}
                       >
                         Copy text
                       </Typography>
