@@ -1,7 +1,7 @@
-import {cards} from "./cards";
+import {ICard} from "./cards";
 
 export interface brief {
     id: number;
     name: string;
-    cards?:Array<cards>
+    cards?:Array<ICard>
 }

@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import useStyles from "../styles/popupPopularTamplate"
 import useStyles1 from "../styles/popularsTemplates";
 import {Typography} from "@material-ui/core";
+import { v4 } from 'uuid'
 
 const PopupPopularTemplate=({card}) => {
     const classes = useStyles();
@@ -22,13 +23,13 @@ const PopupPopularTemplate=({card}) => {
     useEffect(() => {
         createCard({
             title: "",
-            text: "",
+            description: "",
         });
     }, []);
 
     // const [tags, setTags] = useState(cardsArray);
     const handleSwitchCard = () => {
-        addCard(card)
+        addCard({...card, id: v4()})
         handleCloseModal();
     };
 

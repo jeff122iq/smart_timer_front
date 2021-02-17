@@ -8,6 +8,9 @@ import useStyles from "../styles/description-modal";
 import ModalBurgerMenu from "./ModalBurgerMenu";
 import { observer } from "mobx-react";
 import {CardStore} from "../store/cardStore";
+import { v4 } from 'uuid'
+import { ICard } from "../interface/cards";
+import {EditorState} from 'draft-js'
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -98,30 +101,41 @@ const local_theme_overrides =  {
   },
 };
 
-const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
+const DescriptionModal = ({ setOpen, card = {title: "", description: "", id: ''}}) => {
+  console.log('inputValue', card.description)
+
   const classes = useStyles();
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState(card.title);
+  const [title, setTitle] = useState(card.title);
+  const [description, setDescription] = useState(card.description);
   const [localTheme, setLocalTheme] = useState(theme);
-  const {whiteCards} = CardStore;
-
-  console.log(card)
-
+  const {whiteCards, selectCard} = CardStore;
+  
   const save = (data: any) => {
-    const newCard = {title: inputValue, description: data}
-    whiteCards.push(newCard);
-    console.log(whiteCards);
+    const idx = whiteCards.findIndex((current)=> current.id === card.id);
+    console.log(idx);
+    
+    if(idx >= 0) {
+      whiteCards[idx].title = title;
+      whiteCards[idx].description = description;
+    } else {
+      const jsonDescription = JSON.parse(data)
+      const newCard: ICard = { title, description: jsonDescription.blocks[0].text, id: v4(), jsonDescription };
+      whiteCards.push(newCard);
+    }
     setOpen(false);
-    saveDescription();
   };
-
-  const saveDescription = () => {
-
-  }
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setTitle(event.target.value);
   };
+
+  const handleDescriptionInput = (event: EditorState) => {
+    console.log(event);
+    
+    // setDescription()
+  };
+
   useEffect(() => {
     setLocalTheme(Object.assign({ ...theme }, local_theme_overrides));
   }, []);
@@ -132,7 +146,7 @@ const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
         className={classes.input}
         placeholder="Write title"
         inputProps={{ "aria-label": "naked" }}
-        value={inputValue}
+        value={title}
         onChange={handleInputValue}
       />
       <ThemeProvider theme={localTheme}>
@@ -146,10 +160,12 @@ const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
         >
           <MUIRichTextEditor
             defaultValue={JSON.stringify({"blocks":[{"key":"9dnkp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}})}
+            value={description}
             controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
             inlineToolbar={true}
-            label="Write description..."
+            label={card.description ? card.description : 'Write description'}
             onSave={save}
+            onChange={handleDescriptionInput}
             customControls={[
               {
                 name: "MoreVertIcon",

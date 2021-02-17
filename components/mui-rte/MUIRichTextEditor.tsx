@@ -262,7 +262,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         end: 0
     })
 
-    console.log(editorState)
+    // console.log(editorState)
 
     /**
      * Exposed methods
@@ -1031,7 +1031,7 @@ const MUIRichTextEditor: RefForwardingComponent<TMUIRichTextEditorRef, IMUIRichT
         }
         const keyBinding = getDefaultKeyBinding(e)
         updateSearchTermForKeyBinding(keyBinding)
-        console.log(e)
+        // console.log(e)
 
         return keyBinding
     }

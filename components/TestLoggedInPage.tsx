@@ -34,6 +34,7 @@ import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
 import {BriefStore} from "../store/briefStore";
 import {log} from "util";
+import { ICard } from "../interface/cards";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -73,9 +74,9 @@ const TestLoggeInPage = (props) => {
   }, )
 
   const [tags, setTags] = useState(whiteCards);
-  console.log("=================");
-  console.log("::::::::::::", tags);
-  console.log("=================");
+  // console.log("=================");
+  // console.log("::::::::::::", tags);
+  // console.log("=================");
 
   const [actionsBurger, setActionsBurger] = useState(false);
 
@@ -83,6 +84,8 @@ const TestLoggeInPage = (props) => {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [openCurrent, setOpenCurrent] = useState(false);
+  const [selectedWhiteCard, setSelectedWhiteCard] = useState<ICard>();
+
   // ================MODAL==================
 
 
@@ -135,9 +138,21 @@ const TestLoggeInPage = (props) => {
     setWriteDescription(!writeDescription);
     setOpen(true);
   };
-
-  const handleOpenCurrent = () => {
+  const handleCloseCurrent = (e: any) => {
+    e.stopPropagation();
+    setOpenCurrent(false);
+    console.log('CLICK CLOSE CURRENt',openCurrent)
+  }
+  const handleOpenCurrent = (whiteCard: ICard) => {
+    whiteCards.map((card) => {
+      if(card.id == whiteCard.id) {
+        setSelectedWhiteCard(card)
+      }
+    })
+    
+    // e.stopPropagation();
     setOpenCurrent(true);
+    console.log('CLICK CURRENt',  openCurrent)
   }
 
   const clearAll = () => {
@@ -148,11 +163,11 @@ const TestLoggeInPage = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    console.log('CLICK ')
+
   };
 
-  const handleCloseCurrent = () => {
-    setOpenCurrent(()=>false);
-  };
+
   // @ts-ignore
   return (
     <div
@@ -215,18 +230,19 @@ const TestLoggeInPage = (props) => {
             .slice((page - 1) * 2, page * 2)
             .map((whiteCard: any, index: number) => {
               return (
-                  <div onClick={handleOpenCurrent} className={classes.cardsHeading} key={index}>
+                  <div key={index} onClick={() => handleOpenCurrent(whiteCard, index)} className={classes.cardsHeading} style={{ zIndex: 0 }} >
                     <h1>{whiteCard.title}</h1>
                     <p>{whiteCard.description}</p>
                     <Modal
                         open={openCurrent}
                         onClose={handleCloseCurrent}
-                        style={{ width: "100%", overflow: "scroll" }}
+                        style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
                     >
-                      <DescriptionModal card={whiteCard} setOpen={setOpenCurrent} />
+                      <DescriptionModal card={selectedWhiteCard} setOpen={setOpenCurrent} />
                     </Modal>
                   </div>
               );
+
             })}
         <div
           className={

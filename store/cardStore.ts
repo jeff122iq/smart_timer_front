@@ -1,7 +1,8 @@
-import { cards } from "../interface/cards";
+import { ICard } from "../interface/cards";
 import { whiteCards } from "../interface/whiteCards";
 import { observable, makeObservable, action } from "mobx";
 import Axios from "axios";
+import { v4 } from 'uuid'
 
  const cardsArr = [
   {
@@ -15,28 +16,31 @@ class cardStore {
     makeObservable(this);
   }
 
-  @observable cardsArray: cards[] = [];
+  @observable cardsArray: ICard[] = [];
 
-  @observable card: cards[] = [];
+  @observable card: ICard = null;
 
-  @observable whiteCards: whiteCards[] = [];
+  @observable whiteCards: ICard[] = [];
 
-  @action createCard = (value) => {
-    this.card.push({title:value.title, description: value.description});
+  @action createCard = (card: { title: any; description: any; }) => {
+    this.card = {title: card.title, description: card.description, id: v4()};
   };
 
-  @action addCard = (card) => {
+  @action addCard = (card: ICard) => {
     this.whiteCards.push(card);
   }
+  @action selectCard = (card: ICard) => {
+    this.whiteCards.push(card);
+  } 
 
-  @action cardsData = async (tags) => {
+  @action cardsData = async (tags: any[]) => {
     const token = window.localStorage.getItem("token");
     try {
-      const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/cards/get`,{tags:tags.map(tag=>tag.id)}, {headers: {
+      const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/cards/get`,{tags:tags.map((tag: { id: any; })=>tag.id)}, {headers: {
           Authorization: `Bearer ${token}`
         }});
       this.cardsArray.length = 0;
-      response.data.map(card => this.cardsArray.push(card));
+      response.data.map((card: ICard) => this.cardsArray.push(card));
     } catch (error) {
       console.log(error);
     }
