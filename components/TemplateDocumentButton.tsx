@@ -18,7 +18,7 @@ import {BriefStore} from "../store/briefStore";
 export function TemplateDocumentButton({ name, id }) {
   const classes = useStyles();
 
-  const {removeBrief, briefLink} = BriefStore
+  const {removeBrief, briefLink, copyLink} = BriefStore
   const [actionsBurger, setActionsBurger] = useState(false);
   const handleActionsBurger = () => {
     setActionsBurger(!actionsBurger);
@@ -63,7 +63,7 @@ export function TemplateDocumentButton({ name, id }) {
               <SvgIcon className={classes.actionsBurgerIcon}>
                 <FileCopyOutlinedIcon />
               </SvgIcon>
-              <Typography className={classes.actionsBurgerText} variant="body2">
+              <Typography onClick={() => copyLink(name)} className={classes.actionsBurgerText} variant="body2">
                 Copy text
               </Typography>
             </div>

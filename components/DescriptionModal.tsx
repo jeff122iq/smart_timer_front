@@ -101,14 +101,20 @@ const local_theme_overrides =  {
   },
 };
 
+<<<<<<< HEAD
 const DescriptionModal = ({ setOpen, card = {title: "", description: "", id: ''}}) => {
   console.log('inputValue', card.description)
+=======
+const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
+  console.log('inputValue', card)
+>>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
 
   const classes = useStyles();
   const theme = useTheme();
   const [title, setTitle] = useState(card.title);
   const [description, setDescription] = useState(card.description);
   const [localTheme, setLocalTheme] = useState(theme);
+<<<<<<< HEAD
   const {whiteCards, selectCard} = CardStore;
   
   const save = (data: any) => {
@@ -123,6 +129,18 @@ const DescriptionModal = ({ setOpen, card = {title: "", description: "", id: ''}
       const newCard: ICard = { title, description: jsonDescription.blocks[0].text, id: v4(), jsonDescription };
       whiteCards.push(newCard);
     }
+=======
+  const {whiteCards} = CardStore;
+
+  const save = (data: any) => {
+
+    const parseData = JSON.parse(data)
+    console.log('data',parseData)
+    // const newData = JSON.parse(data);
+    const newCard = {title: inputValue, description: parseData.blocks[0].text}
+    whiteCards.push(newCard);
+    console.log(whiteCards);
+>>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
     setOpen(false);
   };
 

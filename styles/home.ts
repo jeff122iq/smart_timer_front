@@ -23,7 +23,7 @@ export default makeStyles((theme: Theme) =>
     },
     more: {
       margin: "30px 0",
-      color: "#1853f4",
+      color: "#2b62ff",
       letterSpacing: "1px",
       padding: "0",
     },

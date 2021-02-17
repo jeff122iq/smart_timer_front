@@ -37,7 +37,11 @@ export const SignIn = (props) => {
   const router = useRouter();
   const classes = useStyles();
   const [email, setEmail] = useState('');
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [emailError, setEmailError] = useState('The field must be filled');
   const [password, setPassword] = useState('');
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [passwordError, setPasswordError] = useState('The field must be filled');
   const [state, setState] = React.useState<State>({
     open: false,
     vertical: 'top',
@@ -53,6 +57,39 @@ export const SignIn = (props) => {
     }
     setState({ ...state, open: false });
   }
+
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+      case "email":
+        setEmailDirty(true);
+        break;
+      case "password":
+        setPasswordDirty(true);
+        break;
+    }
+  }
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailDirty(false);
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(String(e.target.value).toLowerCase())) {
+      setEmailError("Incorrect email!");
+    } else {
+      setEmailError("");
+    }
+  }
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordDirty(false);
+    if (e.target.value.length < 8 || e.target.value.length > 16) {
+      setPasswordError("Password must longer 8 and shorter 16");
+    } else {
+      setPasswordError("");
+    }
+  }
+
   async function handleSubmitRegister(event) {
     event.preventDefault();
     try {
@@ -62,7 +99,7 @@ export const SignIn = (props) => {
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
     } catch (error) {
-      console.log(error)
+      setEmailError("This email is already token.")
     }
   }
 
@@ -74,7 +111,7 @@ export const SignIn = (props) => {
       localStorage.setItem("token", response.data.access_token);
       router.push("/");
     } catch (error) {
-      console.log(error)
+      setEmailError("User is not created.")
     }
   }
 
@@ -91,25 +128,35 @@ export const SignIn = (props) => {
         >
           <div className={classes.inputPannel}>
             <FormControl error fullWidth>
-              <InputLabel htmlFor="email-field" style={{color: "gray"}}>
-                {/*color: "#f34235"*/}
+              <InputLabel htmlFor="email-field" style={{color: "#5f5f5f"}}>
                 Company email
               </InputLabel>
-              <Input onChange={(event) => setEmail(event.target.value)}
-                id="email-field"
-                aria-describedby="component-error-email"
-                style={{ borderColor: "#f34235" }}
+              <Input onChange={handleEmailChange}
+                     id="email-field"
+                     aria-describedby="component-error-email"
+                     style={{color: "#5f5f5f"}}
+                     type={"email"}
+                     name={"email"}
+                     onBlur={e => blurHandler(e)}
+                     value={email}
               />
+              {(emailDirty && emailError) &&
+                <FormHelperText style={{color: "#f44336", margin: "10px 0 5px 0"}}>{emailError}
+                  </FormHelperText>}
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel htmlFor="password-field">Password</InputLabel>
+              <InputLabel style={{color: "#5f5f5f"}} htmlFor="password-field">Password</InputLabel>
               <Input
-                  onChange={e => setPassword(e.target.value)}
-                id="password-field"
-                aria-describedby="component-error-password" type={"password"}
+                  onBlur={e => blurHandler(e)}
+                  onChange={handlePasswordChange}
+                  id="password-field"
+                  aria-describedby="component-error-password"
+                  type={"password"}
+                  name={"password"}
+                  value={password}
+                  style={{color: "#5f5f5f"}}
               />
-              <FormHelperText id="component-error-email">
-              </FormHelperText>
+                {(passwordDirty && passwordError) && <FormHelperText style={{color: "#f44336", margin: "10px 0 5px 0"}}>{passwordError}</FormHelperText>}
             </FormControl>
             <Box display="flex">
                 <Button className={classes.buttonLogin} onClick={handleSubmitLogin}>
@@ -117,7 +164,7 @@ export const SignIn = (props) => {
                 </Button>
               <Button className={classes.buttonSignin} onClick={handleSubmitRegister}>Sign in</Button>
             </Box>
-            <Button className={classes.buttonForgot}>Forgot password?</Button>
+            {/*<Button className={classes.buttonForgot}>Forgot password?</Button>*/}
           </div>
           <div>
             <Typography variant="h5" className={classes.quickTitle}>
