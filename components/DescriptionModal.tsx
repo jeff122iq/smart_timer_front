@@ -7,18 +7,16 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../styles/description-modal";
 import ModalBurgerMenu from "./ModalBurgerMenu";
 import { observer } from "mobx-react";
-import {CardStore} from "../store/cardStore";
-import { v4 } from 'uuid'
+import { CardStore } from "../store/cardStore";
+import { v4 } from "uuid";
 import { ICard } from "../interface/cards";
-import {EditorState} from 'draft-js'
+import { EditorState } from "draft-js";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
-const local_theme_overrides =  {
+const local_theme_overrides = {
   overrides: {
-    linkPopover: {
-
-    },
+    linkPopover: {},
     MUIRichTextEditor: {
       root: {
         marginTop: 20,
@@ -29,25 +27,20 @@ const local_theme_overrides =  {
             display: "none",
           },
         },
-        UrlPopover: {
-        },
-        '& >.UrlPopover-linkPopover': {
-
-        },
+        UrlPopover: {},
+        "& >.UrlPopover-linkPopover": {},
       },
-      '& > .MuiPopover-paper': {
-        '.UrlPopover-linkPopover-1471': {
+      "& > .MuiPopover-paper": {
+        ".UrlPopover-linkPopover-1471": {
           zIndex: 500,
         },
-
       },
       MuiPopover: {
         root: {
           UrlPopover: {
             zIndex: 500,
           },
-          linkPopover: {
-          },
+          linkPopover: {},
         },
       },
       focusVisible: {
@@ -101,46 +94,36 @@ const local_theme_overrides =  {
   },
 };
 
-<<<<<<< HEAD
-const DescriptionModal = ({ setOpen, card = {title: "", description: "", id: ''}}) => {
-  console.log('inputValue', card.description)
-=======
-const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
-  console.log('inputValue', card)
->>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
+const DescriptionModal = ({
+  setOpen,
+  card = { title: "", description: "", id: "" },
+}) => {
+  console.log("inputValue", card.description);
 
   const classes = useStyles();
   const theme = useTheme();
   const [title, setTitle] = useState(card.title);
   const [description, setDescription] = useState(card.description);
   const [localTheme, setLocalTheme] = useState(theme);
-<<<<<<< HEAD
-  const {whiteCards, selectCard} = CardStore;
-  
+  const { whiteCards, selectCard } = CardStore;
+
   const save = (data: any) => {
-    const idx = whiteCards.findIndex((current)=> current.id === card.id);
+    const idx = whiteCards.findIndex((current) => current.id === card.id);
     console.log(idx);
-    
-    if(idx >= 0) {
+
+    if (idx >= 0) {
       whiteCards[idx].title = title;
       whiteCards[idx].description = description;
     } else {
-      const jsonDescription = JSON.parse(data)
-      const newCard: ICard = { title, description: jsonDescription.blocks[0].text, id: v4(), jsonDescription };
+      const jsonDescription = JSON.parse(data);
+      const newCard: ICard = {
+        title,
+        description: jsonDescription.blocks[0].text,
+        id: v4(),
+        jsonDescription,
+      };
       whiteCards.push(newCard);
     }
-=======
-  const {whiteCards} = CardStore;
-
-  const save = (data: any) => {
-
-    const parseData = JSON.parse(data)
-    console.log('data',parseData)
-    // const newData = JSON.parse(data);
-    const newCard = {title: inputValue, description: parseData.blocks[0].text}
-    whiteCards.push(newCard);
-    console.log(whiteCards);
->>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
     setOpen(false);
   };
 
@@ -150,7 +133,7 @@ const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
 
   const handleDescriptionInput = (event: EditorState) => {
     console.log(event);
-    
+
     // setDescription()
   };
 
@@ -177,11 +160,24 @@ const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
           }}
         >
           <MUIRichTextEditor
-            defaultValue={JSON.stringify({"blocks":[{"key":"9dnkp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}})}
+            defaultValue={JSON.stringify({
+              blocks: [
+                {
+                  key: "9dnkp",
+                  text: "",
+                  type: "unstyled",
+                  depth: 0,
+                  inlineStyleRanges: [],
+                  entityRanges: [],
+                  data: {},
+                },
+              ],
+              entityMap: {},
+            })}
             value={description}
             controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
             inlineToolbar={true}
-            label={card.description ? card.description : 'Write description'}
+            label={card.description ? card.description : "Write description"}
             onSave={save}
             onChange={handleDescriptionInput}
             customControls={[
@@ -193,22 +189,28 @@ const DescriptionModal = ({ setOpen, card = {title: "", description: ""}}) => {
               },
               {
                 name: "save",
-                icon: <div onClick={save} style={{
-                  textTransform: "uppercase",
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  fontFamily: "Roboto, san-serif"
-                }}>close</div>,
+                icon: (
+                  <div
+                    onClick={save}
+                    style={{
+                      textTransform: "uppercase",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                      fontFamily: "Roboto, san-serif",
+                    }}
+                  >
+                    close
+                  </div>
+                ),
                 type: "callback",
               },
               {
-                name: 'link',
+                name: "link",
                 icon: <ModalBurgerMenu />,
                 type: "callback",
-                onClick: () => console.log('test'),
+                onClick: () => console.log("test"),
               },
             ]}
-
           />
         </div>
       </ThemeProvider>

@@ -17,10 +17,7 @@ import {
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
-import {
-  createStyles,
-  withStyles,
-} from "@material-ui/core/styles";
+import { createStyles, withStyles } from "@material-ui/core/styles";
 import { CardStore } from "../store/cardStore";
 
 import Tags from "./Tags";
@@ -30,12 +27,8 @@ import DescriptionModal from "./DescriptionModal";
 import useStyles from "../styles/testLoggedInPage";
 import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
-import {BriefStore} from "../store/briefStore";
-<<<<<<< HEAD
-import {log} from "util";
+import { BriefStore } from "../store/briefStore";
 import { ICard } from "../interface/cards";
-=======
->>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -68,11 +61,11 @@ const TestLoggeInPage = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
   const { whiteCards, card } = CardStore;
-  const {addBrief} = BriefStore;
+  const { addBrief } = BriefStore;
   const [isToken, setIsToken] = React.useState("");
   React.useEffect(() => {
-    setIsToken(window.localStorage.getItem("token"))
-  }, )
+    setIsToken(window.localStorage.getItem("token"));
+  });
 
   const [tags, setTags] = useState(whiteCards);
   // console.log("=================");
@@ -88,7 +81,6 @@ const TestLoggeInPage = (props) => {
   const [selectedWhiteCard, setSelectedWhiteCard] = useState<ICard>();
 
   // ================MODAL==================
-
 
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(whiteCards.length / 2);
@@ -106,40 +98,47 @@ const TestLoggeInPage = (props) => {
     setInputValue(event.target.value);
   };
   async function saveBrief() {
-    const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`, {name: inputValue, cards: whiteCards},{headers: {
-        Authorization: `Bearer ${isToken}`}});
-        addBrief(response.data);
-        clearAll();
-        setInputValue("");
+    const response = await Axios.post(
+      `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
+      { name: inputValue, cards: whiteCards },
+      {
+        headers: {
+          Authorization: `Bearer ${isToken}`,
+        },
+      }
+    );
+    addBrief(response.data);
+    clearAll();
+    setInputValue("");
   }
   const handleOpenModal = () => {
     setOpen(true);
   };
 
   const copyLink = () => {
-    const el = document.createElement('textarea');
+    const el = document.createElement("textarea");
     el.value = `http://localhost:3000/create`;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
     document.body.appendChild(el);
     el.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(el);
-  }
+  };
 
   const copyText = () => {
-    const el = document.createElement('textarea');
+    const el = document.createElement("textarea");
     el.value = inputValue;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
     document.body.appendChild(el);
     el.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(el);
     setActionsBurger(false);
-  }
+  };
 
   const handleClickAway = () => {
     setActionsBurger(false);
@@ -152,50 +151,34 @@ const TestLoggeInPage = (props) => {
     setWriteDescription(!writeDescription);
     setOpen(true);
   };
-<<<<<<< HEAD
   const handleCloseCurrent = (e: any) => {
     e.stopPropagation();
     setOpenCurrent(false);
-    console.log('CLICK CLOSE CURRENt',openCurrent)
-  }
+    console.log("CLICK CLOSE CURRENt", openCurrent);
+  };
   const handleOpenCurrent = (whiteCard: ICard) => {
     whiteCards.map((card) => {
-      if(card.id == whiteCard.id) {
-        setSelectedWhiteCard(card)
+      if (card.id == whiteCard.id) {
+        setSelectedWhiteCard(card);
       }
-    })
-    
+    });
+
     // e.stopPropagation();
     setOpenCurrent(true);
-    console.log('CLICK CURRENt',  openCurrent)
-=======
-  const handleCloseCurrent = () => {
-    setOpenCurrent(!openCurrent);
-    console.log('CLICK CLOSE CURRENt',openCurrent)
-  }
-  const handleOpenCurrent = () => {
-    setOpenCurrent(true);
-    console.log('CLICK CURRENt', openCurrent)
->>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
-  }
+    console.log("CLICK CURRENt", openCurrent);
+  };
 
   const clearAll = () => {
     whiteCards.length = 0;
     setActionsBurger(false);
     setInputValue("");
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-    console.log('CLICK ')
-
+    console.log("CLICK ");
   };
-<<<<<<< HEAD
 
-
-  // @ts-ignore
-=======
->>>>>>> b24484988c269ec4c12f8b9774d9031c0f3c204b
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -253,23 +236,30 @@ const TestLoggeInPage = (props) => {
           ""
         )}
         {whiteCards
-            .slice((page - 1) * 2, page * 2)
-            .map((whiteCard: any, index: number) => {
-              return (
-                  <div key={index} onClick={() => handleOpenCurrent(whiteCard, index)} className={classes.cardsHeading} style={{ zIndex: 0 }} >
-                    <h1>{whiteCard.title}</h1>
-                    <p>{whiteCard.description}</p>
-                    <Modal
-                        open={openCurrent}
-                        onClose={handleCloseCurrent}
-                        style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
-                    >
-                      <DescriptionModal card={selectedWhiteCard} setOpen={setOpenCurrent} />
-                    </Modal>
-                  </div>
-              );
-
-            })}
+          .slice((page - 1) * 2, page * 2)
+          .map((whiteCard: any, index: number) => {
+            return (
+              <div
+                key={index}
+                onClick={() => handleOpenCurrent(whiteCard)}
+                className={classes.cardsHeading}
+                style={{ zIndex: 0 }}
+              >
+                <h1>{whiteCard.title}</h1>
+                <p>{whiteCard.description}</p>
+                <Modal
+                  open={openCurrent}
+                  onClose={handleCloseCurrent}
+                  style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
+                >
+                  <DescriptionModal
+                    card={selectedWhiteCard}
+                    setOpen={setOpenCurrent}
+                  />
+                </Modal>
+              </div>
+            );
+          })}
         <div
           className={
             writeDescription
@@ -300,7 +290,11 @@ const TestLoggeInPage = (props) => {
             )}
             <ClickAwayListener onClickAway={handleClickAway}>
               <div className={classes.actions}>
-                <Button onClick={saveBrief} className={classes.actionsBtnSave} variant="contained">
+                <Button
+                  onClick={saveBrief}
+                  className={classes.actionsBtnSave}
+                  variant="contained"
+                >
                   Save
                 </Button>
                 <div style={{ position: "relative" }}>
@@ -343,7 +337,9 @@ const TestLoggeInPage = (props) => {
                     </div>
                   </div>
                 </div>
-                <Button onClick={copyLink} className={classes.actionsBtnLink}>Copy Link</Button>
+                <Button onClick={copyLink} className={classes.actionsBtnLink}>
+                  Copy Link
+                </Button>
               </div>
             </ClickAwayListener>
           </div>
@@ -353,11 +349,7 @@ const TestLoggeInPage = (props) => {
       </div>
       <div className={classes.populars}>
         <Collapse in={tagLength}>
-          {tagLength ? (
-            <AdditionalTemplate/>
-          ) : (
-            ""
-          )}
+          {tagLength ? <AdditionalTemplate /> : ""}
         </Collapse>
       </div>
     </div>
