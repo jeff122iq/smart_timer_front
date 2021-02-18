@@ -198,6 +198,7 @@ export default makeStyles((theme: Theme) =>
           "& > p": {
               marginBottom: "30px"
           },
+          overflowWrap: 'anywhere',
           borderBottom: "2px solid rgba(0, 0, 0, 0.12)",
           marginBottom: "60px",
       },

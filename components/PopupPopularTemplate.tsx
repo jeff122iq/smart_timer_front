@@ -7,7 +7,9 @@ import { observer } from "mobx-react";
 import useStyles from "../styles/popupPopularTamplate"
 import useStyles1 from "../styles/popularsTemplates";
 import {Typography} from "@material-ui/core";
-import { v4 } from 'uuid'
+import { v4 } from 'uuid';
+import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
+
 
 const PopupPopularTemplate=({card}) => {
     const classes = useStyles();
@@ -44,6 +46,11 @@ const PopupPopularTemplate=({card}) => {
                 >
                     {card.description}
                 </div>
+                {/* <MUIRichTextEditor
+                  defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                  controls={[]}
+                  readOnly
+                /> */}
                 <div className={classes1.popularsCardFooter}>
                     <Button
                         className={classes1.popularsActionsAddBtn}

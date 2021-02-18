@@ -41,6 +41,7 @@ class cardStore {
         }});
       this.cardsArray.length = 0;
       response.data.map((card: ICard) => this.cardsArray.push(card));
+      console.log('response', response)
     } catch (error) {
       console.log(error);
     }

@@ -128,6 +128,8 @@ const styles = ({ spacing, typography, palette }: Theme) => createStyles({
         fontSize: "inherit"
     },
     editor: {
+        width: '100%',
+        paddingRight: 10
     },
     editorContainer: {
         margin: spacing(1, 0, 0, 0),
