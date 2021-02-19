@@ -121,7 +121,6 @@ const DescriptionModal = ({
 
       // console.log('card text IF ===>>', JSON.parse(data));
       setOpenCard(false)
-
     } else {
       // console.log('card text ELSE ===>>', JSON.parse(data));
       const newCard: ICard = {

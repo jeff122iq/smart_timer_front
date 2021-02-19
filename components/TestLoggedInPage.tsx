@@ -179,8 +179,6 @@ whiteCards.map((el: any) => {
     console.log("CLICK ");
   };
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -306,7 +304,7 @@ whiteCards.map((el: any) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <DescriptionModal setOpen={setOpen} />
+            <DescriptionModal setOpen={setOpen} setOpenCard={setOpenCard}/>
           </Modal>
         </div>
         {whiteCards.length > 0 ? (

@@ -86,6 +86,7 @@ const BriefTemplate = (props) => {
   // ================MODAL==================
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const [openCard, setOpenCard] = useState(true);
   // ================MODAL==================
 
   const { addBrief } = BriefStore;
@@ -224,7 +225,7 @@ const BriefTemplate = (props) => {
                   onClose={handleClose}
                   style={{ width: "100%", overflow: "scroll" }}
               >
-                <DescriptionModal setOpen={setOpen} />
+                <DescriptionModal setOpen={setOpen} setOpenCard={setOpenCard} />
               </Modal>
             </div>
             {whiteCards.length > 0 ? (
