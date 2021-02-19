@@ -27,7 +27,9 @@ class cardStore {
   };
 
   @action addCard = (card: ICard) => {
+    console.log('CARD FROM STORE', card)
     this.whiteCards.push(card);
+    // this.whiteCards.map(whiteCard=>({...whiteCard, description:JSON.stringify(whiteCard.description)}))
   }
   @action selectCard = (card: ICard) => {
     this.whiteCards.push(card);

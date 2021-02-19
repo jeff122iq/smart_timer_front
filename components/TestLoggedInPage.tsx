@@ -70,9 +70,11 @@ const TestLoggeInPage = (props) => {
 
   const [tags, setTags] = useState(whiteCards);
   // console.log("=================");
-  // console.log("::::::::::::", tags);
+  console.log("whiteCards---->", whiteCards);
   // console.log("=================");
-
+whiteCards.map((el: any) => {
+  console.log('>>>>>>',el.description.blocks)
+})
   const [actionsBurger, setActionsBurger] = useState(false);
 
   // ================MODAL==================
@@ -80,14 +82,15 @@ const TestLoggeInPage = (props) => {
   const [open, setOpen] = useState(false);
   const [openCurrent, setOpenCurrent] = useState(false);
   const [selectedWhiteCard, setSelectedWhiteCard] = useState<ICard>();
+  const [openCard, setOpenCard] = useState(true);
 
   // ================MODAL==================
 
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(whiteCards.length / 2);
   const handlePagination = (
-      event: React.ChangeEvent<unknown>,
-      value: number
+    event: React.ChangeEvent<unknown>,
+    value: number
   ) => {
     setPage(value);
   };
@@ -100,13 +103,13 @@ const TestLoggeInPage = (props) => {
   };
   async function saveBrief() {
     const response = await Axios.post(
-        `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
-        { name: inputValue, cards: whiteCards.map(whiteCard=>({...whiteCard, description:JSON.stringify(whiteCard.description)})) },
-        {
-          headers: {
-            Authorization: `Bearer ${isToken}`,
-          },
-        }
+      `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
+      { name: inputValue, cards: whiteCards.map(whiteCard => ({ ...whiteCard, description: JSON.stringify(whiteCard.description) })) },
+      {
+        headers: {
+          Authorization: `Bearer ${isToken}`,
+        },
+      }
     );
     addBrief(response.data);
     clearAll();
@@ -156,10 +159,14 @@ const TestLoggeInPage = (props) => {
   const handleOpenCurrent = (whiteCard: ICard) => {
     setSelectedWhiteCard(whiteCard);
     setOpenCurrent(true);
+    setOpenCard(!openCard)
+    console.log('opeCard OPEN', openCard)
   };
 
   const handleCloseCurrent = () => {
     setOpenCurrent(false);
+    console.log('opeCard CLOSE', openCard)
+
   };
   const clearAll = () => {
     whiteCards.length = 0;
@@ -173,189 +180,205 @@ const TestLoggeInPage = (props) => {
   };
 
   return (
+    <div
+      className={classes.rootCreateTemplate}
+      style={{
+        flexDirection: !tagLength ? "column" : "row",
+      }}
+    >
+      <div className={classes.wrapper}></div>
       <div
-          className={classes.rootCreateTemplate}
-          style={{
-            flexDirection: !tagLength ? "column" : "row",
-          }}
+        className={classes.wrapTopContent}
+        style={{ margin: !tagLength ? "auto" : "0" }}
       >
-        <div className={classes.wrapper}></div>
-        <div
-            className={classes.wrapTopContent}
-            style={{ margin: !tagLength ? "auto" : "0" }}
-        >
-          {!tagLength ? (
-              <h1>
-                Add tag to that relevant to
-                <br />
+        {!tagLength ? (
+          <h1>
+            Add tag to that relevant to
+            <br />
                 your type of work
-              </h1>
-          ) : (
-              ""
+          </h1>
+        ) : (
+            ""
           )}
-          <div className={classes.CreateTemplateTags}>
-            <Tags />
-          </div>
-          <div
-              className={classes.CreateTemplate_description}
-              style={{ display: tagLength ? "block" : "none" }}
-          >
-            <Collapse in={tagLength}>
-              {tagLength ? (
-                  <CustomButton
-                      className={classes.descriptionBtn}
-                      onClick={handleWriteDescription}
-                  >
-                    Write description
-                  </CustomButton>
-              ) : (
-                  ""
-              )}
-            </Collapse>
-          </div>
-          {tagLength ? (
-              <Collapse in={tagLength}>
-                <>
-                  <InputBase
-                      className={classes.CreateTemplateHeading}
-                      placeholder="Write heading"
-                      inputProps={{ "aria-label": "naked" }}
-                      value={inputValue}
-                      onChange={handleInputValue}
-                  />
-                </>
-              </Collapse>
-          ) : (
-              ""
-          )}
-          {whiteCards
-              .slice((page - 1) * 2, page * 2)
-              .map((whiteCard: any, index: number) => {
-                return (
-                    <div
-                        key={index}
-                        onClick={() => handleOpenCurrent(whiteCard)}
-                        className={classes.cardsHeading}
-                        style={{ zIndex: 0 }}
-                    >
-                      <h1>{whiteCard.title}</h1>
-                      {/* <p>{whiteCard.description.blocks[0].text}</p> */}
-                      <MUIRichTextEditor
-                          defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
-                          controls={[]}
-                          readOnly
-                      />
-
-                    </div>
-                );
-              })
-
-          }
-          <>
-            <Modal
-                open={openCurrent}
-                onClose={handleCloseCurrent}
-                style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
-            >
-              <DescriptionModal
-                  card={selectedWhiteCard}
-                  setOpen={setOpenCurrent}
-              />
-            </Modal>
-          </>
-          <div
-              className={
-                writeDescription
-                    ? classes.CreateTemplateModalOpen
-                    : classes.CreateTemplateModal
-              }
-          >
-            <Modal
-                open={open}
-                onClose={handleClose}
-                style={{ width: "100%", overflow: "scroll" }}
-            >
-              <DescriptionModal setOpen={setOpen} />
-            </Modal>
-          </div>
-          {whiteCards.length > 0 ? (
-              <div>
-                {whiteCards.length > 2 ? (
-                    <div className={classes.pagination}>
-                      <Paginator
-                          count={totalPages}
-                          page={page}
-                          onChange={handlePagination}
-                      />
-                    </div>
-                ) : (
-                    ""
-                )}
-                <ClickAwayListener onClickAway={handleClickAway}>
-                  <div className={classes.actions}>
-                    <Button
-                        onClick={saveBrief}
-                        className={classes.actionsBtnSave}
-                        variant="contained"
-                    >
-                      Save
-                    </Button>
-                    <div style={{ position: "relative" }}>
-                      <SvgIcon
-                          className={classes.actionsBurger}
-                          onClick={handleActionsBurger}
-                      >
-                        <MoreVertIcon />
-                      </SvgIcon>
-                      <div
-                          className={
-                            actionsBurger
-                                ? classes.actionsBurgerModalOpen
-                                : classes.actionsBurgerModal
-                          }
-                      >
-                        <div className={classes.modalBurgerCopytext}>
-                          <SvgIcon className={classes.actionsBurgerIcon}>
-                            <FileCopyOutlinedIcon />
-                          </SvgIcon>
-                          <Typography
-                              className={classes.actionsBurgerText}
-                              variant="body2"
-                              onClick={copyText}
-                          >
-                            Copy text
-                          </Typography>
-                        </div>
-                        <div className={classes.modalBurgerCopytext}>
-                          <SvgIcon className={classes.actionsBurgerIcon}>
-                            <DeleteIcon />
-                          </SvgIcon>
-                          <Typography
-                              className={classes.actionsBurgerText}
-                              variant="body2"
-                              onClick={clearAll}
-                          >
-                            Clear all
-                          </Typography>
-                        </div>
-                      </div>
-                    </div>
-                    <Button onClick={copyLink} className={classes.actionsBtnLink}>
-                      Copy Link
-                    </Button>
-                  </div>
-                </ClickAwayListener>
-              </div>
-          ) : (
-              ""
-          )}
+        <div className={classes.CreateTemplateTags}>
+          <Tags />
         </div>
-        <div className={classes.populars}>
+        <div
+          className={classes.CreateTemplate_description}
+          style={{ display: tagLength ? "block" : "none" }}
+        >
           <Collapse in={tagLength}>
-            {tagLength ? <AdditionalTemplate /> : ""}
+            {tagLength ? (
+              <CustomButton
+                className={classes.descriptionBtn}
+                onClick={handleWriteDescription}
+              >
+                Write description
+              </CustomButton>
+            ) : (
+                ""
+              )}
           </Collapse>
         </div>
+        {tagLength ? (
+          <Collapse in={tagLength}>
+            <>
+              <InputBase
+                className={classes.CreateTemplateHeading}
+                placeholder="Write heading"
+                inputProps={{ "aria-label": "naked" }}
+                value={inputValue}
+                onChange={handleInputValue}
+              />
+            </>
+          </Collapse>
+        ) : (
+            ""
+          )}
+        {whiteCards
+          .slice((page - 1) * 2, page * 2)
+          .map((whiteCard: any, index: number) => {
+            return (
+              <div
+                key={index}
+                onClick={() => handleOpenCurrent(whiteCard)}
+                className={classes.cardsHeading}
+                style={{ zIndex: 0 }}
+              >
+                {/* {title: "html", description: "hello world", id: "5ed1bba6-5a36-4ae3-9e10-f2dce30b112a"} */}
+
+               {openCard ? 
+                    <>
+                      <h1>{whiteCard.title}</h1>
+                      <p>{whiteCard.description.blocks ? whiteCard.description.blocks.map((el:any) => el.text) : whiteCard.description}</p>
+                    </>
+                    :  
+                    <>
+                    <h1>{whiteCard.title}</h1>
+                    <MUIRichTextEditor
+                      defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                      controls={[]}
+                      readOnly
+                    /></>
+                  }
+                     {/* <h1>{whiteCard.title}</h1>
+                     <p>{whiteCard.description.blocks ? whiteCard.description.blocks.map((el:any) => el.text) : whiteCard.description}</p> */}
+                    {/* <MUIRichTextEditor
+                      defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                      controls={[]}
+                      readOnly
+                    /> */}
+              </div>
+            );
+          })
+
+        }
+        <>
+          <Modal
+            open={openCurrent}
+            onClose={handleCloseCurrent}
+            style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
+          >
+            <DescriptionModal
+              card={selectedWhiteCard}
+              setOpen={setOpenCurrent}
+              setOpenCard={setOpenCard}
+            />
+          </Modal>
+        </>
+        <div
+          className={
+            writeDescription
+              ? classes.CreateTemplateModalOpen
+              : classes.CreateTemplateModal
+          }
+        >
+          <Modal
+            open={open}
+            onClose={handleClose}
+            style={{ width: "100%", overflow: "scroll" }}
+          >
+            <DescriptionModal setOpen={setOpen} />
+          </Modal>
+        </div>
+        {whiteCards.length > 0 ? (
+          <div>
+            {whiteCards.length > 2 ? (
+              <div className={classes.pagination}>
+                <Paginator
+                  count={totalPages}
+                  page={page}
+                  onChange={handlePagination}
+                />
+              </div>
+            ) : (
+                ""
+              )}
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <div className={classes.actions}>
+                <Button
+                  onClick={saveBrief}
+                  className={classes.actionsBtnSave}
+                  variant="contained"
+                >
+                  Save
+                    </Button>
+                <div style={{ position: "relative" }}>
+                  <SvgIcon
+                    className={classes.actionsBurger}
+                    onClick={handleActionsBurger}
+                  >
+                    <MoreVertIcon />
+                  </SvgIcon>
+                  <div
+                    className={
+                      actionsBurger
+                        ? classes.actionsBurgerModalOpen
+                        : classes.actionsBurgerModal
+                    }
+                  >
+                    <div className={classes.modalBurgerCopytext}>
+                      <SvgIcon className={classes.actionsBurgerIcon}>
+                        <FileCopyOutlinedIcon />
+                      </SvgIcon>
+                      <Typography
+                        className={classes.actionsBurgerText}
+                        variant="body2"
+                        onClick={copyText}
+                      >
+                        Copy text
+                          </Typography>
+                    </div>
+                    <div className={classes.modalBurgerCopytext}>
+                      <SvgIcon className={classes.actionsBurgerIcon}>
+                        <DeleteIcon />
+                      </SvgIcon>
+                      <Typography
+                        className={classes.actionsBurgerText}
+                        variant="body2"
+                        onClick={clearAll}
+                      >
+                        Clear all
+                          </Typography>
+                    </div>
+                  </div>
+                </div>
+                <Button onClick={copyLink} className={classes.actionsBtnLink}>
+                  Copy Link
+                    </Button>
+              </div>
+            </ClickAwayListener>
+          </div>
+        ) : (
+            ""
+          )}
       </div>
+      <div className={classes.populars}>
+        <Collapse in={tagLength}>
+          {tagLength ? <AdditionalTemplate /> : ""}
+        </Collapse>
+      </div>
+    </div>
   );
 };
 

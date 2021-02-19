@@ -98,9 +98,10 @@ const local_theme_overrides = {
 
 const DescriptionModal = ({
   setOpen,
+  setOpenCard,
   card = { title: "", description: {blocks: []}, id: "" },
 }) => {
-  console.log("inputValue", card.description);
+  console.log("inputValue", card, card.description);
   {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum eaque magnam nostrum accusamus eos, velit dolor, quasi at doloribus voluptatum architecto molestias laborum quos? In eos ab esse ea vitae nobis distinctio, molestias fugiat ullam ut accusantium saepe deserunt quibusdam voluptatem repellendus earum error magnam aspernatur nostrum. Quos alias deserunt rem vero sit iure ex pariatur. Culpa maiores obcaecati reiciendis. */ }
 0
   const classes = useStyles();
@@ -109,7 +110,7 @@ const DescriptionModal = ({
   const [description, setDescription] = useState(card.description);
   const [localTheme, setLocalTheme] = useState(theme);
   const { whiteCards, selectCard } = CardStore;
-  console.log(description.blocks)
+  // console.log(description.blocks)
 
   const save = (data: any) => {
     const idx = whiteCards.findIndex((current) => current.id === card.id);
@@ -117,25 +118,19 @@ const DescriptionModal = ({
     if (idx >= 0) {
       whiteCards[idx].title = title;
       whiteCards[idx].description = JSON.parse(data)
-      // .map((string: any) => {
-      //   const descriptions = string.tetx;
-      //   // console.log('DESCRIPTION ===>>', descriptions);
-      //   // console.log('DESCRIPTION JOIN ===>>', string.text);
-      //   return string.text
-      // }).join(' ')
 
-      console.log('card text ===>>', JSON.parse(data));
-      
-      // console.log('card After map ==> ===>>', whiteCards[idx]);
+      // console.log('card text IF ===>>', JSON.parse(data));
+      setOpenCard(false)
 
     } else {
-      console.log('card text ===>>', JSON.parse(data));
+      // console.log('card text ELSE ===>>', JSON.parse(data));
       const newCard: ICard = {
         title,
         description: JSON.parse(data),
         id: v4(),
       };
       whiteCards.push(newCard);
+      console.log('NEW CARD ===>>', newCard);
     }
     setOpen(false);
   };
@@ -147,17 +142,6 @@ const DescriptionModal = ({
   useEffect(() => {
     setLocalTheme(Object.assign({ ...theme }, local_theme_overrides));
   }, []);
-
-
-  // const textToConvert = '<p>A paragraph</p>';
-  // const blocksFromHTML = convertFromHTML(textToConvert);
-  // const [editorState, setEditorState] = React.useState(
-  //   EditorState.createWithContent(
-  //     ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap)
-  //   )
-  // );
-  // const emptyContentState = JSON.stringify(
-  //   convertToRaw(EditorState.createWithContent(description).getCurrentContent()))
 
   return (
     <div className={classes.rootModal} style={{}}>

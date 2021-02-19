@@ -14,7 +14,7 @@ import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 const PopupPopularTemplate=({card}) => {
     const classes = useStyles();
     const classes1 = useStyles1();
-    const { createCard, cardsArray, addCard } = CardStore;
+    const { createCard, cardsArray, whiteCards, addCard } = CardStore;
     const [modalOpen, setModalOpen] = useState(false);
     const handleOpenModal = () => {
         setModalOpen(true);
