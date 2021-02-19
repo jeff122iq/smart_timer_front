@@ -44,6 +44,11 @@ const AdditionalTemplate = () => {
             </div>
             <div className={classes.cardsWrapper}>
                 {cardsArray.slice((page - 1) * 2, page * 6).map(({title, description}) => {
+                //     <MUIRichTextEditor
+                //     defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                //     controls={[]}
+                //     readOnly
+                //   />
                     return(<PopupPopularTemplate card={{title, description}}/>)
                 })
                 }

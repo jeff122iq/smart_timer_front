@@ -29,7 +29,7 @@ import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
 import { BriefStore } from "../store/briefStore";
 import { ICard } from "../interface/cards";
-import {SelectedDescription} from "../store/selectedDescription";
+import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -102,7 +102,7 @@ const TestLoggeInPage = (props) => {
   async function saveBrief() {
     const response = await Axios.post(
       `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
-      { name: inputValue, cards: whiteCards },
+      { name: inputValue, cards: whiteCards.map(whiteCard=>({...whiteCard, description:JSON.stringify(whiteCard.description)})) },
       {
         headers: {
           Authorization: `Bearer ${isToken}`,
@@ -153,24 +153,15 @@ const TestLoggeInPage = (props) => {
     setWriteDescription(!writeDescription);
     setOpen(true);
   };
-  const handleCloseCurrent = (e: any) => {
-    e.stopPropagation();
-    setOpenCurrent(false);
-    console.log("CLICK CLOSE CURRENt", openCurrent);
-  };
+
   const handleOpenCurrent = (whiteCard: ICard) => {
-    whiteCards.map((card) => {
-      if (card.id == whiteCard.id) {
-        setSelectedWhiteCard(card);
-        saveSelectedCard(card);
-      }
-    });
-
-    // e.stopPropagation();
+    setSelectedWhiteCard(whiteCard);
     setOpenCurrent(true);
-    console.log("CLICK CURRENt", openCurrent);
   };
 
+  const handleCloseCurrent = () => {
+    setOpenCurrent(false);
+  };
   const clearAll = () => {
     whiteCards.length = 0;
     setActionsBurger(false);
@@ -201,8 +192,8 @@ const TestLoggeInPage = (props) => {
             your type of work
           </h1>
         ) : (
-          ""
-        )}
+            ""
+          )}
         <div className={classes.CreateTemplateTags}>
           <Tags />
         </div>
@@ -219,8 +210,8 @@ const TestLoggeInPage = (props) => {
                 Write description
               </CustomButton>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </Collapse>
         </div>
         {tagLength ? (
@@ -236,8 +227,8 @@ const TestLoggeInPage = (props) => {
             </>
           </Collapse>
         ) : (
-          ""
-        )}
+            ""
+          )}
         {whiteCards
           .slice((page - 1) * 2, page * 2)
           .map((whiteCard: any, index: number) => {
@@ -249,21 +240,15 @@ const TestLoggeInPage = (props) => {
                 style={{ zIndex: 0 }}
               >
                 <h1>{whiteCard.title}</h1>
-                <p>{whiteCard.description}</p>
-                <Modal
-                  open={openCurrent}
-                  onClose={handleCloseCurrent}
-                  style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
-                >
-                  <DescriptionModal
-                    card={selectedWhiteCard}
-                    setOpen={setOpenCurrent}
-                  />
-                </Modal>
+                {/* <p>{whiteCard.description.blocks[0].text}</p> */}
+                <MUIRichTextEditor
+                  defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                  controls={[]}
+                  readOnly
+                />
+
               </div>
             );
-          })}
-        <div style={{padding: 0}}
           className={
             writeDescription
               ? classes.CreateTemplateModalOpen
@@ -289,8 +274,8 @@ const TestLoggeInPage = (props) => {
                 />
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
             <ClickAwayListener onClickAway={handleClickAway}>
               <div className={classes.actions}>
                 <Button
@@ -345,8 +330,8 @@ const TestLoggeInPage = (props) => {
             </ClickAwayListener>
           </div>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </div>
       <div className={classes.populars}>
         <Collapse in={tagLength}>
