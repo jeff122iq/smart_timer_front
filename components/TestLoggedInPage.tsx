@@ -63,7 +63,6 @@ const TestLoggeInPage = (props) => {
   const { tagLength } = TagsStore;
   const { whiteCards, card } = CardStore;
   const { addBrief } = BriefStore;
-  const {saveSelectedCard} = SelectedDescription;
   const [isToken, setIsToken] = React.useState("");
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"));
@@ -87,8 +86,8 @@ const TestLoggeInPage = (props) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(whiteCards.length / 2);
   const handlePagination = (
-    event: React.ChangeEvent<unknown>,
-    value: number
+      event: React.ChangeEvent<unknown>,
+      value: number
   ) => {
     setPage(value);
   };
@@ -101,13 +100,13 @@ const TestLoggeInPage = (props) => {
   };
   async function saveBrief() {
     const response = await Axios.post(
-      `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
-      { name: inputValue, cards: whiteCards.map(whiteCard=>({...whiteCard, description:JSON.stringify(whiteCard.description)})) },
-      {
-        headers: {
-          Authorization: `Bearer ${isToken}`,
-        },
-      }
+        `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
+        { name: inputValue, cards: whiteCards.map(whiteCard=>({...whiteCard, description:JSON.stringify(whiteCard.description)})) },
+        {
+          headers: {
+            Authorization: `Bearer ${isToken}`,
+          },
+        }
     );
     addBrief(response.data);
     clearAll();
@@ -174,171 +173,189 @@ const TestLoggeInPage = (props) => {
   };
 
   return (
-    <div
-      className={classes.rootCreateTemplate}
-      style={{
-        flexDirection: !tagLength ? "column" : "row",
-      }}
-    >
-      <div className={classes.wrapper}></div>
       <div
-        className={classes.wrapTopContent}
-        style={{ margin: !tagLength ? "auto" : "0" }}
+          className={classes.rootCreateTemplate}
+          style={{
+            flexDirection: !tagLength ? "column" : "row",
+          }}
       >
-        {!tagLength ? (
-          <h1>
-            Add tag to that relevant to
-            <br />
-            your type of work
-          </h1>
-        ) : (
-            ""
-          )}
-        <div className={classes.CreateTemplateTags}>
-          <Tags />
-        </div>
+        <div className={classes.wrapper}></div>
         <div
-          className={classes.CreateTemplate_description}
-          style={{ display: tagLength ? "block" : "none" }}
+            className={classes.wrapTopContent}
+            style={{ margin: !tagLength ? "auto" : "0" }}
         >
-          <Collapse in={tagLength}>
-            {tagLength ? (
-              <CustomButton
-                className={classes.descriptionBtn}
-                onClick={handleWriteDescription}
-              >
-                Write description
-              </CustomButton>
-            ) : (
-                ""
-              )}
-          </Collapse>
-        </div>
-        {tagLength ? (
-          <Collapse in={tagLength}>
-            <>
-              <InputBase
-                className={classes.CreateTemplateHeading}
-                placeholder="Write heading"
-                inputProps={{ "aria-label": "naked" }}
-                value={inputValue}
-                onChange={handleInputValue}
-              />
-            </>
-          </Collapse>
-        ) : (
-            ""
+          {!tagLength ? (
+              <h1>
+                Add tag to that relevant to
+                <br />
+                your type of work
+              </h1>
+          ) : (
+              ""
           )}
-        {whiteCards
-          .slice((page - 1) * 2, page * 2)
-          .map((whiteCard: any, index: number) => {
-            return (
-              <div
-                key={index}
-                onClick={() => handleOpenCurrent(whiteCard)}
-                className={classes.cardsHeading}
-                style={{ zIndex: 0 }}
-              >
-                <h1>{whiteCard.title}</h1>
-                {/* <p>{whiteCard.description.blocks[0].text}</p> */}
-                <MUIRichTextEditor
-                  defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
-                  controls={[]}
-                  readOnly
-                />
-
-              </div>
-            );
-          className={
-            writeDescription
-              ? classes.CreateTemplateModalOpen
-              : classes.CreateTemplateModal
-          }
-        >
-          <Modal
-            open={open}
-            onClose={handleClose}
-            style={{ width: "100%", overflow: "scroll", padding: 0,  boxSizing: "border-box", }}
-          >
-            <DescriptionModal setOpen={setOpen} />
-          </Modal>
-        </div>
-        {whiteCards.length > 0 ? (
-          <div>
-            {whiteCards.length > 2 ? (
-              <div className={classes.pagination}>
-                <Paginator
-                  count={totalPages}
-                  page={page}
-                  onChange={handlePagination}
-                />
-              </div>
-            ) : (
-                ""
-              )}
-            <ClickAwayListener onClickAway={handleClickAway}>
-              <div className={classes.actions}>
-                <Button
-                  onClick={saveBrief}
-                  className={classes.actionsBtnSave}
-                  variant="contained"
-                >
-                  Save
-                </Button>
-                <div style={{ position: "relative", top: "3px" }}>
-                  <SvgIcon
-                    className={classes.actionsBurger}
-                    onClick={handleActionsBurger}
-                  >
-                    <MoreVertIcon />
-                  </SvgIcon>
-                  <div
-                    className={
-                      actionsBurger
-                        ? classes.actionsBurgerModalOpen
-                        : classes.actionsBurgerModal
-                    }
-                  >
-                    <div onClick={copyText} className={classes.modalBurgerCopytext}>
-                      <SvgIcon className={classes.actionsBurgerIcon}>
-                        <FileCopyOutlinedIcon />
-                      </SvgIcon>
-                      <Typography
-                        className={classes.actionsBurgerText}
-                        variant="body2"
-                      >
-                        Copy text
-                      </Typography>
-                    </div>
-                    <div onClick={clearAll} className={classes.modalBurgerCopytext}>
-                      <SvgIcon className={classes.actionsBurgerIcon}>
-                        <DeleteIcon />
-                      </SvgIcon>
-                      <Typography
-                        className={classes.actionsBurgerText}
-                        variant="body2"
-                      >
-                        Clear all
-                      </Typography>
-                    </div>
-                  </div>
-                </div>
-                <Button onClick={copyLink} className={classes.actionsBtnLink}>
-                  Copy Link
-                </Button>
-              </div>
-            </ClickAwayListener>
+          <div className={classes.CreateTemplateTags}>
+            <Tags />
           </div>
-        ) : (
-            ""
+          <div
+              className={classes.CreateTemplate_description}
+              style={{ display: tagLength ? "block" : "none" }}
+          >
+            <Collapse in={tagLength}>
+              {tagLength ? (
+                  <CustomButton
+                      className={classes.descriptionBtn}
+                      onClick={handleWriteDescription}
+                  >
+                    Write description
+                  </CustomButton>
+              ) : (
+                  ""
+              )}
+            </Collapse>
+          </div>
+          {tagLength ? (
+              <Collapse in={tagLength}>
+                <>
+                  <InputBase
+                      className={classes.CreateTemplateHeading}
+                      placeholder="Write heading"
+                      inputProps={{ "aria-label": "naked" }}
+                      value={inputValue}
+                      onChange={handleInputValue}
+                  />
+                </>
+              </Collapse>
+          ) : (
+              ""
           )}
+          {whiteCards
+              .slice((page - 1) * 2, page * 2)
+              .map((whiteCard: any, index: number) => {
+                return (
+                    <div
+                        key={index}
+                        onClick={() => handleOpenCurrent(whiteCard)}
+                        className={classes.cardsHeading}
+                        style={{ zIndex: 0 }}
+                    >
+                      <h1>{whiteCard.title}</h1>
+                      {/* <p>{whiteCard.description.blocks[0].text}</p> */}
+                      <MUIRichTextEditor
+                          defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                          controls={[]}
+                          readOnly
+                      />
+
+                    </div>
+                );
+              })
+
+          }
+          <>
+            <Modal
+                open={openCurrent}
+                onClose={handleCloseCurrent}
+                style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
+            >
+              <DescriptionModal
+                  card={selectedWhiteCard}
+                  setOpen={setOpenCurrent}
+              />
+            </Modal>
+          </>
+          <div
+              className={
+                writeDescription
+                    ? classes.CreateTemplateModalOpen
+                    : classes.CreateTemplateModal
+              }
+          >
+            <Modal
+                open={open}
+                onClose={handleClose}
+                style={{ width: "100%", overflow: "scroll" }}
+            >
+              <DescriptionModal setOpen={setOpen} />
+            </Modal>
+          </div>
+          {whiteCards.length > 0 ? (
+              <div>
+                {whiteCards.length > 2 ? (
+                    <div className={classes.pagination}>
+                      <Paginator
+                          count={totalPages}
+                          page={page}
+                          onChange={handlePagination}
+                      />
+                    </div>
+                ) : (
+                    ""
+                )}
+                <ClickAwayListener onClickAway={handleClickAway}>
+                  <div className={classes.actions}>
+                    <Button
+                        onClick={saveBrief}
+                        className={classes.actionsBtnSave}
+                        variant="contained"
+                    >
+                      Save
+                    </Button>
+                    <div style={{ position: "relative" }}>
+                      <SvgIcon
+                          className={classes.actionsBurger}
+                          onClick={handleActionsBurger}
+                      >
+                        <MoreVertIcon />
+                      </SvgIcon>
+                      <div
+                          className={
+                            actionsBurger
+                                ? classes.actionsBurgerModalOpen
+                                : classes.actionsBurgerModal
+                          }
+                      >
+                        <div className={classes.modalBurgerCopytext}>
+                          <SvgIcon className={classes.actionsBurgerIcon}>
+                            <FileCopyOutlinedIcon />
+                          </SvgIcon>
+                          <Typography
+                              className={classes.actionsBurgerText}
+                              variant="body2"
+                              onClick={copyText}
+                          >
+                            Copy text
+                          </Typography>
+                        </div>
+                        <div className={classes.modalBurgerCopytext}>
+                          <SvgIcon className={classes.actionsBurgerIcon}>
+                            <DeleteIcon />
+                          </SvgIcon>
+                          <Typography
+                              className={classes.actionsBurgerText}
+                              variant="body2"
+                              onClick={clearAll}
+                          >
+                            Clear all
+                          </Typography>
+                        </div>
+                      </div>
+                    </div>
+                    <Button onClick={copyLink} className={classes.actionsBtnLink}>
+                      Copy Link
+                    </Button>
+                  </div>
+                </ClickAwayListener>
+              </div>
+          ) : (
+              ""
+          )}
+        </div>
+        <div className={classes.populars}>
+          <Collapse in={tagLength}>
+            {tagLength ? <AdditionalTemplate /> : ""}
+          </Collapse>
+        </div>
       </div>
-      <div className={classes.populars}>
-        <Collapse in={tagLength}>
-          {tagLength ? <AdditionalTemplate /> : ""}
-        </Collapse>
-      </div>
-    </div>
   );
 };
 
