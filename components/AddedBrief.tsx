@@ -25,7 +25,6 @@ const AddedBrief = () => {
                 {currentBrief.cards.map((card,idx) => {
                     return(
                         <>
-                            <h1>Template: </h1>
                         <div key={idx}>
                             <h2>{card.title}</h2>
                             <p>{card.description}</p>

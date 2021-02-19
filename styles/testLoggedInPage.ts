@@ -12,6 +12,7 @@ export default makeStyles((theme: Theme) =>
     },
 
     rootCreateTemplate: {
+        boxSizing: "border-box",
       display: "flex",
       flexWrap: "wrap",
         justifyContent: "center",

@@ -10,6 +10,7 @@ import MovieIcon from '@material-ui/icons/Movie'
 import FormatAlignCenter from '@material-ui/icons/FormatAlignCenter'
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft'
 import FormatAlignRight from '@material-ui/icons/FormatAlignRight'
+import {SelectedDescription} from "../../../store/selectedDescription";
 
 export type TAlignment = "left" | "center" | "right"
 
@@ -73,6 +74,9 @@ const styles = ({ spacing }: Theme) => createStyles({
     },
 })
 
+const {fullCard} = SelectedDescription;
+// const cardDescription = fullCard[0].description;
+
 const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
     const [data, setData] = useState<TUrlData>(props.data || {
         name: undefined,
@@ -123,6 +127,7 @@ const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
                                     onChange={(event) => setData({...data, name: event.target.value})}
                                     defaultValue={props.data && props.data.name}
                                     autoFocus={true}
+                                    // value={cardDescription}
                                     InputLabelProps={{
                                         shrink: true
                                     }}

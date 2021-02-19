@@ -31,10 +31,9 @@ export function TemplateDocumentButton({ name, id }) {
     <ClickAwayListener onClickAway={handleClickAway}>
       <FormGroup className={classes.documentContainer}>
         <Typography className={classes.documentName}>{name}</Typography>
-        <div style={{ position: "relative" }}>
+        <div onClick={handleActionsBurger} style={{ position: "relative" }}>
           <SvgIcon
             className={classes.actionsBurger}
-            onClick={handleActionsBurger}
           >
             <MoreVertIcon />
           </SvgIcon>
@@ -47,34 +46,34 @@ export function TemplateDocumentButton({ name, id }) {
           >
             <div
               className={classes.modalBurgerCopytext}
-              onClick={handleActionsBurger}
+              onClick={()=>briefLink(id)}
             >
               <SvgIcon className={classes.actionsBurgerIcon}>
                 <ShareIcon />
               </SvgIcon>
-              <Typography onClick={()=>briefLink(id)} className={classes.actionsBurgerText} variant="body2">
+              <Typography className={classes.actionsBurgerText} variant="body2">
                 Share link
               </Typography>
             </div>
             <div
               className={classes.modalBurgerCopytext}
-              onClick={handleActionsBurger}
+              onClick={() => copyLink(name)}
             >
               <SvgIcon className={classes.actionsBurgerIcon}>
                 <FileCopyOutlinedIcon />
               </SvgIcon>
-              <Typography onClick={() => copyLink(name)} className={classes.actionsBurgerText} variant="body2">
+              <Typography className={classes.actionsBurgerText} variant="body2">
                 Copy text
               </Typography>
             </div>
             <div
               className={classes.modalBurgerCopytext}
-              onClick={handleActionsBurger}
+              onClick={()=>removeBrief(id)}
             >
               <SvgIcon className={classes.actionsBurgerIcon}>
                 <DeleteIcon />
               </SvgIcon>
-              <Typography onClick={()=>removeBrief(id)} className={classes.actionsBurgerText} variant="body2">
+              <Typography className={classes.actionsBurgerText} variant="body2">
                 Delete
               </Typography>
             </div>

@@ -11,6 +11,7 @@ export default makeStyles((theme: Theme) =>
       top: "auto",
       left: "auto",
       zIndex: 2,
+      boxSizing: "border-box",
     },
     appbar: {
       backgroundColor: "white",

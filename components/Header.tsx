@@ -49,7 +49,7 @@ const Header = () => {
   const router = useRouter();
 
   const [decode, setDecode] = useState("");
-  const [isToken, setIsToken] = React.useState('')
+  const [isToken, setIsToken] = useState('')
 
   const { currentPage } = CurrentPage;
 
@@ -187,7 +187,11 @@ const Header = () => {
               aria-label="menu"
             >
             </IconButton>
-            {isToken ? <Avatar alt={decode} src={""} className={classes.avatar}/> : <AccountCircleIcon className={classes.avatar} />}
+            {isToken ? <>
+              <Avatar src={""} className={classes.avatar}/>
+              <p style={{marginLeft: "10px", color: "#5f5f5f"}}>{decode}</p>
+            </> :
+                <AccountCircleIcon className={classes.avatar} />}
             {isToken
                   ?
                   <Button onClick={logout} className={classes.button}>

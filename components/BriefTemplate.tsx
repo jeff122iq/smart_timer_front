@@ -33,6 +33,9 @@ import PopularsTemplate from "./PopularsTemplate";
 import { TagsStore } from "../store/tagsStore";
 import useStyles from "../styles/brief-template";
 import DescriptionModal from "./DescriptionModal";
+import AdditionalTemplate from "./AdditionalTemplate";
+import Axios from "axios";
+import {BriefStore} from "../store/briefStore";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -85,6 +88,7 @@ const BriefTemplate = (props) => {
   const [open, setOpen] = useState(false);
   // ================MODAL==================
 
+  const { addBrief } = BriefStore;
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(whiteCards.length / 2);
   const handlePagination = (
@@ -93,10 +97,60 @@ const BriefTemplate = (props) => {
   ) => {
     setPage(value);
   };
+  const [isToken, setIsToken] = React.useState("");
+  React.useEffect(() => {
+    setIsToken(window.localStorage.getItem("token"));
+  });
   const [inputValue, setInputValue] = useState("");
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
+  };
+
+  async function saveBrief() {
+    const response = await Axios.post(
+        `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
+        { name: inputValue, cards: whiteCards },
+        {
+          headers: {
+            Authorization: `Bearer ${isToken}`,
+          },
+        }
+    );
+    addBrief(response.data);
+    clearAll();
+    setInputValue("");
+  }
+
+  const clearAll = () => {
+    whiteCards.length = 0;
+    setActionsBurger(false);
+    setInputValue("");
+  };
+
+  const copyText = () => {
+    const el = document.createElement("textarea");
+    el.value = inputValue;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    setActionsBurger(false);
+  };
+
+  const copyLink = () => {
+    const el = document.createElement("textarea");
+    el.value = `http://localhost:3000/create`;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
   };
 
   const handleOpenModal = () => {
@@ -137,6 +191,7 @@ const BriefTemplate = (props) => {
                 className={classes.briefTemplateHeading}
                 placeholder="Write heading"
                 inputProps={{ "aria-label": "naked" }}
+                onChange={handleInputValue}
             />
             {whiteCards
                 .slice((page - 1) * 2, page * 2)
@@ -176,10 +231,10 @@ const BriefTemplate = (props) => {
                 <div>
                   <ClickAwayListener onClickAway={handleClickAway}>
                     <div className={classes.actions}>
-                      <Button className={classes.actionsBtnSave} variant="contained">
+                      <Button onClick={saveBrief} className={classes.actionsBtnSave} variant="contained">
                         Save
                       </Button>
-                      <div style={{ position: "relative" }}>
+                      <div style={{ position: "relative", top: "3px" }}>
                         <SvgIcon
                             className={classes.actionsBurger}
                             onClick={handleActionsBurger}
@@ -200,6 +255,7 @@ const BriefTemplate = (props) => {
                             <Typography
                                 className={classes.actionsBurgerText}
                                 variant="body2"
+                                onClick={copyText}
                             >
                               Copy text
                             </Typography>
@@ -211,13 +267,16 @@ const BriefTemplate = (props) => {
                             <Typography
                                 className={classes.actionsBurgerText}
                                 variant="body2"
+                                onClick={clearAll}
                             >
                               Clear all
                             </Typography>
                           </div>
                         </div>
                       </div>
-                      <Button className={classes.actionsBtnLink}>Copy Link</Button>
+                      <Button onClick={copyLink} className={classes.actionsBtnLink}>
+                        Copy Link
+                      </Button>
                     </div>
                   </ClickAwayListener>
                 </div>
@@ -225,12 +284,11 @@ const BriefTemplate = (props) => {
                 ""
             )}
           </div>
-          <div className={classes.populars}>
+        <div className={classes.populars}>
             <PopularsTemplate />
-          </div>
-          <div className={classes.wrapper}></div>
+        </div>
       </div>
-);
+  );
 };
 
 export default observer(BriefTemplate);
