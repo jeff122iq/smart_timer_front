@@ -35,6 +35,10 @@ const PopupPopularTemplate=({card}) => {
         handleCloseModal();
     };
 
+    const handleCloseCard = () => {
+        handleCloseModal();
+    }
+
     return (
         <>
             <div className={classes1.popularsCard}>
@@ -71,6 +75,9 @@ const PopupPopularTemplate=({card}) => {
                     <div className={classes.footer}>
                         <Button autoFocus onClick={handleSwitchCard} color="primary">
                             Add
+                        </Button>
+                        <Button autoFocus onClick={handleCloseCard} color="primary">
+                            Close
                         </Button>
                     </div>
                 </Dialog>

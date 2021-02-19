@@ -53,7 +53,6 @@ const AdditionalTemplate = () => {
                 })
                 }
             </div>
-
             <div className={classes.pagination}>
                 <Paginator     count={totalPages}
                                page={page}

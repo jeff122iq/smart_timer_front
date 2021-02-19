@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {BriefStore} from "../store/briefStore"
 import {observer} from "mobx-react";
+import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
 
 const AddedBrief = () => {
     const {getBrief, currentBrief} = BriefStore
@@ -18,19 +19,20 @@ const AddedBrief = () => {
     }
     return (
         <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
-        <div style={{textAlign: "center", width: "500px", height: "inherit", margin: "20px"}}>
+        <div style={{width: "500px", height: "inherit", margin: "20px"}}>
             <h1>Brief name: {currentBrief.name}</h1>
             <hr/>
             <div>
                 {currentBrief.cards.map((card,idx) => {
+
                     return(
                         <>
-                        <div key={idx}>
                             <h2>{card.title}</h2>
-                            <p>{card.description}</p>
-                        </div>
-                            <hr/>
-                        </>
+                            <MUIRichTextEditor
+                                defaultValue={card.description }
+                                controls={[]}
+                                readOnly
+                            /></>
                     )
                 })}
             </div>

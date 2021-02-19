@@ -16,7 +16,7 @@ export default makeStyles((theme: Theme) =>
         flexWrap: "wrap",
         justifyContent: "center",
         background: "white",
-        marginTop: "110px",
+        marginTop: "105px",
         // zIndex: 2
     },
     wrapper: {
@@ -49,7 +49,7 @@ export default makeStyles((theme: Theme) =>
       boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
       display: "flex",
       justifyContent: "flex-start",
-      fontSize: "30px",
+      fontSize: "24px",
       fontWeight: 400,
       lineHeight: 1,
       textTransform: "none",
@@ -79,8 +79,9 @@ export default makeStyles((theme: Theme) =>
       width: "100%",
       fontSize: "24px",
       margin: "10px 0",
-        borderBottom: "2px solid #a1a1a1",
-      "& $underline::after": {
+        borderBottom: "2px solid #2b62ff",
+        padding: "5px 15px",
+        "& $underline::after": {
         border: "none",
         outline: "none",
         background: "transparent",

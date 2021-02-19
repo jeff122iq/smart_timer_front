@@ -17,12 +17,13 @@ export default makeStyles((theme: Theme) =>
         footer: {
             display: "flex",
             justifyContent: "flex-end",
-            borderTop: "2px solid rgba(0,0,0,0.2)",
+            borderTop: "2px solid #eeeeee",
             // boxShadow: "0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset",
             "& > button": {
                 background: "transparent",
-                padding: "10px",
-                fontWeight: 700,
+                padding: "10px 20px",
+                fontSize: 14,
+                fontWeight: 500,
                 color: "#347cff",
                 "&:hover": {
                     background: "transparent",

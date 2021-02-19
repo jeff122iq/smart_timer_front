@@ -61,13 +61,13 @@ export default makeStyles((theme: Theme) =>
       width: "300px",
       margin: "5px 0",
       borderRadius: 4,
-      height: "171px",
+      height: "190px",
       overflow: "hidden",
       position: "relative",
       transition: "all 0.5s",
       "&:hover": {
         transition: "all 0.5s",
-          boxShadow: "0px 3px 14px 0px rgba(0,0,0,0.6)",
+          boxShadow: "0px 3px 9px 0 rgba(0, 0, 0, 0.25), 0px 3px 12px 0 rgba(0, 0, 0, 0.12)",
       //   "& $popularsCardDescription": {
       //     lineClamp: 12,
       //   },
@@ -84,7 +84,7 @@ export default makeStyles((theme: Theme) =>
     },
     popularsCardDescription: {
       display: "-webkit-box",
-      padding: "10px 30px 44px",
+      padding: "10px 30px 0",
       transition: "all 0.5s",
       cursor: "pointer",
       lineClamp: 4,
@@ -95,7 +95,7 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "flex-end",
       width: "100%",
-      boxShadow: "0px -1px 3px 0px rgba(0,0,0,0.2)",
+        borderTop: "2px solid #eeeeee",
       margin: "10px 0 0 0",
       zIndex: 1,
       position: "absolute",
@@ -118,7 +118,7 @@ export default makeStyles((theme: Theme) =>
     },
     popularsActionsAddBtn: {
       color: "#347cff",
-      fontWeight: 700,
+      fontWeight: 500,
       padding: "10px 0",
       backgroundColor: "transparent",
     },

@@ -179,6 +179,8 @@ whiteCards.map((el: any) => {
     console.log("CLICK ");
   };
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <div
       className={classes.rootCreateTemplate}
@@ -209,12 +211,18 @@ whiteCards.map((el: any) => {
         >
           <Collapse in={tagLength}>
             {tagLength ? (
+                <>
+                <h1 style={{
+                  fontWeight: 500,
+                  fontSize: 24
+                }}>Add new</h1>
               <CustomButton
                 className={classes.descriptionBtn}
                 onClick={handleWriteDescription}
               >
                 Write description
               </CustomButton>
+                </>
             ) : (
                 ""
               )}
