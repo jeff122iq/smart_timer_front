@@ -6,38 +6,57 @@ export default makeStyles((theme: Theme) =>
       display: "flex",
       backgroundColor: "#252525",
       color: "white",
-      marginTop: "auto",
-      width: "100%",
+        ["@media screen and (max-width: 768px)"]: {
+          position: "static"
+        }
     },
     footerContainer: {
-      flexDirection: "column",
-      padding: "15px",
+      flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      padding: "15px 0",
       width: "100%",
       margin: "0 auto",
-      ["@media (min-width: 765px)"]: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-      },
-    },
-    logo: {
-      fontFamily: "'Imbue', serif",
-      letterSpacing: "1.5px !important",
+        ["@media screen and (max-width: 768px)"]: {
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+        },
+        ["@media screen and (max-width: 425px)"]: {
+           justifyContent: "flex-start"
+        }
     },
     footerLinksContainer: {
-      flexDirection: "column",
-      alignItems: "flex-start",
-      ["@media (min-width: 765px)"]: {
-        flexDirection: "row",
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+        "& > h6": {
+          margin: 0,
+            fontFamily: "'Imbue', serif",
+            letterSpacing: "1.5px !important",
+            fontSize: 16,
+        },
+        ["@media screen and (max-width: 768px)"]: {
+        flexDirection: "column",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "flex-start",
+            width: "100%",
       },
+        ["@media screen and (max-width: 425px)"]: {
+            marginBottom: "15px",
+            display: "flex",
+            alignItems: "flex-start",
+            width: "100%",
+
+        }
     },
     footerLink: {
       cursor: "pointer",
       color: "white",
       backgroundColor: "transparent",
       padding: 0,
+      fontSize: 14,
+        margin: "0 15px",
       fontWeight: "inherit",
       minWidth: "inherit",
       letterSpacing: "inherit",
@@ -45,19 +64,38 @@ export default makeStyles((theme: Theme) =>
       "& :not(:first-child)": {
         fontSize: "inherit",
       },
-      ["@media (min-width: 765px)"]: {
-        margin: "0 15px",
-      },
+        ["@media screen and (max-width: 768px)"]: {
+            margin: 0,
+        },
     },
     helpLinksContainer: {
-      marginTop: "10px",
+        display: "flex",
+        justifyContent: "space-between",
+        width: "20%",
       "& :nth-child(1)": {
         marginLeft: 0,
       },
+        ["@media screen and (max-width: 768px)"]: {
+            justifyContent: "space-between",
+            width: "100%",
+        },
     },
+
+      navigation: {
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+              ["@media screen and (max-width: 768px)"]: {
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  marginBottom: 20,
+
+}
+      },
+
     helpLink: {
       color: "#787878",
-      margin: "0 5px",
+        margin: 0,
     },
   })
 );

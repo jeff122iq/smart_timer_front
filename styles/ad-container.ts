@@ -8,6 +8,7 @@ export default makeStyles((theme: Theme) =>
       justifyContent: "space-between",
       alignItems: "center",
       width: '100%',
+      margin: "136.5px 0",
       // [theme.breakpoints.down('md')]
       ["@media (min-width: 1020px)"]: {
       // flexDirection: "column",

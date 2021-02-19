@@ -17,9 +17,14 @@ export function Footer() {
         <Box display="flex" className={classes.footerContainer}>
           <Box display="flex" className={classes.footerLinksContainer}>
             <Link href={"/"}>
-            <Typography variant="h6" className={clsx(classes.footerLink, classes.logo)}>
+            <Typography variant="h6" className={clsx(classes.footerLink)}>
               BRIEFFER
             </Typography>
+            </Link>
+          </Box>
+            <nav className={classes.navigation}>
+            <Link href={"/"}>
+              <Button className={classes.footerLink}>Home</Button>
             </Link>
             <Link href={"/create"}>
             <Button className={classes.footerLink}>Create Brief</Button>
@@ -33,7 +38,7 @@ export function Footer() {
             <Link href={"/blog"}>
             <Button className={classes.footerLink}>Blog</Button>
             </Link>
-          </Box>
+            </nav>
 
           <Box display="flex" className={classes.helpLinksContainer}>
             <a href="#" className={classes.helpLink}>

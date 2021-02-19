@@ -29,6 +29,7 @@ import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
 import { BriefStore } from "../store/briefStore";
 import { ICard } from "../interface/cards";
+import {SelectedDescription} from "../store/selectedDescription";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -62,6 +63,7 @@ const TestLoggeInPage = (props) => {
   const { tagLength } = TagsStore;
   const { whiteCards, card } = CardStore;
   const { addBrief } = BriefStore;
+  const {saveSelectedCard} = SelectedDescription;
   const [isToken, setIsToken] = React.useState("");
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"));
@@ -160,6 +162,7 @@ const TestLoggeInPage = (props) => {
     whiteCards.map((card) => {
       if (card.id == whiteCard.id) {
         setSelectedWhiteCard(card);
+        saveSelectedCard(card);
       }
     });
 
@@ -260,7 +263,7 @@ const TestLoggeInPage = (props) => {
               </div>
             );
           })}
-        <div
+        <div style={{padding: 0}}
           className={
             writeDescription
               ? classes.CreateTemplateModalOpen
@@ -270,7 +273,7 @@ const TestLoggeInPage = (props) => {
           <Modal
             open={open}
             onClose={handleClose}
-            style={{ width: "100%", overflow: "scroll" }}
+            style={{ width: "100%", overflow: "scroll", padding: 0,  boxSizing: "border-box", }}
           >
             <DescriptionModal setOpen={setOpen} />
           </Modal>
@@ -297,7 +300,7 @@ const TestLoggeInPage = (props) => {
                 >
                   Save
                 </Button>
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative", top: "3px" }}>
                   <SvgIcon
                     className={classes.actionsBurger}
                     onClick={handleActionsBurger}
@@ -311,26 +314,24 @@ const TestLoggeInPage = (props) => {
                         : classes.actionsBurgerModal
                     }
                   >
-                    <div className={classes.modalBurgerCopytext}>
+                    <div onClick={copyText} className={classes.modalBurgerCopytext}>
                       <SvgIcon className={classes.actionsBurgerIcon}>
                         <FileCopyOutlinedIcon />
                       </SvgIcon>
                       <Typography
                         className={classes.actionsBurgerText}
                         variant="body2"
-                        onClick={copyText}
                       >
                         Copy text
                       </Typography>
                     </div>
-                    <div className={classes.modalBurgerCopytext}>
+                    <div onClick={clearAll} className={classes.modalBurgerCopytext}>
                       <SvgIcon className={classes.actionsBurgerIcon}>
                         <DeleteIcon />
                       </SvgIcon>
                       <Typography
                         className={classes.actionsBurgerText}
                         variant="body2"
-                        onClick={clearAll}
                       >
                         Clear all
                       </Typography>
