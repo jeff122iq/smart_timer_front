@@ -32,7 +32,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import { observer } from "mobx-react";
 import Create from "./Create";
 import jwt_decode from "jwt-decode";
-import ReactLetterAvatar from "react"
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -45,9 +44,7 @@ const Header = () => {
     { link: "about", name: "About", active: false },
     { link: "blog", name: "Blog", active: false },
   ]);
-
   const router = useRouter();
-
   const [decode, setDecode] = useState("");
   const [isToken, setIsToken] = useState('')
 

@@ -1,4 +1,3 @@
-import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import React, {useEffect, useState} from "react";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -38,23 +37,20 @@ const PopupPopularTemplate=({card}) => {
     const handleCloseCard = () => {
         handleCloseModal();
     }
-
+    console.log(card.description)
     return (
         <>
             <div className={classes1.popularsCard}>
                 <Typography className={classes1.cardTitle} variant="h4">
                     {card.title}
                 </Typography>
-                <div
-                    className={classes1.popularsCardDescription}
-                >
-                    {card.description}
-                </div>
-                {/* <MUIRichTextEditor
-                  defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
+                <p className={classes1.popularsCardDescription}>
+                 <MUIRichTextEditor
+                  defaultValue={card.description}
                   controls={[]}
                   readOnly
-                /> */}
+                />
+                </p>
                 <div className={classes1.popularsCardFooter}>
                     <Button
                         className={classes1.popularsActionsAddBtn}
@@ -70,7 +66,11 @@ const PopupPopularTemplate=({card}) => {
                         <h1>{card.title}</h1>
                     </div>
                     <div className={classes.text}>
-                        <p>{card.description}</p>
+                            <MUIRichTextEditor
+                                defaultValue={card.description}
+                                controls={[]}
+                                readOnly
+                            />
                     </div>
                     <div className={classes.footer}>
                         <Button autoFocus onClick={handleSwitchCard} color="primary">

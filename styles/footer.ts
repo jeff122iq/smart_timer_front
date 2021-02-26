@@ -3,12 +3,14 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 export default makeStyles((theme: Theme) =>
   createStyles({
     rootFooter: {
-      display: "flex",
-      backgroundColor: "#252525",
-      color: "white",
-        ["@media screen and (max-width: 768px)"]: {
-          position: "static"
-        }
+        width: "100%",
+        display: "flex",
+        backgroundColor: "#252525",
+        color: "white",
+        position: "static",
+        marginTop: "auto",
+        zIndex: 100,
+        bottom: 0,
     },
     footerContainer: {
       flexDirection: "row",

@@ -2,8 +2,8 @@ import { Typography, SvgIcon, ClickAwayListener } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useState } from "react";
-
 import useStyles from "../styles/modalBurgerMenu";
+
 
 const DescriptionModal = (props) => {
   const classes = useStyles();
@@ -18,6 +18,11 @@ const DescriptionModal = (props) => {
     setActionsBurger(() => false);
   };
 
+  const deleteAll = () => {
+    console.log("Delete all");
+    props.description = {};
+  }
+
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div style={{ position: "relative" }}>
@@ -27,7 +32,7 @@ const DescriptionModal = (props) => {
         <div
           className={actionsBurger ? classes.actionsBurgerModalOpen : classes.actionsBurgerModal}
         >
-          <div className={classes.modalBurgerCopytext}>
+          <div onClick={deleteAll} className={classes.modalBurgerCopytext}>
             <SvgIcon className={classes.actionsBurgerIcon}>
               <DeleteIcon />
             </SvgIcon>

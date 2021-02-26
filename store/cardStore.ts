@@ -17,10 +17,12 @@ class cardStore {
   }
 
   @observable cardsArray: ICard[] = [];
-
   @observable card: ICard = null;
-
   @observable whiteCards: ICard[] = [];
+
+  @action pushToWhiteCards = (card:ICard) => {
+    this.whiteCards.push(card)
+  }
 
   @action createCard = (card: { title: any; description: any; }) => {
     this.card = {title: card.title, description: card.description, id: v4()};

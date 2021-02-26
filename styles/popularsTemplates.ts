@@ -8,7 +8,7 @@ export default makeStyles((theme: Theme) =>
       flexDirection: "column",
       width: "100%",
       background: "#f2bc1c",
-      padding: "0 53px 0 33px",
+      padding: "0 16px 0 16px",
         ["@media screen and (max-width: 1280px)"]: {
             padding: "0 10px",
         },
@@ -86,7 +86,6 @@ export default makeStyles((theme: Theme) =>
       display: "-webkit-box",
       padding: "10px 30px 0",
       transition: "all 0.5s",
-      cursor: "pointer",
       lineClamp: 4,
       boxOrient: "vertical",
       overflow: "hidden",

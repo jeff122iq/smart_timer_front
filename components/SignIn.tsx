@@ -27,6 +27,7 @@ export interface State extends SnackbarOrigin {
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import {useRouter} from "next/router";
 import {observer} from "mobx-react";
+import jwt_decode from "jwt-decode";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================

@@ -17,7 +17,7 @@ const AdditionalTemplate = () => {
     const { cardsArray, createCard, cardsData } = CardStore;
     const {selectedTags} = TagsStore;
     const [page, setPage] = useState(1);
-    const totalPages = Math.ceil(cardsArray.length / 2);
+    const totalPages = Math.ceil(cardsArray.length / 6);
     const handlePagination = (
         event: React.ChangeEvent<unknown>,
         value: number
@@ -43,12 +43,7 @@ const AdditionalTemplate = () => {
                 </Typography>
             </div>
             <div className={classes.cardsWrapper}>
-                {cardsArray.slice((page - 1) * 2, page * 6).map(({title, description}) => {
-                //     <MUIRichTextEditor
-                //     defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
-                //     controls={[]}
-                //     readOnly
-                //   />
+                {cardsArray.slice((page - 1) * 6, page * 6).map(({title, description}) => {
                     return(<PopupPopularTemplate card={{title, description}}/>)
                 })
                 }

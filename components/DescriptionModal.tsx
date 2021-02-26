@@ -11,6 +11,7 @@ import { CardStore } from "../store/cardStore";
 import { v4 } from "uuid";
 import { ICard } from "../interface/cards";
 import { EditorState, convertToRaw } from "draft-js";
+import {toJS} from "mobx";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -99,25 +100,27 @@ const local_theme_overrides = {
 const DescriptionModal = ({
   setOpen,
   setOpenCard,
-  card = { title: "", description: {blocks: []}, id: "" },
+  card,
 }) => {
-  console.log("inputValue", card, card.description);
-  {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum eaque magnam nostrum accusamus eos, velit dolor, quasi at doloribus voluptatum architecto molestias laborum quos? In eos ab esse ea vitae nobis distinctio, molestias fugiat ullam ut accusantium saepe deserunt quibusdam voluptatem repellendus earum error magnam aspernatur nostrum. Quos alias deserunt rem vero sit iure ex pariatur. Culpa maiores obcaecati reiciendis. */ }
-0
+  console.log("312312312", card?.description)
+  let description;
+  if(card?.description){
+    if(typeof (card.description) === 'string') description = card.description
+    else description = JSON.stringify(toJS(card.description));
+  }
+  else description = '{"blocks":[],"entityMap":{}}';
   const classes = useStyles();
   const theme = useTheme();
-  const [title, setTitle] = useState(card.title);
-  const [description, setDescription] = useState(card.description);
+  const [title, setTitle] = useState(card?.title || '');
   const [localTheme, setLocalTheme] = useState(theme);
-  const { whiteCards, selectCard } = CardStore;
-  // console.log(description.blocks)
+  const { whiteCards, pushToWhiteCards } = CardStore;
 
   const save = (data: any) => {
-    const idx = whiteCards.findIndex((current) => current.id === card.id);
+    const idx = whiteCards.findIndex((current) => current.id === card?.id);
 
     if (idx >= 0) {
       whiteCards[idx].title = title;
-      whiteCards[idx].description = JSON.parse(data)
+      whiteCards[idx].description = data
 
       // console.log('card text IF ===>>', JSON.parse(data));
       setOpenCard(false)
@@ -128,8 +131,7 @@ const DescriptionModal = ({
         description: JSON.parse(data),
         id: v4(),
       };
-      whiteCards.push(newCard);
-      console.log('NEW CARD ===>>', newCard);
+      pushToWhiteCards(newCard)
     }
     setOpen(false);
   };
@@ -161,23 +163,7 @@ const DescriptionModal = ({
           }}
         >
           <MUIRichTextEditor
-            defaultValue={description?.blocks?.length ? JSON.stringify(description) : ""
-              // ? description 
-              // : JSON.stringify({
-              //   blocks: [
-              //     {
-              //       key: "9dnkp",
-              //       text: description,
-              //       type: "unstyled",
-              //       depth: 0,
-              //       inlineStyleRanges: [],
-              //       entityRanges: [],
-              //       data: {},
-              //     },
-              //   ],
-              //   entityMap: {},
-              // })
-            }
+            defaultValue={description}
             controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
             inlineToolbar={true}
             label={"Write description"}
@@ -208,7 +194,7 @@ const DescriptionModal = ({
               },
               {
                 name: "link",
-                icon: <ModalBurgerMenu />,
+                icon: <ModalBurgerMenu description = {description}/>,
                 type: "callback",
                 onClick: () => console.log("test"),
               },

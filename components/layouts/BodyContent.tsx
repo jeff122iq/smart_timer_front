@@ -7,9 +7,7 @@ import { AdContainer } from "../AdContainer";
 export function BodyContent({ children }) {
   const classes = useStyles();
   const router = useRouter();
-
   const isNotIndex = router.route !== "/";
-
   return (
     <div className={classes.root}>
       {isNotIndex && (

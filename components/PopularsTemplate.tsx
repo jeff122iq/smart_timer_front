@@ -47,7 +47,7 @@ const PopularsTemplate = () => {
         </Typography>
       </div>
       <div className={classes.cardsWrapper}>
-        {cardsArray.slice((page - 1) * 2, page * 6).map(({title, description}) => {
+        {cardsArray.slice((page - 1) * 2, page * 2).map(({title, description}) => {
             return(<PopupPopularTemplate card={{title, description}}/>)
         })
         }

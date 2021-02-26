@@ -14,6 +14,7 @@ import {
   ClickAwayListener,
   Collapse,
   ButtonBase,
+  Container,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
@@ -30,6 +31,7 @@ import Axios from "axios";
 import { BriefStore } from "../store/briefStore";
 import { ICard } from "../interface/cards";
 import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
+import {toJS} from "mobx";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -102,22 +104,24 @@ whiteCards.map((el: any) => {
     setInputValue(event.target.value);
   };
   async function saveBrief() {
-    const response = await Axios.post(
-      `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
-      { name: inputValue, cards: whiteCards.map(whiteCard => ({ ...whiteCard, description: JSON.stringify(whiteCard.description) })) },
-      {
-        headers: {
-          Authorization: `Bearer ${isToken}`,
-        },
-      }
-    );
-    addBrief(response.data);
-    clearAll();
-    setInputValue("");
-  }
-  const handleOpenModal = () => {
-    setOpen(true);
-  };
+    try {
+      const response = await Axios.post(
+          `http://${process.env.BACK_URL}:${process.env.BACK_PORT}/briefs`,
+          { name: inputValue, cards: whiteCards.map(whiteCard => ({ ...whiteCard, description: JSON.stringify(whiteCard.description) })) },
+          {
+            headers: {
+              Authorization: `Bearer ${isToken}`,
+            },
+          }
+      );
+      addBrief(response.data);
+      clearAll();
+      setInputValue("");
+    } catch (error) {
+          setInputValue("Введите название!")
+    }
+
+    }
 
   const copyLink = () => {
     const el = document.createElement("textarea");
@@ -180,13 +184,14 @@ whiteCards.map((el: any) => {
   };
 
   return (
-    <div
+      <div style={{width: "100%", backgroundColor: "white"}}>
+      <Container style={{display: "flex", flexDirection: "column", maxWidth: 1365}}>
+        <div
       className={classes.rootCreateTemplate}
       style={{
         flexDirection: !tagLength ? "column" : "row",
       }}
     >
-      <div className={classes.wrapper}></div>
       <div
         className={classes.wrapTopContent}
         style={{ margin: !tagLength ? "auto" : "0" }}
@@ -244,6 +249,7 @@ whiteCards.map((el: any) => {
         {whiteCards
           .slice((page - 1) * 2, page * 2)
           .map((whiteCard: any, index: number) => {
+            const description = typeof(whiteCard.description) === 'string' ? whiteCard.description : JSON.stringify(whiteCard.description)
             return (
               <div
                 key={index}
@@ -251,33 +257,39 @@ whiteCards.map((el: any) => {
                 className={classes.cardsHeading}
                 style={{ zIndex: 0 }}
               >
-                {/* {title: "html", description: "hello world", id: "5ed1bba6-5a36-4ae3-9e10-f2dce30b112a"} */}
-
-               {openCard ? 
+               {openCard ?
                     <>
                       <h1>{whiteCard.title}</h1>
-                      <p>{whiteCard.description.blocks ? whiteCard.description.blocks.map((el:any) => el.text) : whiteCard.description}</p>
+                      <MUIRichTextEditor
+                          defaultValue={description}
+                          controls={[]}
+                          readOnly
+                      />
                     </>
-                    :  
+                    :
                     <>
                     <h1>{whiteCard.title}</h1>
-                    <MUIRichTextEditor
-                      defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
-                      controls={[]}
-                      readOnly
-                    /></>
+                    {openCard ?
+                        <>
+                          <MUIRichTextEditor
+                              defaultValue={description}
+                              controls={[]}
+                              readOnly
+                          />
+                        </>
+                        :
+                      <MUIRichTextEditor
+                        defaultValue={description}
+                        controls={[]}
+                        readOnly
+                      />
                   }
-                     {/* <h1>{whiteCard.title}</h1>
-                     <p>{whiteCard.description.blocks ? whiteCard.description.blocks.map((el:any) => el.text) : whiteCard.description}</p> */}
-                    {/* <MUIRichTextEditor
-                      defaultValue={whiteCard.description?.blocks?.length ? JSON.stringify(whiteCard.description) : ""}
-                      controls={[]}
-                      readOnly
-                    /> */}
+                      </>
+               }
               </div>
             );
-          })
-
+          }
+          )
         }
         <>
           <Modal
@@ -304,7 +316,7 @@ whiteCards.map((el: any) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <DescriptionModal setOpen={setOpen} setOpenCard={setOpenCard}/>
+            <DescriptionModal  card={selectedWhiteCard} setOpen={setOpen} setOpenCard={setOpenCard}/>
           </Modal>
         </div>
         {whiteCards.length > 0 ? (
@@ -385,6 +397,8 @@ whiteCards.map((el: any) => {
         </Collapse>
       </div>
     </div>
+      </Container>
+      </div>
   );
 };
 

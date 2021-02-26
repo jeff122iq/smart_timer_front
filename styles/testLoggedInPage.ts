@@ -24,7 +24,7 @@ export default makeStyles((theme: Theme) =>
       background: "rgba(0, 0, 0, 0.5)",
     },
     wrapTopContent: {
-        width: "35%",
+        width: "50%",
         padding: "0 50px 40px 53px",
       display: "flex",
       flexDirection: "column",
@@ -69,7 +69,7 @@ export default makeStyles((theme: Theme) =>
       textTransform: "none",
       letterSpacing: "0",
       color: "grey",
-      marginTop: "30px",
+      marginTop: "80px",
       backgroundColor: "white",
       // transform: 'translateY(50%)'
       [theme.breakpoints.down("xs")]: {
@@ -212,7 +212,7 @@ export default makeStyles((theme: Theme) =>
     populars: {
       flexWrap: "wrap",
       backgroundColor: "#f2bc1c",
-      width: "38%",
+        width: "50%",
         ["@media screen and (max-width: 1280px)"]: {
             width: "50%",
         },
