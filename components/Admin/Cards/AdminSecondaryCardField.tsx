@@ -8,14 +8,16 @@ import MUIRichTextEditor from "../../mui-rte/MUIRichTextEditor";
 import AdminEditSecondaryCard from "./AdminEditSecondaryCard";
 import {createStyles, withStyles} from "@material-ui/core/styles";
 import Paginator from "../../Paginator";
-
-
+import {ICard} from "../../../interface/cards";
 
 const AdminSecondaryCardField = () => {
     const classes = useStyles();
     const [page, setPage] = useState(1);
     const [writeDescription, setWriteDescription] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openCurrent, setOpenCurrent] = useState(false);
+    const [openCard, setOpenCard] = useState(true);
+    const [selectedSecondaryCard, setSelectedSecondaryCard] = useState<ICard>();
     const handlePagination = (
         event: React.ChangeEvent<unknown>,
         value: number
@@ -29,7 +31,6 @@ const AdminSecondaryCardField = () => {
             },
         });
     })(ButtonBase);
-
     const {isSecondaryField} =EditTagAndCategories;
     const totalPages = Math.ceil(isSecondaryField.length / 6);
     const [cards,setCards] = useState([])
@@ -40,6 +41,18 @@ const AdminSecondaryCardField = () => {
         setWriteDescription(!writeDescription);
         setOpen(true);
     };
+
+    const handleOpenCurrent = (secondaryCard: ICard) => {
+        setSelectedSecondaryCard(secondaryCard);
+        // setOpen(true);
+        setOpenCurrent(true);
+        setOpenCard(!openCard)
+        console.log('opeCard OPEN', openCard)
+    };
+
+    const handleCloseCurrent = () => {
+        setOpenCurrent(false);
+    }
 
     useEffect(()=>{
         setCards(isSecondaryField)
@@ -53,9 +66,11 @@ const AdminSecondaryCardField = () => {
                 </h1>
                 <div className={classes.cardsContainer}>
                     {cards.slice((page - 1) * 6, page * 6)
-                        .map((card, index) => {
+                        .map((card: any, index) => {
                         return (
-                            <div key={index} className={classes.card}>
+                            <div
+                                  key={index}
+                                  className={classes.card}>
                                 <h1>{card.title}</h1>
                                 <p>
                                 <MUIRichTextEditor
@@ -64,7 +79,7 @@ const AdminSecondaryCardField = () => {
                                     readOnly
                                 />
                                 </p>
-                                <footer style={{
+                                <footer  onClick={() =>handleOpenCurrent(selectedSecondaryCard)} style={{
                                     width: "100%",
                                     padding: "26px 0",
                                     backgroundColor: "white",
@@ -72,6 +87,7 @@ const AdminSecondaryCardField = () => {
                                     left: 0,
                                     borderTop: "1px solid #b7b7b7",
                                     bottom: 0,
+                                    cursor: "pointer",
                                 }}>
                                 </footer>
                             </div>
@@ -93,11 +109,14 @@ const AdminSecondaryCardField = () => {
 
             </div>
             <Modal
-                onClose={closeModal}
-                open={open}
+                onClose={handleCloseCurrent}
+                open={openCurrent}
                 style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
             >
-                <AdminEditSecondaryCard setOpenCard={open} setOpen={setOpen}/>
+                <AdminEditSecondaryCard
+                    card={isSecondaryField}
+                    setOpenCard={setOpenCard}
+                    setOpen={setOpenCurrent}/>
             </Modal>
             <CustomButton
                 className={classes.descriptionBtn}
@@ -105,6 +124,16 @@ const AdminSecondaryCardField = () => {
             >
                 Write description
             </CustomButton>
+            <Modal
+                onClose={closeModal}
+                open={open}
+                style={{ width: "100%", overflow: "scroll", zIndex: 1000 }}
+            >
+                <AdminEditSecondaryCard
+                    card={isSecondaryField}
+                    setOpenCard={setOpenCard}
+                    setOpen={setOpenCard}/>
+            </Modal>
         </div>
     );
 };

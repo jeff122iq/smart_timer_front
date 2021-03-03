@@ -19,6 +19,7 @@ const AdminMainCardField = (props: any) => {
     const [writeDescription, setWriteDescription] = useState(false);
     const [open, setOpen] = useState(false);
     const [page, setPage] = useState(1);
+    const [editCard, setEditCard] = useState(true);
     const handlePagination = (
         event: React.ChangeEvent<unknown>,
         value: number
@@ -42,6 +43,10 @@ const AdminMainCardField = (props: any) => {
         setOpen(false)
     }
 
+    const editCurrentCard = () => {
+        setOpen(true);
+    }
+
     return (
         <div className={classes.mainCardContainer}>
             <h1 style={{
@@ -52,7 +57,7 @@ const AdminMainCardField = (props: any) => {
                 {isMainField.slice((page - 1) * 2, page * 2)
                     .map((card, index) => {
                     return (
-                        <div key={index}>
+                        <div onClick={editCurrentCard} key={index} style={{cursor: "pointer"}}>
                             <h1 style={{
                                 fontWeight: 400,
                             }}>{card.title}</h1>

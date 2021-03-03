@@ -15,8 +15,8 @@ export default makeStyles((theme: Theme) =>
     },
 
     input: {
-      width: "100%",
-      margin: "10px",
+        width: "100%",
+        margin: "10px",
     },
 
     descriptionBtn: {

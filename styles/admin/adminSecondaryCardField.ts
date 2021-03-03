@@ -58,7 +58,7 @@ export default makeStyles((theme: Theme) =>
                 textTransform: "none",
                 letterSpacing: "0",
                 color: "grey",
-                marginTop: "50px",
+                marginTop: "70px",
                 transition: "3s ease-in-out",
                 backgroundColor: "white",
                 "&:focus": {

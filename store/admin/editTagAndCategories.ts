@@ -3,7 +3,8 @@ import {category} from "../../interface/category";
 import {tags} from "../../interface/tags";
 import {ICard} from "../../interface/cards";
 import Axios from "axios";
-import {number} from "prop-types";
+import { v4 } from 'uuid'
+
 
 class editTagAndCategories {
     constructor() {
@@ -132,10 +133,10 @@ class editTagAndCategories {
         }
     }
 
-    @action createSecondaryFieldCards = async(title, description) => {
+    @action createSecondaryFieldCards = async(newCard) => {
         try {
             const token = window.localStorage.getItem("token");
-            const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/cards-tags`, {tag: this.tagCurrent.id, card: {title, description, isMainField: false}}, {headers: {Authorization: `Bearer ${token}`}});
+            const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/cards-tags`, {tag: this.tagCurrent.id, card: {title: newCard.title, description: JSON.stringify(newCard.description), isMainField: false}}, {headers: {Authorization: `Bearer ${token}`}});
             this.isSecondaryField.push(response.data)
         } catch(error) {
             console.log(error);

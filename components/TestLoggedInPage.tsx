@@ -20,7 +20,6 @@ import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 import { CardStore } from "../store/cardStore";
-
 import Tags from "./Tags";
 import Paginator from "./Paginator";
 import { TagsStore } from "../store/tagsStore";
@@ -31,9 +30,7 @@ import Axios from "axios";
 import { BriefStore } from "../store/briefStore";
 import { ICard } from "../interface/cards";
 import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
-import {toJS} from "mobx";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-
 const CustomButton = withStyles(() => {
   createStyles({
     focusVisible: {
@@ -41,7 +38,6 @@ const CustomButton = withStyles(() => {
     },
   });
 })(ButtonBase);
-
 // ========================== COMPONENT ====================================
 // =================MODAL=====================
 function rand() {
@@ -69,25 +65,14 @@ const TestLoggeInPage = (props) => {
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"));
   });
-
-  const [tags, setTags] = useState(whiteCards);
-  // console.log("=================");
-  console.log("whiteCards---->", whiteCards);
-  // console.log("=================");
-whiteCards.map((el: any) => {
-  console.log('>>>>>>',el.description.blocks)
-})
   const [actionsBurger, setActionsBurger] = useState(false);
-
   // ================MODAL==================
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [openCurrent, setOpenCurrent] = useState(false);
   const [selectedWhiteCard, setSelectedWhiteCard] = useState<ICard>();
   const [openCard, setOpenCard] = useState(true);
-
   // ================MODAL==================
-
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(whiteCards.length / 2);
   const handlePagination = (
@@ -96,10 +81,8 @@ whiteCards.map((el: any) => {
   ) => {
     setPage(value);
   };
-
   const [writeDescription, setWriteDescription] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
@@ -122,7 +105,6 @@ whiteCards.map((el: any) => {
     }
 
     }
-
   const copyLink = () => {
     const el = document.createElement("textarea");
     el.value = `http://localhost:3000/create`;
@@ -134,7 +116,6 @@ whiteCards.map((el: any) => {
     document.execCommand("copy");
     document.body.removeChild(el);
   };
-
   const copyText = () => {
     const el = document.createElement("textarea");
     el.value = inputValue;
@@ -147,11 +128,9 @@ whiteCards.map((el: any) => {
     document.body.removeChild(el);
     setActionsBurger(false);
   };
-
   const handleClickAway = () => {
     setActionsBurger(false);
   };
-
   const handleActionsBurger = () => {
     setActionsBurger(!actionsBurger);
   };
@@ -159,14 +138,12 @@ whiteCards.map((el: any) => {
     setWriteDescription(!writeDescription);
     setOpen(true);
   };
-
   const handleOpenCurrent = (whiteCard: ICard) => {
     setSelectedWhiteCard(whiteCard);
     setOpenCurrent(true);
     setOpenCard(!openCard)
     console.log('opeCard OPEN', openCard)
   };
-
   const handleCloseCurrent = () => {
     setOpenCurrent(false);
     console.log('opeCard CLOSE', openCard)
@@ -177,12 +154,10 @@ whiteCards.map((el: any) => {
     setActionsBurger(false);
     setInputValue("");
   };
-
   const handleClose = () => {
     setOpen(false);
     console.log("CLICK ");
   };
-
   return (
       <div style={{width: "100%", backgroundColor: "white"}}>
       <Container style={{display: "flex", flexDirection: "column", maxWidth: 1365}}>
@@ -316,7 +291,10 @@ whiteCards.map((el: any) => {
             onClose={handleClose}
             style={{ width: "100%", overflow: "scroll" }}
           >
-            <DescriptionModal  card={selectedWhiteCard} setOpen={setOpen} setOpenCard={setOpenCard}/>
+            <DescriptionModal
+                card={selectedWhiteCard}
+                setOpen={setOpen}
+                setOpenCard={setOpenCard}/>
           </Modal>
         </div>
         {whiteCards.length > 0 ? (

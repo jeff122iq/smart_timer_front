@@ -8,18 +8,22 @@ import { CardStore } from "../store/cardStore";
 import { observer } from "mobx-react";
 import PopupPopularTemplate from "./PopupPopularTemplate";
 import {TagsStore} from "../store/tagsStore";
+import {EditTemplates} from "../store/admin/editTemplates";
+import {TemplateDocumentButton} from "./TemplateDocumentButton";
+import AdminTemplateBriefButton from "./Admin/Templates/AdminTemplateBriefButton";
 
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
 const PopularsTemplate = () => {
-  const { cardsArray, cardsData } = CardStore;
-  const {selectedTags} = TagsStore
-  const [cards, setCard] = useState();
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-  const [page, setPage] = useState(1);
+    const { cardsArray, cardsData } = CardStore;
+    const {selectedTags} = TagsStore;
+    const { getTemplates, template } = EditTemplates;
+    const [cards, setCard] = useState();
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+    const [page, setPage] = useState(1);
     const totalPages = Math.ceil(cardsArray.length / 2);
     const handlePagination = (
         event: React.ChangeEvent<unknown>,
@@ -27,11 +31,9 @@ const PopularsTemplate = () => {
     ) => {
         setPage(value);
     };
-
-
     useEffect(() => {
         async function  getData(){
-            await cardsData(selectedTags);
+            await getTemplates();
         }
         getData()
     }, []);
@@ -46,12 +48,35 @@ const PopularsTemplate = () => {
           Popular
         </Typography>
       </div>
-      <div className={classes.cardsWrapper}>
-        {cardsArray.slice((page - 1) * 2, page * 2).map(({title, description}) => {
-            return(<PopupPopularTemplate card={{title, description}}/>)
-        })
-        }
-      </div>
+        <div style={{
+            marginTop: 15,
+            display: "flex",
+            justifyContent: "flex-start",
+            flexDirection: "row",
+            flexWrap: "wrap",}}>
+            {template.map((brief, index) => {
+                    return (
+                        <div key={index} style={{
+                            backgroundColor: "#2962ff",
+                            margin: "0 10px 15px 0",
+                            display: "flex",
+                            alignItems: "center",
+                            borderRadius: 3,
+
+                        }}>
+                            <h1 style={{
+                                color: "white",
+                                marginLeft: 10,
+                                fontWeight: 500,
+                                fontSize: 16
+                            }}>{brief.name}</h1>
+                            <AdminTemplateBriefButton name={brief.name} id={brief.id}/>
+                        </div>
+                    )
+                },
+            )
+            }
+        </div>
 
       <div className={classes.pagination}>
         <Paginator     count={totalPages}

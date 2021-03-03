@@ -10,7 +10,6 @@ import { observer } from "mobx-react";
 import { CardStore } from "../store/cardStore";
 import { v4 } from "uuid";
 import { ICard } from "../interface/cards";
-import { EditorState, convertToRaw } from "draft-js";
 import {toJS} from "mobx";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
@@ -114,18 +113,13 @@ const DescriptionModal = ({
   const [title, setTitle] = useState(card?.title || '');
   const [localTheme, setLocalTheme] = useState(theme);
   const { whiteCards, pushToWhiteCards } = CardStore;
-
   const save = (data: any) => {
     const idx = whiteCards.findIndex((current) => current.id === card?.id);
-
     if (idx >= 0) {
       whiteCards[idx].title = title;
       whiteCards[idx].description = data
-
-      // console.log('card text IF ===>>', JSON.parse(data));
       setOpenCard(false)
     } else {
-      // console.log('card text ELSE ===>>', JSON.parse(data));
       const newCard: ICard = {
         title,
         description: JSON.parse(data),
@@ -135,15 +129,12 @@ const DescriptionModal = ({
     }
     setOpen(false);
   };
-
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
-
   useEffect(() => {
     setLocalTheme(Object.assign({ ...theme }, local_theme_overrides));
   }, []);
-
   return (
     <div className={classes.rootModal} style={{}}>
       <InputBase

@@ -15,7 +15,7 @@ import {
   Collapse,
   ClickAwayListener,
   ButtonBase,
-  Container
+  Container, Box
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import Modal from "@material-ui/core/Modal";
@@ -36,6 +36,7 @@ import DescriptionModal from "./DescriptionModal";
 import AdditionalTemplate from "./AdditionalTemplate";
 import Axios from "axios";
 import {BriefStore} from "../store/briefStore";
+import {TemplateDocumentButton} from "./TemplateDocumentButton";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 const CustomButton = withStyles(() => {
@@ -67,7 +68,17 @@ function getModalStyle() {
 const BriefTemplate = (props) => {
   const classes = useStyles();
   const { tagLength } = TagsStore;
+  const {createBrief, getBriefs, briefs} = BriefStore;
+  const [brief,setBrief] = React.useState([])
   const { createCard, card, whiteCards } = CardStore;
+
+  React.useEffect(()=>{
+    async function getData(){
+      getBriefs();
+    }
+    setBrief(createBrief);
+    getData();
+  },[createBrief])
 
   useEffect(() => {
     createCard({
@@ -98,7 +109,7 @@ const BriefTemplate = (props) => {
   ) => {
     setPage(value);
   };
-  const [isToken, setIsToken] = React.useState("");
+  const [isToken, setIsToken] = useState("");
   React.useEffect(() => {
     setIsToken(window.localStorage.getItem("token"));
   });
@@ -168,122 +179,129 @@ const BriefTemplate = (props) => {
   return (
       <div className={classes.rootBriefTemplate}>
           <div className={classes.wrapTopContent}>
-            <div className={classes.briefTemplateTags}>
-              <Tags />
-            </div>
-            <div
-                className={classes.briefTemplate_description}
-                style={{ display: tagLength ? "block" : "none" }}
-            >
-              {tagLength ? (
-                  <>
-                    <CustomButton
-                        className={classes.descriptionBtn}
-                        onClick={handleOpenModal}
-                    >
-                      Write description
-                    </CustomButton>
-                  </>
-              ) : (
-                  ""
-              )}
-            </div>
-            <InputBase
-                className={classes.briefTemplateHeading}
-                placeholder="Write heading"
-                inputProps={{ "aria-label": "naked" }}
-                onChange={handleInputValue}
-            />
-            {whiteCards
-                .slice((page - 1) * 2, page * 2)
-                .map((whiteCards: any, index: number) => {
-                  return (
-                      <div className={classes.cardsHeading} key={index}>
-                        <h1>{whiteCards.title}</h1>
-                        <p>{whiteCards.description}</p>
-                      </div>
-                  );
-                })}
-            {whiteCards.length > 2 ? (
-                <div className={classes.pagination}>
-                  <Paginator
-                      count={totalPages}
-                      page={page}
-                      onChange={handlePagination}
-                  />
-                </div>
-            ) : (
-                ""
-            )}
-            <div
-                className={
-                  open ? classes.briefTemplateModalOpen : classes.briefTemplateModal
-                }
-            >
-              <Modal
-                  open={open}
-                  onClose={handleClose}
-                  style={{ width: "100%", overflow: "scroll" }}
-              >
-                <DescriptionModal setOpen={setOpen} setOpenCard={setOpenCard} />
-              </Modal>
-            </div>
-            {whiteCards.length > 0 ? (
-                <div>
-                  <ClickAwayListener onClickAway={handleClickAway}>
-                    <div className={classes.actions}>
-                      <Button onClick={saveBrief} className={classes.actionsBtnSave} variant="contained">
-                        Save
-                      </Button>
-                      <div style={{ position: "relative", top: "3px" }}>
-                        <SvgIcon
-                            className={classes.actionsBurger}
-                            onClick={handleActionsBurger}
-                        >
-                          <MoreVertIcon />
-                        </SvgIcon>
-                        <div
-                            className={
-                              actionsBurger
-                                  ? classes.actionsBurgerModalOpen
-                                  : classes.actionsBurgerModal
-                            }
-                        >
-                          <div className={classes.modalBurgerCopytext}>
-                            <SvgIcon className={classes.actionsBurgerIcon}>
-                              <FileCopyOutlinedIcon />
-                            </SvgIcon>
-                            <Typography
-                                className={classes.actionsBurgerText}
-                                variant="body2"
-                                onClick={copyText}
-                            >
-                              Copy text
-                            </Typography>
-                          </div>
-                          <div className={classes.modalBurgerCopytext}>
-                            <SvgIcon className={classes.actionsBurgerIcon}>
-                              <DeleteIcon />
-                            </SvgIcon>
-                            <Typography
-                                className={classes.actionsBurgerText}
-                                variant="body2"
-                                onClick={clearAll}
-                            >
-                              Clear all
-                            </Typography>
-                          </div>
-                        </div>
-                      </div>
-                      <Button onClick={copyLink} className={classes.actionsBtnLink}>
-                        Copy Link
-                      </Button>
-                    </div>
-                  </ClickAwayListener>
-                </div>
-            ) : (
-                ""
-            )}
+            {/*<div className={classes.briefTemplateTags}>*/}
+            {/*  <Tags />*/}
+            {/*</div>*/}
+            {/*<div*/}
+            {/*    className={classes.briefTemplate_description}*/}
+            {/*    style={{ display: tagLength ? "block" : "none" }}*/}
+            {/*>*/}
+            {/*  {tagLength ? (*/}
+            {/*      <>*/}
+            {/*        <CustomButton*/}
+            {/*            className={classes.descriptionBtn}*/}
+            {/*            onClick={handleOpenModal}*/}
+            {/*        >*/}
+            {/*          Write description*/}
+            {/*        </CustomButton>*/}
+            {/*      </>*/}
+            {/*  ) : (*/}
+            {/*      ""*/}
+            {/*  )}*/}
+            {/*</div>*/}
+            {/*<InputBase*/}
+            {/*    className={classes.briefTemplateHeading}*/}
+            {/*    placeholder="Write heading"*/}
+            {/*    inputProps={{ "aria-label": "naked" }}*/}
+            {/*    onChange={handleInputValue}*/}
+            {/*/>*/}
+            {/*{whiteCards*/}
+            {/*    .slice((page - 1) * 2, page * 2)*/}
+            {/*    .map((whiteCards: any, index: number) => {*/}
+            {/*      return (*/}
+            {/*          <div className={classes.cardsHeading} key={index}>*/}
+            {/*            <h1>{whiteCards.title}</h1>*/}
+            {/*            <p>{whiteCards.description}</p>*/}
+            {/*          </div>*/}
+            {/*      );*/}
+            {/*    })}*/}
+            {/*{whiteCards.length > 2 ? (*/}
+            {/*    <div className={classes.pagination}>*/}
+            {/*      <Paginator*/}
+            {/*          count={totalPages}*/}
+            {/*          page={page}*/}
+            {/*          onChange={handlePagination}*/}
+            {/*      />*/}
+            {/*    </div>*/}
+            {/*) : (*/}
+            {/*    ""*/}
+            {/*)}*/}
+            {/*<div*/}
+            {/*    className={*/}
+            {/*      open ? classes.briefTemplateModalOpen : classes.briefTemplateModal*/}
+            {/*    }*/}
+            {/*>*/}
+            {/*  /!*<Modal*!/*/}
+            {/*  /!*    open={open}*!/*/}
+            {/*  /!*    onClose={handleClose}*!/*/}
+            {/*  /!*    style={{ width: "100%", overflow: "scroll" }}*!/*/}
+            {/*  /!*>*!/*/}
+            {/*  /!*  <DescriptionModal setOpen={setOpen} setOpenCard={setOpenCard} />*!/*/}
+            {/*  /!*</Modal>*!/*/}
+            {/*</div>*/}
+            {/*{whiteCards.length > 0 ? (*/}
+            {/*    <div>*/}
+            {/*      <ClickAwayListener onClickAway={handleClickAway}>*/}
+            {/*        <div className={classes.actions}>*/}
+            {/*          <Button onClick={saveBrief} className={classes.actionsBtnSave} variant="contained">*/}
+            {/*            Save*/}
+            {/*          </Button>*/}
+            {/*          <div style={{ position: "relative", top: "3px" }}>*/}
+            {/*            <SvgIcon*/}
+            {/*                className={classes.actionsBurger}*/}
+            {/*                onClick={handleActionsBurger}*/}
+            {/*            >*/}
+            {/*              <MoreVertIcon />*/}
+            {/*            </SvgIcon>*/}
+            {/*            <div*/}
+            {/*                className={*/}
+            {/*                  actionsBurger*/}
+            {/*                      ? classes.actionsBurgerModalOpen*/}
+            {/*                      : classes.actionsBurgerModal*/}
+            {/*                }*/}
+            {/*            >*/}
+            {/*              <div className={classes.modalBurgerCopytext}>*/}
+            {/*                <SvgIcon className={classes.actionsBurgerIcon}>*/}
+            {/*                  <FileCopyOutlinedIcon />*/}
+            {/*                </SvgIcon>*/}
+            {/*                <Typography*/}
+            {/*                    className={classes.actionsBurgerText}*/}
+            {/*                    variant="body2"*/}
+            {/*                    onClick={copyText}*/}
+            {/*                >*/}
+            {/*                  Copy text*/}
+            {/*                </Typography>*/}
+            {/*              </div>*/}
+            {/*              <div className={classes.modalBurgerCopytext}>*/}
+            {/*                <SvgIcon className={classes.actionsBurgerIcon}>*/}
+            {/*                  <DeleteIcon />*/}
+            {/*                </SvgIcon>*/}
+            {/*                <Typography*/}
+            {/*                    className={classes.actionsBurgerText}*/}
+            {/*                    variant="body2"*/}
+            {/*                    onClick={clearAll}*/}
+            {/*                >*/}
+            {/*                  Clear all*/}
+            {/*                </Typography>*/}
+            {/*              </div>*/}
+            {/*            </div>*/}
+            {/*          </div>*/}
+            {/*          <Button onClick={copyLink} className={classes.actionsBtnLink}>*/}
+            {/*            Copy Link*/}
+            {/*          </Button>*/}
+            {/*        </div>*/}
+            {/*      </ClickAwayListener>*/}
+            {/*    </div>*/}
+            {/*) : (*/}
+            {/*    ""*/}
+            {/*)}*/}
+            <h1>My templates</h1>
+            <Box display="flex" flexWrap="wrap" style={{ marginBottom: "147px" }}>
+              {briefs.map(({name, id}) => (
+                    <TemplateDocumentButton name={name} id={id} key={id} />
+
+              ))}
+            </Box>
           </div>
         <div className={classes.populars}>
             <PopularsTemplate />

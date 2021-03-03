@@ -40,8 +40,8 @@ const Header = () => {
     // ============================= LINKS ====================================
     const [navMenu, setNavMenu] = React.useState([
         { link: "admin", name: "Home", active: false },
-        { link: "admin/edit_categories", name: "Edit tag", active: false },
-        { link: "admin/brief_templates", name: "Brief template", active: false },
+        { link: "admin/edit_categories_tags", name: "Edit tag", active: false },
+        { link: "admin/edit_categories_templates", name: "Brief template", active: false },
         { link: "admin/about", name: "About", active: false },
         { link: "admin/blog", name: "Blog", active: false },
     ]);

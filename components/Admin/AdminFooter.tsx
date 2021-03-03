@@ -27,7 +27,7 @@ export function AdminFooter() {
             <Link href={"/admin"}>
               <Button className={classes.footerLink}>Home</Button>
             </Link>
-            <Link href={"/admin/edit_categories"}>
+            <Link href={"/admin/edit_categories_tags"}>
             <Button className={classes.footerLink}>Edit tag</Button>
             </Link>
             <Link href={"/admin/brief_templates"}>

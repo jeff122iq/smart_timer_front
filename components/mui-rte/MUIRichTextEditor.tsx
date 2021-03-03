@@ -132,10 +132,8 @@ const styles = ({ spacing, typography, palette }: Theme) => createStyles({
         paddingRight: 10
     },
     editorContainer: {
-        margin: spacing(1, 0, 0, 0),
-        cursor: "text",
+        cursor: "pointer",
         width: "100%",
-        padding: spacing(0, 0, 1, 0)
     },
     editorReadOnly: {
         borderBottom: "none"

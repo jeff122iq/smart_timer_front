@@ -7,10 +7,10 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import useStyles from "../../../styles/description-modal";
 import ModalBurgerMenu from "../../ModalBurgerMenu";
 import { observer } from "mobx-react";
-import { CardStore } from "../../../store/cardStore";
 import { v4 } from "uuid";
 import { ICard } from "../../../interface/cards";
 import {EditTagAndCategories} from "../../../store/admin/editTagAndCategories";
+import {toJS} from "mobx";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================
@@ -95,43 +95,45 @@ const local_theme_overrides = {
         },
     },
 };
-
 const AdminEditSecondaryCard = ({
                               setOpen,
                               setOpenCard,
-                              card = { title: "", description: {blocks: []}, id: "" },
+                              card,
                           }) => {
-    console.log("inputValue", card, card.description);
+    console.log("inputValue",  card?.description);
     const classes = useStyles();
     const theme = useTheme();
-    const [title, setTitle] = useState(card.title);
-    const [description, setDescription] = useState(card.description);
-    console.log("$$$$$$$$$$$$$$")
-    console.log(description)
-    console.log("$$$$$$$$$$$$$$")
+    const [title, setTitle] = useState(card?.title);
+    let description;
+    if(card?.description){
+        if(typeof (card.description) === 'string') description = card.description
+        else description = JSON.stringify(toJS(card.description));
+    }
+    else description = '{"blocks":[],"entityMap":{}}';
     const [localTheme, setLocalTheme] = useState(theme);
     const {isSecondaryField, createSecondaryFieldCards} = EditTagAndCategories;
-
-    const save = async (data: any) => {
-        const idx = isSecondaryField.findIndex((current) => current.id === card.id);
+    const save = (data: any) => {
+        const idx = isSecondaryField.findIndex((current) => current.id === card?.id);
         if (idx >= 0) {
             isSecondaryField[idx].title = title;
             isSecondaryField[idx].description = JSON.parse(data)
             setOpenCard(false)
         } else {
-            await createSecondaryFieldCards(title, data);
+            const newCard: ICard = {
+                title,
+                description: JSON.parse(data),
+                id: v4(),
+            };
+            createSecondaryFieldCards(newCard);
         }
         setOpen(false);
     };
-
     const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
     };
-
     useEffect(() => {
         setLocalTheme(Object.assign({ ...theme }, local_theme_overrides));
     }, []);
-
     return (
         <div className={classes.rootModal} style={{}}>
             <InputBase
@@ -151,7 +153,7 @@ const AdminEditSecondaryCard = ({
                     }}
                 >
                     <MUIRichTextEditor
-                        defaultValue={""}
+                        defaultValue={description}
                         controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
                         inlineToolbar={true}
                         label={"Write description"}

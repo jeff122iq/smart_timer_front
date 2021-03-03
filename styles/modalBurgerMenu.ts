@@ -20,6 +20,7 @@ export default makeStyles((theme: Theme) =>
       top: "-50px",
       transform: "translateX(-38%)",
       boxShadow: "-1px 2px 6px 0px rgba(0,0,0,0.2)",
+        zIndex: 5,
     },
     modalBurgerCopytext: {
       width: "100%",

@@ -25,7 +25,7 @@ export interface State extends SnackbarOrigin {
   open: boolean;
 }
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import {useRouter} from "next/router";
+import {Router, useRouter} from "next/router";
 import {observer} from "mobx-react";
 import jwt_decode from "jwt-decode";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
@@ -110,6 +110,11 @@ export const SignIn = (props) => {
       const response = await Axios.post(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/auth/login`, {email: email, password: password, role: 2});
       handleClick({ vertical: 'top', horizontal: 'center' });
       localStorage.setItem("token", response.data.access_token);
+      console.log(response.data);
+      const decode_role: any = jwt_decode(response.data.access_token);
+      if (decode_role.role === "admin") {
+        return await router.push("/admin")
+      }
       router.push("/");
     } catch (error) {
       setEmailError("User is not created.")

@@ -61,7 +61,7 @@ export default makeStyles((theme: Theme) =>
       width: "300px",
       margin: "5px 0",
       borderRadius: 4,
-      height: "190px",
+      height: "215px",
       overflow: "hidden",
       position: "relative",
       transition: "all 0.5s",

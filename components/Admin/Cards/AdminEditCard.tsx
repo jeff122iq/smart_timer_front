@@ -99,7 +99,7 @@ const local_theme_overrides = {
 const AdminEditCard = ({
                               setOpen,
                               setOpenCard,
-                              card = { title: "", description: {blocks: []}, id: "" },
+                              card = { title: "", description: '{"blocks":[],"entityMap":{}}', id: "" },
                           }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -134,7 +134,7 @@ const AdminEditCard = ({
                 className={classes.input}
                 placeholder="Write title"
                 inputProps={{ "aria-label": "naked" }}
-                value={title}
+                value={card.title}
                 onChange={handleInputValue}
             />
             <ThemeProvider theme={localTheme}>
@@ -147,7 +147,7 @@ const AdminEditCard = ({
                     }}
                 >
                     <MUIRichTextEditor
-                        defaultValue={""}
+                        defaultValue={card.description}
                         controls={["numberList", "link", "bold", "MoreVertIcon", "save"]}
                         inlineToolbar={true}
                         label={"Write description"}

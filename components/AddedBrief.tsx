@@ -24,15 +24,14 @@ const AddedBrief = () => {
             <hr/>
             <div>
                 {currentBrief.cards.map((card,idx) => {
-
                     return(
-                        <>
+                        <div key={idx}>
                             <h2>{card.title}</h2>
                             <MUIRichTextEditor
-                                defaultValue={card.description }
+                                defaultValue={JSON.stringify(card.description)}
                                 controls={[]}
                                 readOnly
-                            /></>
+                            /></div>
                     )
                 })}
             </div>

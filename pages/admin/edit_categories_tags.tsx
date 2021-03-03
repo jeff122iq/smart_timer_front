@@ -1,16 +1,16 @@
 import React from 'react';
 import BodyAdmin from "../../components/layouts/BodyAdmin";
-import AdminBriefTemplate from "../../components/Admin/AdminBriefTemplate";
+import AdminEditTag from "../../components/Admin/Category/AdminCategories";
 import { CurrentPage } from "../../store/currentPage";
 
-const BriefTeplates = () => {
+const edit_categories_tags = () => {
     const { setCurrentPage } = CurrentPage;
-    setCurrentPage("Brief template");
+    setCurrentPage("Edit tag");
     return (
         <BodyAdmin>
-            <AdminBriefTemplate/>
+            <AdminEditTag/>
         </BodyAdmin>
     );
 };
 
-export default BriefTeplates;
+export default edit_categories_tags;
