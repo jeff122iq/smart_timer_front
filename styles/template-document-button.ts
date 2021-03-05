@@ -11,6 +11,7 @@ export default makeStyles((theme: Theme) =>
       borderRadius: "3px",
       userSelect: "none",
       marginRight: 10,
+        marginBottom: 15,
         padding: "5px 10px",
       [theme.breakpoints.down("sm")]: {
         minWidth: "100px",

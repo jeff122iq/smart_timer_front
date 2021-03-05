@@ -35,10 +35,10 @@ export default makeStyles((theme: Theme) =>
       },
 
       underline: {
-        "&&&:before": {
+        "&:before": {
           borderBottom: "none",
         },
-        "&&:after": {
+        "&:after": {
           borderBottom: "none",
         },
       },

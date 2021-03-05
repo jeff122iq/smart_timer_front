@@ -100,7 +100,6 @@ class editTagAndCategories {
         } catch(error) {
             console.log(error);
         }
-
     }
     //======================== TAGS ===================================
 

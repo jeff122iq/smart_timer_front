@@ -2,7 +2,7 @@
 import { Box, Button, Container, Typography } from "@material-ui/core";
 import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
 import useStyles from "../styles/home";
-import { HomeTop } from "./HomeTop";
+import HomeTop from "./HomeTop";
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
 
 // ========================== COMPONENT ====================================

@@ -8,9 +8,22 @@ class editTemplates {
     }
     //======================== OBSERVABLES ===================================
     @observable template: brief[] = [];
+    @observable currentTemplate = null;
     //======================== OBSERVABLES ===================================
 
     //======================== TEMPLATES ===================================
+    @action getTemplate = async(id) => {
+        const token = window.localStorage.getItem("token");
+        if (id) {
+            try {
+                const response = await Axios.get(`http://${process.env.BACK_URL}:${process.env.BACK_PORT}/templates/${id}`, {headers: { Authorization: `Bearer ${token}`}});
+                this.currentTemplate = response.data;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
     @action getTemplates = async() => {
         const token = window.localStorage.getItem("token");
         try {

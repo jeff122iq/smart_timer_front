@@ -52,19 +52,8 @@ const AdminTemplateSecondaryField = () => {
                 fontFamily: "Roboto, sans-serif",
                 fontWeight: 500
             }}>Additional</h1>
-            {/*<div className={classes.cardsWrapper}>*/}
-            {/*    {cardsArray.slice((page - 1) * 6, page * 6).map(({title, description}) => {*/}
-            {/*        return(<PopupPopularTemplate card={{title, description}}/>)*/}
-            {/*    })*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<div className={classes.pagination}>*/}
-            {/*    <Paginator     count={totalPages}*/}
-            {/*                   page={page}*/}
-            {/*                   onChange={handlePagination}/>*/}
-            {/*</div>*/}
             <div className={classes.cardsContainer}>
-                {cardsArray.slice((page - 1) * 6, page * 6)
+                {isSecondaryField.slice((page - 1) * 6, page * 6)
                     .map((card: any, index) => {
                         return (
                             <div

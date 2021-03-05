@@ -124,6 +124,7 @@ const AdminEditSecondaryCard = ({
                 description: JSON.parse(data),
                 id: v4(),
             };
+            console.log(data);
             createSecondaryFieldCards(newCard);
         }
         setOpen(false);
