@@ -21,10 +21,10 @@ const AdedTemplate = () => {
     return (
         <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
             <div style={{width: "500px", height: "inherit", margin: "20px"}}>
-                <h1>Template name: {template.name}</h1>
+                <h1>Template name: {template?.name}</h1>
                 <hr/>
                 <div>
-                    {template.cards.map((card,idx) => {
+                    {template && template.cards.map((card,idx) => {
                         console.log(card)
                         return(
                             <div key={idx}>
