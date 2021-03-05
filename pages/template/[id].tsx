@@ -1,12 +1,11 @@
 import React from 'react';
 import AdedTemplate from "../../components/AdedTemplate";
 
-const Templates = () => {
+function Templates() {
     return (
         <div>
             <AdedTemplate/>
         </div>
     );
 };
-
-    export default Templates;
+export default Templates;
