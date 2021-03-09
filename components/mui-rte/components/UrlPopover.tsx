@@ -221,8 +221,7 @@ const UrlPopover: FunctionComponent<IUrlPopoverStateProps> = (props) => {
                                 <p>save</p>
                             </Button>
                             {console.log(data.name, data.url)}
-                        <Button style={{background: "transparent",}}
-                            onClick={() => props.onConfirm(props.isMedia, "")}>
+                        <Button style={{background: "transparent",}} onClick={() => props.onConfirm(props.isMedia, data.url, data.name, data.width, data.height, data.alignment, data.type)}>
                             <p>close</p>
                         </Button>
                         </div>

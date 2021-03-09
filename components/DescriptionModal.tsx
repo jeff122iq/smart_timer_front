@@ -1,5 +1,5 @@
 // ========================== IMPORT_COMPONENTS_AND_LIBRARIES ====================================
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import MUIRichTextEditor from "./mui-rte/MUIRichTextEditor";
@@ -101,13 +101,19 @@ const DescriptionModal = ({
   setOpenCard,
   card,
 }) => {
-  console.log("312312312", card?.description)
-  let description;
-  if(card?.description){
-    if(typeof (card.description) === 'string') description = card.description
-    else description = JSON.stringify(toJS(card.description));
+  const [description, setDescription] = useState<any>();
+  useEffect(()=>{
+    if(card?.description){
+      if(typeof (card.description) === 'string') setDescription(card.description)
+      else setDescription(JSON.stringify(toJS(card.description)));
+    }
+    else setDescription('{"blocks":[],"entityMap":{}}');
+  }, [])
+
+  function clearDescription () {
+    setDescription('{"blocks":[],"entityMap":{}}')
   }
-  else description = '{"blocks":[],"entityMap":{}}';
+
   const classes = useStyles();
   const theme = useTheme();
   const [title, setTitle] = useState(card?.title || '');
@@ -162,7 +168,7 @@ const DescriptionModal = ({
             customControls={[
               {
                 name: "MoreVertIcon",
-                icon: <ModalBurgerMenu />,
+                icon: <ModalBurgerMenu clearDescription={clearDescription}/>,
                 type: "callback",
                 onClick: () => { },
               },
@@ -185,7 +191,7 @@ const DescriptionModal = ({
               },
               {
                 name: "link",
-                icon: <ModalBurgerMenu description = {description}/>,
+                icon: <ModalBurgerMenu clearDescription={clearDescription}/>,
                 type: "callback",
                 onClick: () => console.log("test"),
               },

@@ -155,7 +155,7 @@ const AdminEditCard = ({
                         customControls={[
                             {
                                 name: "MoreVertIcon",
-                                icon: <ModalBurgerMenu />,
+                                icon: <ModalBurgerMenu test1={''} />,
                                 type: "callback",
                                 onClick: () => { },
                             },

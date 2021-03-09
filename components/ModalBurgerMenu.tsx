@@ -4,7 +4,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useState } from "react";
 import useStyles from "../styles/modalBurgerMenu";
 
-
 const DescriptionModal = (props) => {
   const classes = useStyles();
 
@@ -13,14 +12,15 @@ const DescriptionModal = (props) => {
   const handleActionsBurger = () => {
     setActionsBurger(() => !actionsBurger);
   };
+  console.log("props",props)
 
   const handleClickAway = () => {
     setActionsBurger(() => false);
   };
-
   const deleteAll = () => {
     console.log("Delete all");
-    props.description = {};
+    props.clearDescription();
+    setActionsBurger(() => false);
   }
 
   return (
